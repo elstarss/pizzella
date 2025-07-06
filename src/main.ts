@@ -8,8 +8,18 @@ const landingContent = document.querySelector(
     ".landing-screen"
 ) as HTMLDivElement;
 const gameContent = document.querySelector(".game-content") as HTMLDivElement;
+//
+// importing pizza loading images
+const baseImage = document.getElementById("pizzaBaseImage");
+const tomatoImage = document.getElementById("pizzaTomatoSauceImage");
+const cheeseImage = document.getElementById("pizzaCheeseToppingImage");
+const mushroomImage = document.getElementById("mushroomToppingImage");
+const tomatoSlicesImage = document.getElementById("tomatoSlicesToppingImage");
+const onionImage = document.getElementById("onionToppingImage");
+const pineappleImage = document.getElementById("pineappleToppingImage");
+//
 // function to change display of any html element
-function setElementVisibility(element, display: boolean) {
+function setElementVisibility(element: any, display: boolean) {
     element.style.display = display ? "block" : "none";
 }
 
