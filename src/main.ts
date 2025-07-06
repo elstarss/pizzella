@@ -9,14 +9,49 @@ const landingContent = document.querySelector(
 ) as HTMLDivElement;
 const gameContent = document.querySelector(".game-content") as HTMLDivElement;
 //
+//
+// buttons for ingredients
+const baseBtn = document.getElementById("baseButton") as HTMLButtonElement;
+const tomatoBtn = document.getElementById("tomatoButton") as HTMLButtonElement;
+const pestoBtn = document.getElementById(
+    "pizzaPestoSauceImage"
+) as HTMLButtonElement;
+const cheeseBtn = document.getElementById("cheeseButton") as HTMLButtonElement;
+const mushroomBtn = document.getElementById(
+    "mushroomButton"
+) as HTMLButtonElement;
+const tomatoSlicesBtn = document.getElementById(
+    "tomatoSlicesToppingImage"
+) as HTMLButtonElement;
+const onionBtn = document.getElementById("onionButton") as HTMLButtonElement;
+const pineappleImageBtn = document.getElementById(
+    "pineappleButton"
+) as HTMLButtonElement;
+//
+//
+//
 // importing pizza loading images
-const baseImage = document.getElementById("pizzaBaseImage");
-const tomatoImage = document.getElementById("pizzaTomatoSauceImage");
-const cheeseImage = document.getElementById("pizzaCheeseToppingImage");
-const mushroomImage = document.getElementById("mushroomToppingImage");
+//
+const baseImage = document.getElementById("pizzaBaseImage") as HTMLImageElement;
+const tomatoImage = document.getElementById(
+    "tomatoSlicesButton"
+) as HTMLImageElement;
+const pestoImage = document.getElementById(
+    "pizzaPestoSauceImage"
+) as HTMLImageElement;
+const cheeseImage = document.getElementById(
+    "pizzaCheeseToppingImage"
+) as HTMLImageElement;
+const mushroomImage = document.getElementById(
+    "mushroomToppingImage"
+) as HTMLImageElement;
 const tomatoSlicesImage = document.getElementById("tomatoSlicesToppingImage");
-const onionImage = document.getElementById("onionToppingImage");
-const pineappleImage = document.getElementById("pineappleToppingImage");
+const onionImage = document.getElementById(
+    "onionToppingImage"
+) as HTMLImageElement;
+const pineappleImage = document.getElementById(
+    "pineappleToppingImage"
+) as HTMLImageElement;
 //
 // function to change display of any html element
 function setElementVisibility(element: any, display: boolean) {
