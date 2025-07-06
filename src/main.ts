@@ -57,7 +57,7 @@ const pineappleImage = document.getElementById(
 function setElementVisibility(element: any, display: boolean) {
     element.style.display = display ? "block" : "none";
 }
-
+// start game functionality
 function startGame() {
     setElementVisibility(landingContent, false);
     setElementVisibility(gameContent, true);
@@ -65,7 +65,30 @@ function startGame() {
 }
 
 startGameButton.addEventListener("click", startGame);
-
+//adding event listeners to each of the ingredient buttons to display their corresponding pizza loading image
+baseBtn.addEventListener("click", () => setElementVisibility(baseImage, true));
+tomatoBtn.addEventListener("click", () =>
+    setElementVisibility(tomatoImage, true)
+);
+pestoBtn.addEventListener("click", () =>
+    setElementVisibility(pestoImage, true)
+);
+cheeseBtn.addEventListener("click", () =>
+    setElementVisibility(cheeseImage, true)
+);
+mushroomBtn.addEventListener("click", () =>
+    setElementVisibility(mushroomImage, true)
+);
+tomatoSlicesBtn.addEventListener("click", () =>
+    setElementVisibility(tomatoSlicesImage, true)
+);
+pineappleImageBtn.addEventListener("click", () =>
+    setElementVisibility(pineappleImage, true)
+);
+onionBtn.addEventListener("click", () =>
+    setElementVisibility(onionImage, true)
+);
+//
 // gameplay content
 // ..
 // generating customer order
