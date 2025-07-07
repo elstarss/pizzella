@@ -1,27 +1,26 @@
 import "./style.scss";
 import "./variables.scss";
 
-const startGameButton = document.querySelector(
-    ".start-game-btn"
-) as HTMLButtonElement;
-const landingContent = document.querySelector(
-    ".landing-screen"
-) as HTMLDivElement;
-const gameContent = document.querySelector(".game-content") as HTMLDivElement;
-//
+// importing landing page elements
+const startGameButton =
+    document.querySelector<HTMLDivElement>(".start-game-btn");
+const landingContent =
+    document.querySelector<HTMLDivElement>(".landing-screen");
+const gameContent = document.querySelector<HTMLDivElement>(".game-content");
 //
 // buttons for ingredients
+const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
+    ".ingredient-buttons"
+);
 const baseBtn = document.getElementById("baseButton") as HTMLButtonElement;
 const tomatoBtn = document.getElementById("tomatoButton") as HTMLButtonElement;
-const pestoBtn = document.getElementById(
-    "pizzaPestoSauceImage"
-) as HTMLButtonElement;
+const pestoBtn = document.getElementById("pestoBtn") as HTMLButtonElement;
 const cheeseBtn = document.getElementById("cheeseButton") as HTMLButtonElement;
 const mushroomBtn = document.getElementById(
     "mushroomButton"
 ) as HTMLButtonElement;
 const tomatoSlicesBtn = document.getElementById(
-    "tomatoSlicesToppingImage"
+    "tomatoSlicesButton"
 ) as HTMLButtonElement;
 const onionBtn = document.getElementById("onionButton") as HTMLButtonElement;
 const pineappleImageBtn = document.getElementById(
@@ -34,7 +33,7 @@ const pineappleImageBtn = document.getElementById(
 //
 const baseImage = document.getElementById("pizzaBaseImage") as HTMLImageElement;
 const tomatoImage = document.getElementById(
-    "tomatoSlicesButton"
+    "pizzaTomatoSauceImage"
 ) as HTMLImageElement;
 const pestoImage = document.getElementById(
     "pizzaPestoSauceImage"
@@ -53,6 +52,13 @@ const pineappleImage = document.getElementById(
     "pineappleToppingImage"
 ) as HTMLImageElement;
 //
+//
+// Need to add checks here for checking is variables are empty or not
+if (!onionBtn) {
+    throw new Error("Variable empty");
+}
+//
+//
 // function to change display of any html element
 function setElementVisibility(element: any, display: boolean) {
     element.style.display = display ? "block" : "none";
@@ -70,9 +76,11 @@ baseBtn.addEventListener("click", () => setElementVisibility(baseImage, true));
 tomatoBtn.addEventListener("click", () =>
     setElementVisibility(tomatoImage, true)
 );
+
 pestoBtn.addEventListener("click", () =>
     setElementVisibility(pestoImage, true)
 );
+
 cheeseBtn.addEventListener("click", () =>
     setElementVisibility(cheeseImage, true)
 );
@@ -125,12 +133,25 @@ function generateOrder(numberOfToppings: number) {
 let clickedIngredientsArray: string[] = [];
 
 // function captures which ingredients are clicked by player
-function clickedIngredients(topping: string) {
-    if (!clickedIngredientsArray.includes(topping)) {
-        clickedIngredientsArray.push(topping);
-        console.log(`Clicked ingredients array is ${clickedIngredientsArray}`);
+// function clickedIngredients(topping: string) {
+//     if (!clickedIngredientsArray.includes(topping)) {
+//         clickedIngredientsArray.push(topping);
+//         console.log(`Clicked ingredients array is ${clickedIngredientsArray}`);
+//     }
+// }
+// maybe another way to write this?
+function registerClick(event: Event) {
+    const target = event.currentTarget as HTMLButtonElement;
+    if (!clickedIngredientsArray.includes(target.innerText)) {
+        clickedIngredientsArray.push(target.innerText);
+        console.log(`Clicked ingredient array is ${clickedIngredientsArray}`);
     }
 }
+ingredientBtns.forEach((btn) => {
+    btn.addEventListener("click", registerClick);
+});
+
+console.log(clickedIngredientsArray);
 
 // add event listener to all ingredients and apply clickedIngredients function
 

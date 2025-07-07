@@ -15,6 +15,31 @@ body {
 
 .pizza-loading-images {
     display: none;
+    position: absolute;
     height: 200px;
     width: 200px;
+    &__base {
+        z-index: 0;
+    }
+    &__tomato-sauce {
+        z-index: 1;
+    }
+    &__pesto {
+        z-index: 1;
+    }
+    &__cheese {
+        z-index: 2;
+    }
+    &__mushroom {
+        z-index: 3;
+    }
+    &__sliced-tomato {
+        z-index: 4;
+    }
+    &__pineapple {
+        z-index: 5;
+    }
+    &__onion {
+        z-index: 6;
+    }
 }
