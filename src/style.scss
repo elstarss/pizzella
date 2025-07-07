@@ -67,10 +67,6 @@ body {
         z-index: 6;
     }
 }
-.icons {
-    width: 60px;
-    height: 60px;
-}
 
 .pizza-loading-area {
     width: 200px;
@@ -83,16 +79,33 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
 }
+.icons {
+    width: 60px;
+    height: 60px;
+}
 .ingredient-buttons {
-    display: flex;
-    flex-direction: column;
+    // display: flex;
     font-size: x-small;
     background-color: transparent;
     border: none;
     &__bake {
         background-color: transparent;
         border: dashed purple 2px;
+        width: 250px;
     }
+}
+.base-and-sauces {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.toppings {
+    display: flex;
+}
+.bin-pizza-btn {
+    background-color: transparent;
+    border: none;
 }
