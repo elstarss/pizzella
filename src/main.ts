@@ -92,32 +92,6 @@ function startGame() {
 }
 
 startGameButton.addEventListener("click", startGame);
-//adding event listeners to each of the ingredient buttons to display their corresponding pizza loading image
-// baseBtn.addEventListener("click", () => setElementVisibility(baseImage, true));
-// tomatoBtn.addEventListener("click", () =>
-//     setElementVisibility(tomatoImage, true)
-// );
-
-// pestoBtn.addEventListener("click", () =>
-//     setElementVisibility(pestoImage, true)
-// );
-// bbqBtn.addEventListener("click", () => setElementVisibility(bbqImage, true));
-// cheeseBtn.addEventListener("click", () =>
-//     setElementVisibility(cheeseImage, true)
-// );
-// mushroomBtn.addEventListener("click", () =>
-//     setElementVisibility(mushroomImage, true)
-// );
-// tomatoSlicesBtn.addEventListener("click", () =>
-//     setElementVisibility(tomatoSlicesImage, true)
-// );
-// pineappleImageBtn.addEventListener("click", () =>
-//     setElementVisibility(pineappleImage, true)
-// );
-// onionBtn.addEventListener("click", () =>
-//     setElementVisibility(onionImage, true)
-// );
-
 //
 // Bin pizza button
 function binPizzaButton() {
@@ -174,16 +148,8 @@ function generateOrder(numberOfToppings: number) {
 }
 //
 //
-
 let clickedIngredientsArray: string[] = [];
 
-// function captures which ingredients are clicked by player
-// function clickedIngredients(topping: string) {
-//     if (!clickedIngredientsArray.includes(topping)) {
-//         clickedIngredientsArray.push(topping);
-//         console.log(`Clicked ingredients array is ${clickedIngredientsArray}`);
-//     }
-// }
 // maybe another way to write this?
 function registerClick(event: Event) {
     const target = event.currentTarget as HTMLButtonElement;
@@ -192,13 +158,7 @@ function registerClick(event: Event) {
         console.log(`Clicked ingredient array is ${clickedIngredientsArray}`);
     }
 }
-ingredientBtns.forEach((btn) => {
-    btn.addEventListener("click", registerClick);
-    btn.addEventListener("click", ingredientClickedSwitch);
-});
 //
-//
-
 function ingredientClickedSwitch(event: Event) {
     const target = event.currentTarget as HTMLButtonElement;
     switch (target) {
@@ -207,6 +167,7 @@ function ingredientClickedSwitch(event: Event) {
             break;
         case tomatoBtn:
             setElementVisibility(tomatoImage, true);
+            break;
         case pestoBtn:
             setElementVisibility(pestoImage, true);
             break;
@@ -233,6 +194,10 @@ function ingredientClickedSwitch(event: Event) {
     }
 }
 //
+ingredientBtns.forEach((btn) => {
+    btn.addEventListener("click", registerClick);
+    btn.addEventListener("click", ingredientClickedSwitch);
+});
 //
 
 ovenBtn?.addEventListener("click", () => {
