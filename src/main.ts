@@ -3,10 +3,15 @@ import "./variables.scss";
 
 // importing landing page elements
 const startGameButton =
-    document.querySelector<HTMLDivElement>(".start-game-btn");
+    document.querySelector<HTMLButtonElement>(".start-game-btn");
 const landingContent =
     document.querySelector<HTMLDivElement>(".landing-screen");
 const gameContent = document.querySelector<HTMLDivElement>(".game-content");
+//
+// other dom elements
+const orderDisplay = document.querySelector<HTMLParagraphElement>(
+    ".customer-order-display"
+);
 //
 // buttons for ingredients
 const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
@@ -26,11 +31,13 @@ const onionBtn = document.getElementById("onionButton") as HTMLButtonElement;
 const pineappleImageBtn = document.getElementById(
     "pineappleButton"
 ) as HTMLButtonElement;
+const ovenBtn = document.getElementById("ovenButton");
 //
 //
 //
 // importing pizza loading images
 //
+const pizzaLoadingImages = document.querySelectorAll(".pizza-loading-images");
 const baseImage = document.getElementById("pizzaBaseImage") as HTMLImageElement;
 const tomatoImage = document.getElementById(
     "pizzaTomatoSauceImage"
@@ -54,7 +61,7 @@ const pineappleImage = document.getElementById(
 //
 //
 // Need to add checks here for checking is variables are empty or not
-if (!onionBtn) {
+if (!onionBtn || !startGameButton || !orderDisplay) {
     throw new Error("Variable empty");
 }
 //
@@ -68,6 +75,7 @@ function startGame() {
     setElementVisibility(landingContent, false);
     setElementVisibility(gameContent, true);
     generateOrder(2);
+    updateCustomerOrder();
 }
 
 startGameButton.addEventListener("click", startGame);
@@ -97,14 +105,28 @@ onionBtn.addEventListener("click", () =>
     setElementVisibility(onionImage, true)
 );
 //
+// Bin pizza button
+console.log(pizzaLoadingImages);
+function binPizzaButton() {
+    clickedIngredientsArray = [];
+    pizzaLoadingImages.forEach((img) => {
+        setElementVisibility(img, false);
+    });
+}
+document
+    .querySelector<HTMLButtonElement>(".bin-pizza-btn")
+    ?.addEventListener("click", binPizzaButton);
 // gameplay content
 // ..
 // generating customer order
 const toppingsList: string[] = [
-    "tomato sauce",
-    "cheese",
-    "mushroom",
-    "sliced tomato",
+    "Tomato sauce",
+    "Pesto sauce",
+    "Cheese",
+    "Mushroom",
+    "Tomato slices",
+    "Pineapple",
+    "Onion",
 ];
 
 // creating a function to shuffle array using fisher yates
@@ -125,11 +147,13 @@ let customerOrder: string[] = [];
 function generateOrder(numberOfToppings: number) {
     const shuffledToppings = shuffle(toppingsList);
     const slicedToppings = shuffledToppings.slice(0, numberOfToppings);
-    slicedToppings.push("base");
+    slicedToppings.unshift("Base");
     customerOrder = slicedToppings;
     console.log("Customer order is: " + customerOrder);
 }
-
+//
+//
+console.log(orderDisplay);
 let clickedIngredientsArray: string[] = [];
 
 // function captures which ingredients are clicked by player
@@ -151,8 +175,9 @@ ingredientBtns.forEach((btn) => {
     btn.addEventListener("click", registerClick);
 });
 
-console.log(clickedIngredientsArray);
-
+ovenBtn?.addEventListener("click", () => {
+    checkOrder();
+});
 // add event listener to all ingredients and apply clickedIngredients function
 
 // checking if clicked ingredient array matches generated customer order array
@@ -162,15 +187,40 @@ function checkOrder() {
     let correctIngredients = 0;
     for (let i = 0; i < clickedIngredientsArray.length; i++) {
         if (customerOrder.includes(clickedIngredientsArray[i])) {
-            console.log(correctIngredients);
             correctIngredients++;
-            console.log(correctIngredients);
         }
     }
     if (correctIngredients === clickedIngredientsArray.length) {
         console.log("correct");
         winCount++;
+        clickedIngredientsArray = [];
+        generateOrder(2);
+        binPizzaButton();
+        updateWinDisplay();
+        updateCustomerOrder();
+    } else if (clickedIngredientsArray.length < customerOrder.length) {
+        console.log("Not enough toppings");
     } else {
-        console.log("wrong toppings!");
+        console.log("Wrong toppings!");
+        clickedIngredientsArray = [];
+        generateOrder(2);
+        updateCustomerOrder();
+        binPizzaButton();
     }
+}
+
+//
+//
+// Customer order display
+function updateCustomerOrder() {
+    orderDisplay.textContent = `The customer order is: ${customerOrder.join(
+        " + "
+    )}`;
+}
+
+//Win display
+function updateWinDisplay() {
+    document.querySelector<HTMLDivElement>(
+        ".win-display"
+    ).textContent = `Win count is: ${winCount}`;
 }
