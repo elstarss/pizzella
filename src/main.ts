@@ -11,7 +11,7 @@ const gameContent = document.querySelector<HTMLDivElement>(".game-content");
 // other dom elements
 const orderDisplay = document.querySelector(".customer-order-display");
 const winDisplay = document.getElementById("winDisplay") as HTMLElement;
-
+const pizzaBinBtn = document.querySelector<HTMLButtonElement>(".bin-pizza-btn");
 //
 // buttons for ingredients
 const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
@@ -240,7 +240,16 @@ function checkOrder() {
 function updateCustomerOrder() {
     let customerToppings = [...customerOrder];
     customerToppings.shift();
-    orderDisplay!.textContent = `The customer order is: ${customerToppings.join(
+    orderDisplay!.textContent = `The customer would like: ${customerToppings.join(
         " + "
     )}`;
 }
+
+// pizzabinbutton
+function binPizza() {
+    clickedIngredientsArray = [];
+    pizzaLoadingImages.forEach((img) => {
+        setElementVisibility(img, false);
+    });
+}
+pizzaBinBtn!.addEventListener("click", binPizza);

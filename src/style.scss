@@ -13,11 +13,11 @@ body {
     }
 }
 
-// .game-content {
-//     display: none;
-//     align-content: center;
-//     justify-items: center;
-// }
+.game-content {
+    display: none;
+    align-content: center;
+    justify-items: center;
+}
 
 .pizza-content-styling {
     border: purple solid;
@@ -90,7 +90,9 @@ body {
     flex-direction: column;
     font-size: x-small;
     background-color: transparent;
+    border: none;
     &__bake {
         background-color: transparent;
+        border: dashed purple 2px;
     }
 }
