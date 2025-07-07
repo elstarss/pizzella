@@ -16,7 +16,6 @@
                 <div class="pizza-content-styling">
                     <h1 class="customer-order-display">Customer order</h1>
                     <div class="pizza-loading-area">
-                        Pizza loading area
                         <img
                             src="src\images\pizza-base-1.png"
                             id="pizzaBaseImage"
@@ -34,6 +33,12 @@
                             alt="pesto sauce"
                             class="pizza-loading-images pizza-loading-images__pesto pizza-sauce"
                             id="pizzaPestoSauceImage"
+                        />
+                        <img
+                            src="src\images\pizza-bbq.png"
+                            alt="bbq sauce"
+                            class="pizza-loading-images pizza-loading-images__bbq pizza-sauce"
+                            id="pizzaBBQSauceImage"
                         />
                         <img
                             src="src\images\pizza-cheese-1.png"
@@ -86,6 +91,12 @@
                             Pesto sauce
                         </button>
                         <button
+                            class="ingredient-buttons ingredient-buttons__bbq sauce-button"
+                            id="bbqbtn"
+                        >
+                            BBQ sauce
+                        </button>
+                        <button
                             class="ingredient-buttons ingredient-buttons__cheese"
                             id="cheeseButton"
                         >
@@ -115,15 +126,13 @@
                         >
                             Onion
                         </button>
-                        <button
-                            class="ingredient-buttons__bake"
-                            id="ovenButton"
-                        >
-                            Bake
-                        </button>
                     </div>
+                    <button class="ingredient-buttons__bake" id="ovenButton">
+                        Bake
+                    </button>
+
                     <button class="bin-pizza-btn">Bin pizza button</button>
-                    <div class="win-display">Win count is:</div>
+                    <h2 class="win-count" id="winDisplay">Win count is:</h2>
                     <div class="countdown-timer-div">Countdown timer</div>
                     <button class="reset-game-btn">Reset button</button>
                 </div>

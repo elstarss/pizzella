@@ -7,18 +7,32 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 30px;
+    @include variables.desktop {
+        margin-top: 200px;
+    }
 }
 
 .game-content {
     display: none;
+    align-content: center;
+    justify-items: center;
 }
 
 .pizza-content-styling {
+    border: purple solid;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    width: 90%;
+    @include variables.desktop {
+        width: 60%;
+    }
 }
-
+.customer-order-display {
+    font-size: medium;
+}
 .pizza-loading-images {
     display: none;
     position: absolute;
@@ -33,6 +47,10 @@ body {
     &__pesto {
         z-index: 1;
     }
+    &__bbq {
+        z-index: 1;
+    }
+
     &__cheese {
         z-index: 2;
     }
@@ -59,4 +77,6 @@ body {
 .pizza-content__ingredients {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
 }

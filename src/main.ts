@@ -9,9 +9,9 @@ const landingContent =
 const gameContent = document.querySelector<HTMLDivElement>(".game-content");
 //
 // other dom elements
-const orderDisplay = document.querySelector<HTMLParagraphElement>(
-    ".customer-order-display"
-);
+const orderDisplay = document.querySelector(".customer-order-display");
+const winDisplay = document.getElementById("winDisplay") as HTMLElement;
+
 //
 // buttons for ingredients
 const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
@@ -20,6 +20,7 @@ const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
 const baseBtn = document.getElementById("baseButton") as HTMLButtonElement;
 const tomatoBtn = document.getElementById("tomatoButton") as HTMLButtonElement;
 const pestoBtn = document.getElementById("pestoBtn") as HTMLButtonElement;
+const bbqBtn = document.getElementById("bbqbtn");
 const cheeseBtn = document.getElementById("cheeseButton") as HTMLButtonElement;
 const mushroomBtn = document.getElementById(
     "mushroomButton"
@@ -33,35 +34,47 @@ const pineappleImageBtn = document.getElementById(
 ) as HTMLButtonElement;
 const ovenBtn = document.getElementById("ovenButton");
 //
-//
+
 //
 // importing pizza loading images
 //
 const pizzaLoadingImages = document.querySelectorAll(".pizza-loading-images");
-const baseImage = document.getElementById("pizzaBaseImage") as HTMLImageElement;
-const tomatoImage = document.getElementById(
-    "pizzaTomatoSauceImage"
-) as HTMLImageElement;
-const pestoImage = document.getElementById(
-    "pizzaPestoSauceImage"
-) as HTMLImageElement;
-const cheeseImage = document.getElementById(
-    "pizzaCheeseToppingImage"
-) as HTMLImageElement;
-const mushroomImage = document.getElementById(
-    "mushroomToppingImage"
-) as HTMLImageElement;
-const tomatoSlicesImage = document.getElementById("tomatoSlicesToppingImage");
-const onionImage = document.getElementById(
-    "onionToppingImage"
-) as HTMLImageElement;
-const pineappleImage = document.getElementById(
-    "pineappleToppingImage"
-) as HTMLImageElement;
+const baseImage = document.querySelector<HTMLImageElement>(
+    ".pizza-loading-images__base"
+);
+const tomatoImage = document.querySelector<HTMLImageElement>(
+    ".pizza-loading-images__tomato-sauce"
+);
+
+const pestoImage = document.querySelector<HTMLImageElement>(
+    ".pizza-loading-images__pesto"
+);
+const bbqImage = document.querySelector<HTMLImageElement>(
+    ".pizza-loading-images__bbq"
+);
+const cheeseImage = document.querySelector<HTMLImageElement>(
+    ".pizza-loading-images__cheese"
+);
+const mushroomImage = document.querySelector<HTMLImageElement>(
+    ".pizza-loading-images__mushroom"
+);
+const tomatoSlicesImage = document.querySelector<HTMLImageElement>(
+    ".pizza-loading-images__sliced-tomato"
+);
+const onionImage = document.querySelector<HTMLImageElement>(
+    ".pizza-loading-images__onion"
+);
+
+const pineappleImage = document.querySelector<HTMLImageElement>(
+    ".pizza-loading-images__pineapple"
+);
 //
 //
+let winCount: number = 0;
+//
+console.log(JSON.parse(JSON.stringify(winDisplay)));
 // Need to add checks here for checking is variables are empty or not
-if (!onionBtn || !startGameButton || !orderDisplay) {
+if (!onionBtn || !startGameButton || !orderDisplay || !bbqBtn) {
     throw new Error("Variable empty");
 }
 //
@@ -74,39 +87,39 @@ function setElementVisibility(element: any, display: boolean) {
 function startGame() {
     setElementVisibility(landingContent, false);
     setElementVisibility(gameContent, true);
-    generateOrder(2);
+    generateOrder(1);
     updateCustomerOrder();
 }
 
 startGameButton.addEventListener("click", startGame);
 //adding event listeners to each of the ingredient buttons to display their corresponding pizza loading image
-baseBtn.addEventListener("click", () => setElementVisibility(baseImage, true));
-tomatoBtn.addEventListener("click", () =>
-    setElementVisibility(tomatoImage, true)
-);
+// baseBtn.addEventListener("click", () => setElementVisibility(baseImage, true));
+// tomatoBtn.addEventListener("click", () =>
+//     setElementVisibility(tomatoImage, true)
+// );
 
-pestoBtn.addEventListener("click", () =>
-    setElementVisibility(pestoImage, true)
-);
+// pestoBtn.addEventListener("click", () =>
+//     setElementVisibility(pestoImage, true)
+// );
+// bbqBtn.addEventListener("click", () => setElementVisibility(bbqImage, true));
+// cheeseBtn.addEventListener("click", () =>
+//     setElementVisibility(cheeseImage, true)
+// );
+// mushroomBtn.addEventListener("click", () =>
+//     setElementVisibility(mushroomImage, true)
+// );
+// tomatoSlicesBtn.addEventListener("click", () =>
+//     setElementVisibility(tomatoSlicesImage, true)
+// );
+// pineappleImageBtn.addEventListener("click", () =>
+//     setElementVisibility(pineappleImage, true)
+// );
+// onionBtn.addEventListener("click", () =>
+//     setElementVisibility(onionImage, true)
+// );
 
-cheeseBtn.addEventListener("click", () =>
-    setElementVisibility(cheeseImage, true)
-);
-mushroomBtn.addEventListener("click", () =>
-    setElementVisibility(mushroomImage, true)
-);
-tomatoSlicesBtn.addEventListener("click", () =>
-    setElementVisibility(tomatoSlicesImage, true)
-);
-pineappleImageBtn.addEventListener("click", () =>
-    setElementVisibility(pineappleImage, true)
-);
-onionBtn.addEventListener("click", () =>
-    setElementVisibility(onionImage, true)
-);
 //
 // Bin pizza button
-console.log(pizzaLoadingImages);
 function binPizzaButton() {
     clickedIngredientsArray = [];
     pizzaLoadingImages.forEach((img) => {
@@ -118,17 +131,22 @@ document
     ?.addEventListener("click", binPizzaButton);
 // gameplay content
 // ..
+//
+//Win display
+function updateWinDisplay() {
+    winDisplay.innerHTML = `Win count is: ${winCount}`;
+}
+
+//
 // generating customer order
 const toppingsList: string[] = [
-    "Tomato sauce",
-    "Pesto sauce",
     "Cheese",
     "Mushroom",
     "Tomato slices",
     "Pineapple",
     "Onion",
 ];
-
+const sauceList: string[] = ["Tomato sauce", "Pesto sauce", "BBQ sauce"];
 // creating a function to shuffle array using fisher yates
 // goes through array starting from last index and swaps random elements with the current [i]. copies array so it is not mutated
 function shuffle(array: string[]): string[] {
@@ -146,14 +164,17 @@ let customerOrder: string[] = [];
 // generate order accepts numberoftoppings so i can make the game harder later on. always has a pizza base
 function generateOrder(numberOfToppings: number) {
     const shuffledToppings = shuffle(toppingsList);
+    const shuffledSauces = shuffle(sauceList);
     const slicedToppings = shuffledToppings.slice(0, numberOfToppings);
-    slicedToppings.unshift("Base");
-    customerOrder = slicedToppings;
+    const slicedSauces = shuffledSauces.slice(0, 1);
+    slicedSauces.unshift("Base");
+    slicedSauces.push(...slicedToppings);
+    customerOrder = slicedSauces;
     console.log("Customer order is: " + customerOrder);
 }
 //
 //
-console.log(orderDisplay);
+
 let clickedIngredientsArray: string[] = [];
 
 // function captures which ingredients are clicked by player
@@ -173,7 +194,46 @@ function registerClick(event: Event) {
 }
 ingredientBtns.forEach((btn) => {
     btn.addEventListener("click", registerClick);
+    btn.addEventListener("click", ingredientClickedSwitch);
 });
+//
+//
+
+function ingredientClickedSwitch(event: Event) {
+    const target = event.currentTarget as HTMLButtonElement;
+    switch (target) {
+        case baseBtn:
+            setElementVisibility(baseImage, true);
+            break;
+        case tomatoBtn:
+            setElementVisibility(tomatoImage, true);
+        case pestoBtn:
+            setElementVisibility(pestoImage, true);
+            break;
+        case bbqBtn:
+            setElementVisibility(bbqImage, true);
+            break;
+        case cheeseBtn:
+            setElementVisibility(cheeseImage, true);
+            break;
+        case mushroomBtn:
+            setElementVisibility(mushroomImage, true);
+            break;
+        case pineappleImageBtn:
+            setElementVisibility(pineappleImage, true);
+            break;
+        case tomatoSlicesBtn:
+            setElementVisibility(tomatoSlicesImage, true);
+            break;
+        case onionBtn:
+            setElementVisibility(onionImage, true);
+            break;
+        default:
+            console.log("Switch error");
+    }
+}
+//
+//
 
 ovenBtn?.addEventListener("click", () => {
     checkOrder();
@@ -181,46 +241,41 @@ ovenBtn?.addEventListener("click", () => {
 // add event listener to all ingredients and apply clickedIngredients function
 
 // checking if clicked ingredient array matches generated customer order array
-let winCount: number = 0;
 //
 function checkOrder() {
     let correctIngredients = 0;
     for (let i = 0; i < clickedIngredientsArray.length; i++) {
+        console.log(customerOrder);
         if (customerOrder.includes(clickedIngredientsArray[i])) {
             correctIngredients++;
         }
     }
-    if (correctIngredients === clickedIngredientsArray.length) {
+    if (
+        correctIngredients === clickedIngredientsArray.length &&
+        clickedIngredientsArray.length == customerOrder.length
+    ) {
         console.log("correct");
         winCount++;
-        clickedIngredientsArray = [];
-        generateOrder(2);
-        binPizzaButton();
         updateWinDisplay();
-        updateCustomerOrder();
     } else if (clickedIngredientsArray.length < customerOrder.length) {
         console.log("Not enough toppings");
+        clickedIngredientsArray = [];
     } else {
         console.log("Wrong toppings!");
-        clickedIngredientsArray = [];
-        generateOrder(2);
-        updateCustomerOrder();
-        binPizzaButton();
     }
+    clickedIngredientsArray = [];
+    generateOrder(1);
+    updateCustomerOrder();
+    binPizzaButton();
 }
 
 //
 //
 // Customer order display
 function updateCustomerOrder() {
-    orderDisplay.textContent = `The customer order is: ${customerOrder.join(
+    let customerToppings = [...customerOrder];
+    customerToppings.shift();
+    orderDisplay!.textContent = `The customer order is: ${customerToppings.join(
         " + "
     )}`;
-}
-
-//Win display
-function updateWinDisplay() {
-    document.querySelector<HTMLDivElement>(
-        ".win-display"
-    ).textContent = `Win count is: ${winCount}`;
 }
