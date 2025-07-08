@@ -1,6 +1,8 @@
 @use "variables";
 body {
     background-color: lavender;
+    font-family: "Playwrite AU NSW", cursive;
+    font-optical-sizing: auto;
 }
 
 .landing-screen {
@@ -31,6 +33,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 90%;
+    padding: 10px;
     @include variables.desktop {
         width: 70%;
         margin-top: 100px;
@@ -117,17 +120,37 @@ body {
             width: 60px;
             height: 60px;
         }
+        // styling oven image
+        &--bake {
+            width: 60px;
+            height: 60px;
+            @include variables.desktop {
+                width: 70px;
+                height: 70px;
+            }
+        }
     }
-
+    // styling oven button/container
     &__bake {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        font-family: "Playwrite AU NSW", cursive;
+        font-size: x-large;
+        font-weight: 600;
         background-color: transparent;
         border: dashed purple 2px;
         width: 200px;
+        transition: transform 0.3s ease-in-out;
+        &:hover {
+            transform: scale(1.1);
+        }
         @include variables.desktop {
             width: 250px;
         }
     }
 }
+
 .bin-pizza-btn__icon {
     width: 60px;
     height: 60px;
@@ -136,14 +159,17 @@ body {
         height: 80px;
     }
 }
+
 .base-and-sauces {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .toppings {
     display: flex;
 }
+
 .bin-pizza-btn {
     background-color: transparent;
     border: none;
@@ -155,4 +181,8 @@ body {
     &:hover {
         transform: rotate(15deg);
     }
+}
+
+.win-count {
+    font-size: large;
 }

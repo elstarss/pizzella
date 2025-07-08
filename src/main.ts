@@ -73,6 +73,7 @@ const pineappleImage = document.querySelector<HTMLImageElement>(
 //
 //
 let winCount: number = 0;
+let levelNumber: number = 1;
 //
 
 // Need to add checks here for checking is variables are empty or not
@@ -95,7 +96,7 @@ function setElementVisibility(element: any, display: boolean) {
 function startGame() {
     setElementVisibility(landingContent, false);
     setElementVisibility(gameContent, true);
-    generateOrder(1);
+    generateOrder(levelNumber);
     updateCustomerOrder();
     updateWinDisplay();
 }
@@ -235,8 +236,9 @@ function checkOrder() {
     } else {
         console.log("Wrong toppings!");
     }
+    levelUp();
     clickedIngredientsArray = [];
-    generateOrder(1);
+    generateOrder(levelNumber);
     updateCustomerOrder();
     binPizzaButton();
 }
@@ -244,7 +246,7 @@ function checkOrder() {
 //
 //Win display
 function updateWinDisplay() {
-    winDisplay.innerHTML = `Win count is: ${winCount}`;
+    winDisplay.innerHTML = `Level ${levelNumber}, Pizzas made in this level: ${winCount}`;
 }
 //
 // Customer order display
@@ -272,5 +274,16 @@ function resetGameFunction() {
     setElementVisibility(landingContent, true);
     binPizza();
     winCount = 0;
+    levelNumber = 1;
 }
 resetGameBtn.addEventListener("click", resetGameFunction);
+
+function levelUp() {
+    if (levelNumber == 3) {
+        console.log("Winner!!");
+    } else if (winCount >= 5) {
+        levelNumber++;
+        winCount = 0;
+        updateWinDisplay();
+    }
+}

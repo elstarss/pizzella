@@ -4,19 +4,25 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="style.scss" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playwrite+AU+NSW:wght@100..400&display=swap"
+            rel="stylesheet"
+        />
         <title>Pizza-game</title>
     </head>
     <body>
         <main>
             <div class="landing-screen">
                 <h1 class="landing-screen__header">Welcome to Pizzella!</h1>
+                <button class="start-game-btn">Start Game!</button>
                 <p class="landing-screen__intro">
                     Have you dined with us before? <br />No worries if not, have
                     a look at the menu before you get started! <br />
                     *Image of menu here wih slide in overlay with game
                     instructions*
                 </p>
-                <button class="start-game-btn">Start Game!</button>
             </div>
             <div class="pizza-content game-content">
                 <div class="pizza-content-styling">
@@ -173,18 +179,15 @@
                             </button>
                         </div>
                     </div>
-                    <button
-                        class="ingredient-buttons__bake icon"
-                        id="ovenButton"
-                    >
+                    <button class="ingredient-buttons__bake" id="ovenButton">
                         <img
                             src="src\images\icons\oven-icon.png"
                             alt="oven icon"
-                            class="ingredient-buttons__icon ingredient-buttons__icon--bake icons"
+                            class="ingredient-buttons__icon ingredient-buttons__icon--bake"
                         />Bake!
                     </button>
 
-                    <button class="bin-pizza-btn icon">
+                    <button class="bin-pizza-btn">
                         <img
                             src="src\images\icons\pizza-bin-icon.png"
                             alt="pizza bin icon"
