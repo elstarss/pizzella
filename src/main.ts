@@ -12,6 +12,8 @@ const gameContent = document.querySelector<HTMLDivElement>(".game-content");
 const orderDisplay = document.querySelector(".customer-order-display");
 const winDisplay = document.getElementById("winDisplay") as HTMLElement;
 const pizzaBinBtn = document.querySelector<HTMLButtonElement>(".bin-pizza-btn");
+const resetGameBtn =
+    document.querySelector<HTMLButtonElement>(".reset-game-btn");
 //
 // buttons for ingredients
 const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
@@ -74,7 +76,13 @@ let winCount: number = 0;
 //
 
 // Need to add checks here for checking is variables are empty or not
-if (!onionBtn || !startGameButton || !orderDisplay || !bbqBtn) {
+if (
+    !onionBtn ||
+    !startGameButton ||
+    !orderDisplay ||
+    !bbqBtn ||
+    !resetGameBtn
+) {
     throw new Error("Variable empty");
 }
 //
@@ -89,6 +97,7 @@ function startGame() {
     setElementVisibility(gameContent, true);
     generateOrder(1);
     updateCustomerOrder();
+    updateWinDisplay();
 }
 
 startGameButton.addEventListener("click", startGame);
@@ -143,15 +152,6 @@ function generateOrder(numberOfToppings: number) {
 //
 let clickedIngredientsArray: string[] = [];
 
-// maybe another way to write this?
-// function registerClick(event: Event) {
-//     const target = event.currentTarget as HTMLButtonElement;
-//     if (!clickedIngredientsArray.includes(target.innerText)) {
-//         // clickedIngredientsArray.push(target.innerText);
-//         console.log(`Clicked ingredient array is ${clickedIngredientsArray}`);
-//     }
-// }
-//
 function ingredientClickedSwitch(event: Event) {
     const target = event.currentTarget as HTMLButtonElement;
     if (!clickedIngredientsArray.includes(target.innerText)) {
@@ -265,3 +265,12 @@ function binPizza() {
 }
 pizzaBinBtn!.addEventListener("click", binPizza);
 console.log(winCount);
+
+// reset game btn
+function resetGameFunction() {
+    setElementVisibility(gameContent, false);
+    setElementVisibility(landingContent, true);
+    binPizza();
+    winCount = 0;
+}
+resetGameBtn.addEventListener("click", resetGameFunction);
