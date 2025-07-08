@@ -40,11 +40,6 @@ body {
     position: absolute;
     height: 120px;
     width: 120px;
-    @include variables.desktop {
-        height: 200px;
-        width: 200px;
-    }
-
     &__base {
         z-index: 0;
     }
@@ -73,17 +68,21 @@ body {
     &__onion {
         z-index: 6;
     }
+    @include variables.desktop {
+        height: 200px;
+        width: 200px;
+    }
 }
 
 .pizza-loading-area {
     width: 120px;
     height: 120px;
+    border: purple 2px dashed;
+    align-self: center;
     @include variables.desktop {
         width: 200px;
         height: 200px;
     }
-    border: purple 2px dashed;
-    align-self: center;
 }
 
 .pizza-content__ingredients {
@@ -93,23 +92,43 @@ body {
     align-items: center;
     flex-wrap: wrap;
 }
-.icons {
-    width: 40px;
-    height: 40px;
-    @include variables.desktop {
-        width: 60px;
-        height: 60px;
-    }
-}
+// .icons {
+//     width: 40px;
+//     height: 40px;
+//     @include variables.desktop {
+//         width: 60px;
+//         height: 60px;
+//     }
+// }
 .ingredient-buttons {
     // display: flex;
     font-size: x-small;
     background-color: transparent;
     border: none;
+    &__icon {
+        width: 40px;
+        height: 40px;
+        @include variables.desktop {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
     &__bake {
         background-color: transparent;
         border: dashed purple 2px;
-        width: 250px;
+        width: 200px;
+        @include variables.desktop {
+            width: 250px;
+        }
+    }
+}
+.bin-pizza-btn__icon {
+    width: 60px;
+    height: 60px;
+    @include variables.desktop {
+        width: 80;
+        height: 80px;
     }
 }
 .base-and-sauces {

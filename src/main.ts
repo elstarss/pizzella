@@ -104,13 +104,6 @@ document
     .querySelector<HTMLButtonElement>(".bin-pizza-btn")
     ?.addEventListener("click", binPizzaButton);
 // gameplay content
-// ..
-//
-//Win display
-function updateWinDisplay() {
-    winDisplay.innerHTML = `Win count is: ${winCount}`;
-}
-
 //
 // generating customer order
 const toppingsList: string[] = [
@@ -249,6 +242,10 @@ function checkOrder() {
 }
 
 //
+//Win display
+function updateWinDisplay() {
+    winDisplay.innerHTML = `Win count is: ${winCount}`;
+}
 //
 // Customer order display
 function updateCustomerOrder() {
