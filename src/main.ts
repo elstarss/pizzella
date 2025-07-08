@@ -231,17 +231,18 @@ function checkOrder() {
         console.log("correct");
         winCount++;
         updateWinDisplay();
+        levelUp();
     } else if (clickedIngredientsArray.length < customerOrder.length) {
         console.log("Not enough toppings");
         clickedIngredientsArray = [];
     } else {
         console.log("Wrong toppings!");
     }
-    levelUp();
     clickedIngredientsArray = [];
     generateOrder(levelNumber);
     updateCustomerOrder();
     binPizzaButton();
+    console.log(levelNumber, winCount);
 }
 
 //
@@ -278,10 +279,10 @@ function resetGameFunction() {
 resetGameBtn.addEventListener("click", resetGameFunction);
 
 function levelUp() {
-    if (levelNumber == 3) {
+    if (levelNumber == 3 && winCount == 2) {
         console.log("Winner!!");
         setElementVisibility(gameContent, false);
-    } else if (winCount >= 3) {
+    } else if (winCount >= 2) {
         levelNumber++;
         winCount = 0;
         updateWinDisplay();
