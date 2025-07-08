@@ -14,19 +14,36 @@
     </head>
     <body>
         <main>
-            <div class="landing-screen">
-                <h1 class="landing-screen__header">Welcome to Pizzella!</h1>
-                <button class="start-game-btn">Start Game!</button>
-                <p class="landing-screen__intro">
-                    Have you dined with us before? <br />No worries if not, have
-                    a look at the menu before you get started! <br />
-                    *Image of menu here wih slide in overlay with game
-                    instructions*
-                </p>
+            <div class="landing-screen-all">
+                <div class="landing-screen">
+                    <h1 class="landing-screen__header">Welcome to Pizzella!</h1>
+                    <button class="start-game-btn">Start Game!</button>
+                    <p class="landing-screen__intro">
+                        Have you dined with us before? <br />No worries if not,
+                        have a look at the menu before you get started! <br />
+                    </p>
+                    <div class="overlay-container">
+                        <img
+                            src="src\images\pizza menu.png"
+                            alt="pizza menu image"
+                            class="landing-screen__img overlay-container__image"
+                        />
+                        <div class="overlay">
+                            <div class="overlay__text">Hello world</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="pizza-content game-content">
                 <div class="pizza-content-styling">
-                    <h1 class="customer-order-display">Customer order</h1>
+                    <h1 class="customer-order-display">
+                        The customer would like:
+                    </h1>
+                    <h1
+                        class="customer-order-display customer-order-display__order"
+                    >
+                        Pizza please!
+                    </h1>
                     <div class="pizza-loading-area">
                         <img
                             src="src\images\pizza-base-1.png"
@@ -179,21 +196,26 @@
                             </button>
                         </div>
                     </div>
-                    <button class="ingredient-buttons__bake" id="ovenButton">
-                        <img
-                            src="src\images\icons\oven-icon.png"
-                            alt="oven icon"
-                            class="ingredient-buttons__icon ingredient-buttons__icon--bake"
-                        />Bake!
-                    </button>
+                    <div class="bake-and-bin">
+                        <button
+                            class="ingredient-buttons__bake"
+                            id="ovenButton"
+                        >
+                            <img
+                                src="src\images\icons\oven-icon.png"
+                                alt="oven icon"
+                                class="ingredient-buttons__icon ingredient-buttons__icon--bake"
+                            />Bake!
+                        </button>
 
-                    <button class="bin-pizza-btn">
-                        <img
-                            src="src\images\icons\pizza-bin-icon.png"
-                            alt="pizza bin icon"
-                            class="bin-pizza-btn__icon icons"
-                        />
-                    </button>
+                        <button class="bin-pizza-btn">
+                            <img
+                                src="src\images\icons\pizza-bin-icon.png"
+                                alt="pizza bin icon"
+                                class="bin-pizza-btn__icon icons"
+                            />
+                        </button>
+                    </div>
                     <h2 class="win-count" id="winDisplay">Win count is:</h2>
                     <div class="countdown-timer-div">Countdown timer</div>
                     <button class="reset-game-btn">Reset button</button>

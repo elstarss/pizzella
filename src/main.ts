@@ -4,12 +4,13 @@ import "./variables.scss";
 // importing landing page elements
 const startGameButton =
     document.querySelector<HTMLButtonElement>(".start-game-btn");
-const landingContent =
-    document.querySelector<HTMLDivElement>(".landing-screen");
+const landingContent = document.querySelector<HTMLDivElement>(
+    ".landing-screen-all"
+);
 const gameContent = document.querySelector<HTMLDivElement>(".game-content");
 //
 // other dom elements
-const orderDisplay = document.querySelector(".customer-order-display");
+const orderDisplay = document.querySelector(".customer-order-display__order");
 const winDisplay = document.getElementById("winDisplay") as HTMLElement;
 const pizzaBinBtn = document.querySelector<HTMLButtonElement>(".bin-pizza-btn");
 const resetGameBtn =
@@ -253,9 +254,7 @@ function updateWinDisplay() {
 function updateCustomerOrder() {
     let customerToppings = [...customerOrder];
     customerToppings.shift();
-    orderDisplay!.textContent = `The customer would like: ${customerToppings.join(
-        " + "
-    )}`;
+    orderDisplay!.textContent = `${customerToppings.join(" + ")}`;
 }
 
 // pizzabinbutton
@@ -281,7 +280,8 @@ resetGameBtn.addEventListener("click", resetGameFunction);
 function levelUp() {
     if (levelNumber == 3) {
         console.log("Winner!!");
-    } else if (winCount >= 5) {
+        setElementVisibility(gameContent, false);
+    } else if (winCount >= 3) {
         levelNumber++;
         winCount = 0;
         updateWinDisplay();
