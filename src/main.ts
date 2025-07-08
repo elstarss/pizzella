@@ -151,13 +151,13 @@ function generateOrder(numberOfToppings: number) {
 let clickedIngredientsArray: string[] = [];
 
 // maybe another way to write this?
-function registerClick(event: Event) {
-    const target = event.currentTarget as HTMLButtonElement;
-    if (!clickedIngredientsArray.includes(target.innerText)) {
-        // clickedIngredientsArray.push(target.innerText);
-        console.log(`Clicked ingredient array is ${clickedIngredientsArray}`);
-    }
-}
+// function registerClick(event: Event) {
+//     const target = event.currentTarget as HTMLButtonElement;
+//     if (!clickedIngredientsArray.includes(target.innerText)) {
+//         // clickedIngredientsArray.push(target.innerText);
+//         console.log(`Clicked ingredient array is ${clickedIngredientsArray}`);
+//     }
+// }
 //
 function ingredientClickedSwitch(event: Event) {
     const target = event.currentTarget as HTMLButtonElement;
@@ -207,7 +207,6 @@ function ingredientClickedSwitch(event: Event) {
 }
 //
 ingredientBtns.forEach((btn) => {
-    btn.addEventListener("click", registerClick);
     btn.addEventListener("click", ingredientClickedSwitch);
 });
 //

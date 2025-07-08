@@ -27,7 +27,9 @@ body {
     align-items: center;
     width: 90%;
     @include variables.desktop {
-        width: 60%;
+        width: 70%;
+        margin-top: 100px;
+        padding: 30px;
     }
 }
 .customer-order-display {
@@ -36,8 +38,13 @@ body {
 .pizza-loading-images {
     display: none;
     position: absolute;
-    height: 200px;
-    width: 200px;
+    height: 120px;
+    width: 120px;
+    @include variables.desktop {
+        height: 200px;
+        width: 200px;
+    }
+
     &__base {
         z-index: 0;
     }
@@ -69,8 +76,12 @@ body {
 }
 
 .pizza-loading-area {
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
+    @include variables.desktop {
+        width: 200px;
+        height: 200px;
+    }
     border: purple 2px dashed;
     align-self: center;
 }
@@ -83,8 +94,12 @@ body {
     flex-wrap: wrap;
 }
 .icons {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
+    @include variables.desktop {
+        width: 60px;
+        height: 60px;
+    }
 }
 .ingredient-buttons {
     // display: flex;
