@@ -72,7 +72,7 @@ const pineappleImage = document.querySelector<HTMLImageElement>(
 //
 let winCount: number = 0;
 //
-console.log(JSON.parse(JSON.stringify(winDisplay)));
+
 // Need to add checks here for checking is variables are empty or not
 if (!onionBtn || !startGameButton || !orderDisplay || !bbqBtn) {
     throw new Error("Variable empty");
@@ -154,43 +154,55 @@ let clickedIngredientsArray: string[] = [];
 function registerClick(event: Event) {
     const target = event.currentTarget as HTMLButtonElement;
     if (!clickedIngredientsArray.includes(target.innerText)) {
-        clickedIngredientsArray.push(target.innerText);
+        // clickedIngredientsArray.push(target.innerText);
         console.log(`Clicked ingredient array is ${clickedIngredientsArray}`);
     }
 }
 //
 function ingredientClickedSwitch(event: Event) {
     const target = event.currentTarget as HTMLButtonElement;
-    switch (target) {
-        case baseBtn:
-            setElementVisibility(baseImage, true);
-            break;
-        case tomatoBtn:
-            setElementVisibility(tomatoImage, true);
-            break;
-        case pestoBtn:
-            setElementVisibility(pestoImage, true);
-            break;
-        case bbqBtn:
-            setElementVisibility(bbqImage, true);
-            break;
-        case cheeseBtn:
-            setElementVisibility(cheeseImage, true);
-            break;
-        case mushroomBtn:
-            setElementVisibility(mushroomImage, true);
-            break;
-        case pineappleImageBtn:
-            setElementVisibility(pineappleImage, true);
-            break;
-        case tomatoSlicesBtn:
-            setElementVisibility(tomatoSlicesImage, true);
-            break;
-        case onionBtn:
-            setElementVisibility(onionImage, true);
-            break;
-        default:
-            console.log("Switch error");
+    if (!clickedIngredientsArray.includes(target.innerText)) {
+        switch (target) {
+            case baseBtn:
+                setElementVisibility(baseImage, true);
+                clickedIngredientsArray.push("Base");
+
+                break;
+            case tomatoBtn:
+                setElementVisibility(tomatoImage, true);
+                clickedIngredientsArray.push("Tomato sauce");
+                break;
+            case pestoBtn:
+                setElementVisibility(pestoImage, true);
+                clickedIngredientsArray.push("Pesto sauce");
+                break;
+            case bbqBtn:
+                setElementVisibility(bbqImage, true);
+                clickedIngredientsArray.push("BBQ sauce");
+                break;
+            case cheeseBtn:
+                setElementVisibility(cheeseImage, true);
+                clickedIngredientsArray.push("Cheese");
+                break;
+            case mushroomBtn:
+                setElementVisibility(mushroomImage, true);
+                clickedIngredientsArray.push("Mushroom");
+                break;
+            case pineappleImageBtn:
+                setElementVisibility(pineappleImage, true);
+                clickedIngredientsArray.push("Pineapple");
+                break;
+            case tomatoSlicesBtn:
+                setElementVisibility(tomatoSlicesImage, true);
+                clickedIngredientsArray.push("Tomato slices");
+                break;
+            case onionBtn:
+                setElementVisibility(onionImage, true);
+                clickedIngredientsArray.push("Onion");
+                break;
+            default:
+                console.log("Switch error");
+        }
     }
 }
 //
@@ -201,6 +213,8 @@ ingredientBtns.forEach((btn) => {
 //
 
 ovenBtn?.addEventListener("click", () => {
+    console.log(clickedIngredientsArray);
+
     checkOrder();
 });
 // add event listener to all ingredients and apply clickedIngredients function
@@ -209,8 +223,9 @@ ovenBtn?.addEventListener("click", () => {
 //
 function checkOrder() {
     let correctIngredients = 0;
+    console.log(clickedIngredientsArray);
+    console.log(customerOrder);
     for (let i = 0; i < clickedIngredientsArray.length; i++) {
-        console.log(customerOrder);
         if (customerOrder.includes(clickedIngredientsArray[i])) {
             correctIngredients++;
         }
@@ -253,3 +268,4 @@ function binPizza() {
     });
 }
 pizzaBinBtn!.addEventListener("click", binPizza);
+console.log(winCount);
