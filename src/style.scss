@@ -178,7 +178,6 @@ body {
             height: 60px;
         }
         &--pesto,
-        &--base,
         &--bbq,
         &--tomato-sauce {
             width: 40px;
@@ -188,13 +187,15 @@ body {
                 height: 70px;
             }
         }
-        // styling oven image
-        &--bake {
+
+        // styling oven and base image
+        &--bake,
+        &--base {
             width: 60px;
             height: 60px;
             @include variables.desktop {
-                width: 70px;
-                height: 70px;
+                width: 90px;
+                height: 90px;
             }
         }
     }
@@ -258,4 +259,8 @@ body {
 }
 .win-count {
     font-size: large;
+}
+
+.end-screen-content {
+    display: none;
 }

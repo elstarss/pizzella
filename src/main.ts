@@ -1,5 +1,10 @@
+import { updateWinDisplay } from "./gameUtils";
 import "./style.scss";
 import "./variables.scss";
+
+// HTML element captures
+// Global variables
+// DOM manipulation direct on document (eventlisteners)
 
 // importing landing page elements
 const startGameButton =
@@ -8,6 +13,11 @@ const landingContent = document.querySelector<HTMLDivElement>(
     ".landing-screen-all"
 );
 const gameContent = document.querySelector<HTMLDivElement>(".game-content");
+const endScreenContent = document.querySelector<HTMLDivElement>(
+    ".end-screen-content"
+);
+const endScreenScore =
+    document.querySelector<HTMLHeadingElement>(".end-screen-score");
 //
 // other dom elements
 const orderDisplay = document.querySelector(".customer-order-display__order");
@@ -15,6 +25,9 @@ const winDisplay = document.getElementById("winDisplay") as HTMLElement;
 const pizzaBinBtn = document.querySelector<HTMLButtonElement>(".bin-pizza-btn");
 const resetGameBtn =
     document.querySelector<HTMLButtonElement>(".reset-game-btn");
+const resetGameBtnEnd = document.querySelector<HTMLButtonElement>(
+    ".reset-game-btn-end"
+);
 //
 // buttons for ingredients
 const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
@@ -75,6 +88,8 @@ const pineappleImage = document.querySelector<HTMLImageElement>(
 //
 let winCount: number = 0;
 let levelNumber: number = 1;
+let totalCorrectPizzas: number = 0;
+// let pizzaStreak: number = 0;
 //
 
 // Need to add checks here for checking is variables are empty or not
@@ -99,7 +114,8 @@ function startGame() {
     setElementVisibility(gameContent, true);
     generateOrder(levelNumber);
     updateCustomerOrder();
-    updateWinDisplay();
+    startCountdown();
+    updateWinDisplay(winDisplay, levelNumber, winCount);
 }
 
 startGameButton.addEventListener("click", startGame);
@@ -161,7 +177,6 @@ function ingredientClickedSwitch(event: Event) {
             case baseBtn:
                 setElementVisibility(baseImage, true);
                 clickedIngredientsArray.push("Base");
-
                 break;
             case tomatoBtn:
                 setElementVisibility(tomatoImage, true);
@@ -230,7 +245,8 @@ function checkOrder() {
     ) {
         console.log("correct");
         winCount++;
-        updateWinDisplay();
+        totalCorrectPizzas++;
+        updateWinDisplay(winDisplay, levelNumber, winCount);
         levelUp();
     } else if (clickedIngredientsArray.length < customerOrder.length) {
         console.log("Not enough toppings");
@@ -247,9 +263,9 @@ function checkOrder() {
 
 //
 //Win display
-function updateWinDisplay() {
-    winDisplay.innerHTML = `Level ${levelNumber}, Pizzas made in this level: ${winCount}`;
-}
+//function updateWinDisplay() {
+//  winDisplay.innerHTML = `Level ${levelNumber}, Pizzas made in this level: ${winCount}`;
+//}
 //
 // Customer order display
 function updateCustomerOrder() {
@@ -272,12 +288,15 @@ console.log(winCount);
 function resetGameFunction() {
     setElementVisibility(gameContent, false);
     setElementVisibility(landingContent, true);
+    setElementVisibility(endScreenContent, false);
     binPizza();
     winCount = 0;
     levelNumber = 1;
+    totalCorrectPizzas = 0;
 }
 resetGameBtn.addEventListener("click", resetGameFunction);
 
+// function that increases difficulty if win count is over x in a level (set to just 2 for now)
 function levelUp() {
     if (levelNumber == 3 && winCount == 2) {
         console.log("Winner!!");
@@ -285,6 +304,34 @@ function levelUp() {
     } else if (winCount >= 2) {
         levelNumber++;
         winCount = 0;
-        updateWinDisplay();
+        updateWinDisplay(winDisplay, levelNumber, winCount);
     }
 }
+//
+const countdownDisplay = document.querySelector<HTMLParagraphElement>(
+    ".countdown-timer-div"
+);
+// countdown timer
+let countdown: any;
+let timeLeft: number = 15;
+
+function startCountdown() {
+    // prevents from duplication issues- resets from when countdown begins
+    clearInterval(countdown);
+    timeLeft = 15;
+    countdownDisplay!.textContent = timeLeft + " seconds left!";
+    countdown = setInterval(() => {
+        timeLeft--;
+        countdownDisplay!.textContent = timeLeft + " seconds left!";
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            setElementVisibility(gameContent, false);
+            setElementVisibility(endScreenContent, true);
+            setElementVisibility(startGameButton, true);
+            endScreenScore!.innerHTML =
+                "Time's up! You scored " + totalCorrectPizzas + " points";
+        }
+    }, 1000);
+}
+
+resetGameBtnEnd?.addEventListener("click", resetGameFunction);

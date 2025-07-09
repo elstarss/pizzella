@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pizza-game</title>
+    </head>
+    <body>
+        Pizza Game Here
+        <div class="pizza-content game-content">
+            <div class="pizza-content-styling">
+                <h1 class="customer-order-display">The customer would like:</h1>
+                <h1
+                    class="customer-order-display customer-order-display__order"
+                >
+                    Pizza please!
+                </h1>
+                <div class="pizza-loading-area">
+                    <img
+                        src="src\images\pizza-base-1.png"
+                        id="pizzaBaseImage"
+                        class="pizza-loading-images pizza-loading-images__base"
+                        alt="pizza base image"
+                    />
+                    <img
+                        src="src\images\pizza-tomato-1.png"
+                        alt="pizza base with tomato sauce image"
+                        class="pizza-loading-images pizza-loading-images__tomato-sauce pizza-sauce"
+                        id="pizzaTomatoSauceImage"
+                    />
+                    <img
+                        src="src\images\pizza-pesto-1.png"
+                        alt="pesto sauce"
+                        class="pizza-loading-images pizza-loading-images__pesto pizza-sauce"
+                        id="pizzaPestoSauceImage"
+                    />
+                    <img
+                        src="src\images\pizza-bbq.png"
+                        alt="bbq sauce"
+                        class="pizza-loading-images pizza-loading-images__bbq pizza-sauce"
+                        id="pizzaBBQSauceImage"
+                    />
+                    <img
+                        src="src\images\pizza-cheese-1.png"
+                        alt="pizza cheese image"
+                        class="pizza-loading-images pizza-loading-images__cheese"
+                        id="pizzaCheeseToppingImage"
+                    />
+                    <img
+                        src="src\images\pizza-topping-mushroom-s2.png"
+                        alt="pizza topping mushrooms"
+                        class="pizza-loading-images pizza-loading-images__mushroom"
+                        id="mushroomToppingImage"
+                    />
+                    <img
+                        src="src\images\tomato-pizza-topping-s2.png"
+                        alt="pizza topping sliced tomato"
+                        class="pizza-loading-images pizza-loading-images__sliced-tomato"
+                        id="tomatoSlicesToppingImage"
+                    />
+                    <img
+                        src="src\images\onion-pizza-topping-s2.png"
+                        alt="onion pizza topping"
+                        class="pizza-loading-images pizza-loading-images__onion"
+                        id="onionToppingImage"
+                    />
+                    <img
+                        src="src\images\pizza-topping-pineapple.png"
+                        alt="pineapple pizza topping"
+                        class="pizza-loading-images pizza-loading-images__pineapple"
+                        id="pineappleToppingImage"
+                    />
+                </div>
+                <div class="pizza-content__ingredients">
+                    <div class="base-and-sauces">
+                        <button
+                            class="ingredient-buttons ingredient-buttons__base"
+                            id="baseButton"
+                        >
+                            <img
+                                src="src\images\icons\dough-icon.png"
+                                alt="pizza dough icons"
+                                class="ingredient-buttons__icon ingredient-buttons__icon--base icons"
+                            />
+                        </button>
+                        <button
+                            class="ingredient-buttons ingredient-buttons__tomato-sauce sauce-button"
+                            id="tomatoButton"
+                        >
+                            <img
+                                src="src\images\icons\tomato-sauce-icon.png"
+                                alt="tomato sauce icon"
+                                class="ingredient-buttons__icon ingredient-buttons__icon--tomato-sauce icons"
+                            />
+                        </button>
+                        <button
+                            class="ingredient-buttons ingredient-buttons__pesto sauce-button"
+                            id="pestoBtn"
+                        >
+                            <img
+                                src="src\images\icons\pesto-sauce-icon.png"
+                                alt="pesto icon"
+                                class="ingredient-buttons__icon ingredient-buttons__icon--pesto icons"
+                            />
+                        </button>
+                        <button
+                            class="ingredient-buttons ingredient-buttons__bbq sauce-button"
+                            id="bbqbtn"
+                        >
+                            <img
+                                src="src\images\icons\bbq-sauce-icon.png"
+                                alt="bbq sauce icon"
+                                class="ingredient-buttons__icon ingredient-buttons__icon--bbq icons"
+                            />
+                        </button>
+                    </div>
+                    <div class="toppings">
+                        <button
+                            class="ingredient-buttons ingredient-buttons__cheese"
+                            id="cheeseButton"
+                        >
+                            <img
+                                src="src\images\icons\cheese-icon.png"
+                                alt="cheese icon"
+                                class="ingredient-buttons__icon ingredient-buttons__icon--cheese icons"
+                            />
+                        </button>
+                        <button
+                            class="ingredient-buttons ingredient-buttons__mushroom"
+                            id="mushroomButton"
+                        >
+                            <img
+                                src="src\images\icons\mushroom-icon.png"
+                                alt="mushroom icon"
+                                class="ingredient-buttons__icon ingredient-buttons__icon--mushroom icons"
+                            />
+                        </button>
+                        <button
+                            class="ingredient-buttons ingredient-buttons__tomato-slices"
+                            id="tomatoSlicesButton"
+                        >
+                            <img
+                                src="src\images\icons\sliced-tomato-icon.png"
+                                alt="sliced tomato icon"
+                                class="ingredient-buttons__icon ingredient-buttons__icon--sliced-tomato icons"
+                            />
+                        </button>
+                        <button
+                            class="ingredient-buttons ingredient-buttons__pineapple"
+                            id="pineappleButton"
+                        >
+                            <img
+                                src="src\images\icons\pineapple-icon.png"
+                                alt="pineapple icon"
+                                class="ingredient-buttons__icon ingredient-buttons__icon--pineapple icons"
+                            />
+                        </button>
+                        <button
+                            class="ingredient-buttons ingredient-buttons__onion"
+                            id="onionButton"
+                        >
+                            <img
+                                src="src\images\icons\onion-icon.png"
+                                alt="onion icon"
+                                class="ingredient-buttons__icon ingredient-buttons__icon--onion icons"
+                            />
+                        </button>
+                    </div>
+                </div>
+                <div class="bake-and-bin">
+                    <button class="ingredient-buttons__bake" id="ovenButton">
+                        <img
+                            src="src\images\icons\oven-icon.png"
+                            alt="oven icon"
+                            class="ingredient-buttons__icon ingredient-buttons__icon--bake"
+                        />Bake!
+                    </button>
+
+                    <button class="bin-pizza-btn">
+                        <img
+                            src="src\images\icons\pizza-bin-icon.png"
+                            alt="pizza bin icon"
+                            class="bin-pizza-btn__icon icons"
+                            id="binButton"
+                        />
+                    </button>
+                </div>
+                <h2 class="win-count" id="winDisplay">Win count is:</h2>
+                <p class="countdown-timer-div">20 seconds left!</p>
+                <button class="reset-game-btn">Reset button</button>
+            </div>
+        </div>
+    </body>
+</html>
