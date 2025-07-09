@@ -119,15 +119,15 @@ let timeLeft: number = 15;
 //
 
 // Need to add checks here for checking is variables are empty or not
-if (
-    !onionBtn ||
-    !startGameButton ||
-    !orderDisplay ||
-    !bbqBtn ||
-    !resetGameBtn
-) {
-    throw new Error("Variable empty");
-}
+// if (
+//     !onionBtn ||
+//     !startGameButton ||
+//     !orderDisplay ||
+//     !bbqBtn ||
+//     !resetGameBtn
+// ) {
+//     throw new Error("Variable empty");
+// }
 //
 const generateOrder = (numberOfToppings: number) => {
     const shuffledToppings = shuffle(toppingsList);
@@ -151,6 +151,7 @@ function startGame() {
 }
 
 startGameButton.addEventListener("click", startGame);
+// startGame();
 //
 // Bin pizza button
 function binPizzaButton() {
