@@ -19,10 +19,18 @@ body {
         justify-content: center;
     }
     &__img {
-        width: 90vw;
+        width: 40vw;
         @include variables.desktop {
             width: 40vw;
         }
+    }
+    &__header {
+        text-align: center;
+        font-size: large;
+    }
+    &__intro {
+        text-align: center;
+        font-size: x-small;
     }
 }
 
@@ -31,14 +39,8 @@ body {
     width: 50%;
     &__image {
         display: block;
-        width: 100%;
+        // width: 100%;
         height: auto;
-        // &:hover {
-        // transform: scale(1.1);
-        // transform: rotate(15deg);
-        // transform: translate(50%, 50%);
-        // -ms-transform: translate(50%, 50%);
-        // }
     }
 }
 .overlay-container:hover .overlay {
@@ -51,7 +53,7 @@ body {
         overflow: hidden;
         top: 50%;
         left: 50%;
-        width: 80%;
+        width: 70%;
         transform: translate(-50%, -50%);
         @include variables.desktop {
             font-size: 20px;
@@ -62,8 +64,6 @@ body {
     }
 }
 .overlay-container:hover .overlay-container__image {
-    // transform: translate(50%, 50%);
-    // -ms-transform: translate(50%, 50%);
     transform: scale(0.7);
 }
 .overlay {
@@ -159,13 +159,10 @@ body {
 
 .pizza-content__ingredients {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    @include variables.desktop {
-        flex-direction: column;
-    }
 }
 
 .ingredient-buttons {
@@ -179,6 +176,17 @@ body {
         @include variables.desktop {
             width: 60px;
             height: 60px;
+        }
+        &--pesto,
+        &--base,
+        &--bbq,
+        &--tomato-sauce {
+            width: 40px;
+            height: 50px;
+            @include variables.desktop {
+                width: 60px;
+                height: 70px;
+            }
         }
         // styling oven image
         &--bake {
@@ -211,9 +219,12 @@ body {
     }
 }
 
-.bin-pizza-btn__icon {
+#binButton {
     width: 60px;
     height: 60px;
+    &:hover {
+        transform: rotate(15deg);
+    }
     @include variables.desktop {
         width: 80;
         height: 80px;
@@ -239,7 +250,7 @@ body {
     transition: transform 0.3s ease-in-out;
 
     &:hover {
-        transform: rotate(15deg);
+        transform: rotate(-15deg);
     }
 }
 .bake-and-bin {
