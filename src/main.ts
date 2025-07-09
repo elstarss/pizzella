@@ -1,4 +1,9 @@
-import { updateWinDisplay } from "./gameUtils";
+import {
+    updateWinDisplay,
+    setElementVisibility,
+    updateCustomerOrder,
+    shuffle,
+} from "./gameUtils";
 import "./style.scss";
 import "./variables.scss";
 
@@ -7,26 +12,34 @@ import "./variables.scss";
 // DOM manipulation direct on document (eventlisteners)
 
 // importing landing page elements
-const startGameButton =
-    document.querySelector<HTMLButtonElement>(".start-game-btn");
-const landingContent = document.querySelector<HTMLDivElement>(
+const startGameButton = document.querySelector<HTMLButtonElement>(
+    ".start-game-btn"
+) as HTMLButtonElement;
+const landingContent = document.querySelector(
     ".landing-screen-all"
-);
-const gameContent = document.querySelector<HTMLDivElement>(".game-content");
+) as HTMLDivElement;
+const gameContent = document.querySelector<HTMLDivElement>(
+    ".game-content"
+) as HTMLDivElement;
 const endScreenContent = document.querySelector<HTMLDivElement>(
     ".end-screen-content"
-);
+) as HTMLDivElement;
 const endScreenScore =
     document.querySelector<HTMLHeadingElement>(".end-screen-score");
 //
 // other dom elements
-const orderDisplay = document.querySelector(".customer-order-display__order");
+const orderDisplay = document.querySelector(
+    ".customer-order-display__order"
+) as HTMLHeadingElement;
 const winDisplay = document.getElementById("winDisplay") as HTMLElement;
 const pizzaBinBtn = document.querySelector<HTMLButtonElement>(".bin-pizza-btn");
 const resetGameBtn =
     document.querySelector<HTMLButtonElement>(".reset-game-btn");
 const resetGameBtnEnd = document.querySelector<HTMLButtonElement>(
     ".reset-game-btn-end"
+);
+const countdownDisplay = document.querySelector<HTMLParagraphElement>(
+    ".countdown-timer-div"
 );
 //
 // buttons for ingredients
@@ -85,10 +98,23 @@ const pineappleImage = document.querySelector<HTMLImageElement>(
     ".pizza-loading-images__pineapple"
 );
 //
-//
+//Global variables
 let winCount: number = 0;
 let levelNumber: number = 1;
 let totalCorrectPizzas: number = 0;
+const toppingsList: string[] = [
+    "Cheese",
+    "Mushroom",
+    "Tomato slices",
+    "Pineapple",
+    "Onion",
+];
+const sauceList: string[] = ["Tomato sauce", "Pesto sauce", "BBQ sauce"];
+let customerOrder: string[] = [];
+let clickedIngredientsArray: string[] = [];
+let countdown: any;
+let timeLeft: number = 15;
+
 // let pizzaStreak: number = 0;
 //
 
@@ -103,17 +129,23 @@ if (
     throw new Error("Variable empty");
 }
 //
-//
-// function to change display of any html element
-function setElementVisibility(element: any, display: boolean) {
-    element.style.display = display ? "block" : "none";
-}
+const generateOrder = (numberOfToppings: number) => {
+    const shuffledToppings = shuffle(toppingsList);
+    const shuffledSauces = shuffle(sauceList);
+    const slicedToppings = shuffledToppings.slice(0, numberOfToppings);
+    const slicedSauces = shuffledSauces.slice(0, 1);
+    slicedSauces.unshift("Base");
+    slicedSauces.push(...slicedToppings);
+    customerOrder = slicedSauces;
+    console.log("Customer order is: " + customerOrder);
+};
+
 // start game functionality
 function startGame() {
     setElementVisibility(landingContent, false);
     setElementVisibility(gameContent, true);
-    generateOrder(levelNumber);
-    updateCustomerOrder();
+    generateOrder(levelNumber, toppingsList, sauceList, customerOrder);
+    updateCustomerOrder(customerOrder, orderDisplay);
     startCountdown();
     updateWinDisplay(winDisplay, levelNumber, winCount);
 }
@@ -133,81 +165,52 @@ document
 // gameplay content
 //
 // generating customer order
-const toppingsList: string[] = [
-    "Cheese",
-    "Mushroom",
-    "Tomato slices",
-    "Pineapple",
-    "Onion",
-];
-const sauceList: string[] = ["Tomato sauce", "Pesto sauce", "BBQ sauce"];
 // creating a function to shuffle array using fisher yates
 // goes through array starting from last index and swaps random elements with the current [i]. copies array so it is not mutated
-function shuffle(array: string[]): string[] {
-    const arrayCopy = [...array];
-    for (let i = arrayCopy.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
-    }
-    return arrayCopy;
-}
 
-// customerOrder globally accessible
-let customerOrder: string[] = [];
-
-// generate order accepts numberoftoppings so i can make the game harder later on. always has a pizza base
-function generateOrder(numberOfToppings: number) {
-    const shuffledToppings = shuffle(toppingsList);
-    const shuffledSauces = shuffle(sauceList);
-    const slicedToppings = shuffledToppings.slice(0, numberOfToppings);
-    const slicedSauces = shuffledSauces.slice(0, 1);
-    slicedSauces.unshift("Base");
-    slicedSauces.push(...slicedToppings);
-    customerOrder = slicedSauces;
-    console.log("Customer order is: " + customerOrder);
-}
 //
-//
-let clickedIngredientsArray: string[] = [];
 
 function ingredientClickedSwitch(event: Event) {
     const target = event.currentTarget as HTMLButtonElement;
     if (!clickedIngredientsArray.includes(target.innerText)) {
         switch (target) {
             case baseBtn:
-                setElementVisibility(baseImage, true);
+                setElementVisibility(baseImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Base");
                 break;
             case tomatoBtn:
-                setElementVisibility(tomatoImage, true);
+                setElementVisibility(tomatoImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Tomato sauce");
                 break;
             case pestoBtn:
-                setElementVisibility(pestoImage, true);
+                setElementVisibility(pestoImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Pesto sauce");
                 break;
             case bbqBtn:
-                setElementVisibility(bbqImage, true);
+                setElementVisibility(bbqImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("BBQ sauce");
                 break;
             case cheeseBtn:
-                setElementVisibility(cheeseImage, true);
+                setElementVisibility(cheeseImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Cheese");
                 break;
             case mushroomBtn:
-                setElementVisibility(mushroomImage, true);
+                setElementVisibility(mushroomImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Mushroom");
                 break;
             case pineappleImageBtn:
-                setElementVisibility(pineappleImage, true);
+                setElementVisibility(pineappleImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Pineapple");
                 break;
             case tomatoSlicesBtn:
-                setElementVisibility(tomatoSlicesImage, true);
+                setElementVisibility(
+                    tomatoSlicesImage as HTMLImageElement,
+                    true
+                );
                 clickedIngredientsArray.push("Tomato slices");
                 break;
             case onionBtn:
-                setElementVisibility(onionImage, true);
+                setElementVisibility(onionImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Onion");
                 break;
             default:
@@ -221,9 +224,7 @@ ingredientBtns.forEach((btn) => {
 });
 //
 
-ovenBtn?.addEventListener("click", () => {
-    console.log(clickedIngredientsArray);
-
+ovenBtn!.addEventListener("click", () => {
     checkOrder();
 });
 // add event listener to all ingredients and apply clickedIngredients function
@@ -256,23 +257,12 @@ function checkOrder() {
     }
     clickedIngredientsArray = [];
     generateOrder(levelNumber);
-    updateCustomerOrder();
+    updateCustomerOrder(customerOrder, orderDisplay);
     binPizzaButton();
     console.log(levelNumber, winCount);
 }
-
-//
-//Win display
-//function updateWinDisplay() {
-//  winDisplay.innerHTML = `Level ${levelNumber}, Pizzas made in this level: ${winCount}`;
-//}
 //
 // Customer order display
-function updateCustomerOrder() {
-    let customerToppings = [...customerOrder];
-    customerToppings.shift();
-    orderDisplay!.textContent = `${customerToppings.join(" + ")}`;
-}
 
 // pizzabinbutton
 function binPizza() {
@@ -300,7 +290,7 @@ resetGameBtn.addEventListener("click", resetGameFunction);
 function levelUp() {
     if (levelNumber == 3 && winCount == 2) {
         console.log("Winner!!");
-        setElementVisibility(gameContent, false);
+        setElementVisibility(gameContent as HTMLDivElement, false);
     } else if (winCount >= 2) {
         levelNumber++;
         winCount = 0;
@@ -308,12 +298,7 @@ function levelUp() {
     }
 }
 //
-const countdownDisplay = document.querySelector<HTMLParagraphElement>(
-    ".countdown-timer-div"
-);
 // countdown timer
-let countdown: any;
-let timeLeft: number = 15;
 
 function startCountdown() {
     // prevents from duplication issues- resets from when countdown begins
