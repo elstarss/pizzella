@@ -118,10 +118,17 @@ body {
     width: 100%;
     &__display {
         visibility: hidden;
-        margin-left: 6vw;
+        margin-left: 4vw;
+        font-size: x-small;
         align-self: center;
         transition: opacity 0.5s ease;
         opacity: 0;
+        @include variables.tablet {
+            font-size: medium;
+        }
+        @include variables.desktop {
+            font-size: x-large;
+        }
     }
 }
 .feedback-pizza-row__display.show {

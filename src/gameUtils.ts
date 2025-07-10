@@ -14,13 +14,6 @@ export const setElementDisplay = (
 ) => {
     return (element.style.display = visibility ? "block" : "none");
 };
-// element visibility
-export const setElementVisibility = (
-    element: HTMLElement,
-    visible: boolean
-) => {
-    return (element.style.visibility = visible ? "visible" : "hidden");
-};
 
 // customer order display
 export const updateCustomerOrder = (
@@ -39,4 +32,17 @@ export const shuffle = (array: string[]): string[] => {
         [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
     }
     return arrayCopy;
+};
+
+export const feedback = (element: HTMLElement, pizzaCheck: string) => {
+    if (pizzaCheck == "correct") {
+        element.innerHTML = "Perfect!";
+    } else if (pizzaCheck == "missing toppings") {
+        element.innerHTML = "Missing toppings!";
+    } else element.innerHTML = "Close, but no pizza!";
+
+    element.classList.add("show");
+    setTimeout(() => {
+        element.classList.remove("show");
+    }, 1000);
 };

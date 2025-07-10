@@ -3,6 +3,7 @@ import {
     setElementDisplay,
     updateCustomerOrder,
     shuffle,
+    feedback,
 } from "./gameUtils";
 import "./style.scss";
 import "./variables.scss";
@@ -262,19 +263,6 @@ const resetGameFunction = () => {
     winCount = 0;
     levelNumber = 1;
     totalCorrectPizzas = 0;
-};
-
-const feedback = (element: HTMLElement, pizzaCheck: string) => {
-    if (pizzaCheck == "correct") {
-        element.innerHTML = "Perfect!";
-    } else if (pizzaCheck == "missing toppings") {
-        element.innerHTML = "Missing toppings!";
-    } else element.innerHTML = "Close, but no pizza!";
-
-    element.classList.add("show");
-    setTimeout(() => {
-        element.classList.remove("show");
-    }, 1000);
 };
 
 // Event listeners
