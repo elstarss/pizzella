@@ -36,8 +36,8 @@ const resetGameBtnEnd = document.querySelector<HTMLButtonElement>(
 const countdownDisplay = document.querySelector<HTMLParagraphElement>(
     ".countdown-timer-div"
 );
-const feedbackDisplay = document.querySelector<HTMLHeadingElement>(
-    ".feedback-pizza-row__display"
+const feedbackDisplay = document.querySelector<HTMLDivElement>(
+    ".feedback-pizza-row"
 );
 // buttons for ingredients
 const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
@@ -200,14 +200,14 @@ const checkOrder = () => {
         totalCorrectPizzas++;
         updateWinDisplay(winDisplay, levelNumber, winCount);
         levelUp();
-        feedback(feedbackDisplay as HTMLHeadingElement, "correct");
+        feedback(feedbackDisplay as HTMLDivElement, "correct");
     } else if (clickedIngredientsArray.length < customerOrder.length) {
         console.log("Not enough toppings");
-        feedback(feedbackDisplay as HTMLHeadingElement, "missing toppings");
+        feedback(feedbackDisplay as HTMLDivElement, "missing toppings");
         clickedIngredientsArray = [];
     } else {
         console.log("Wrong toppings!");
-        feedback(feedbackDisplay as HTMLHeadingElement, "wrong");
+        feedback(feedbackDisplay as HTMLDivElement, "wrong");
     }
     clickedIngredientsArray = [];
     generateOrder(levelNumber);

@@ -35,11 +35,16 @@ export const shuffle = (array: string[]): string[] => {
 };
 
 export const feedback = (element: HTMLElement, pizzaCheck: string) => {
-    if (pizzaCheck == "correct") {
-        element.innerHTML = "Perfect!";
-    } else if (pizzaCheck == "missing toppings") {
-        element.innerHTML = "Missing toppings!";
-    } else element.innerHTML = "Close, but no pizza!";
+    const header = element.querySelector(".feedback-header");
+    if (!header) return;
+
+    if (pizzaCheck === "correct") {
+        header.textContent = "Perfect!";
+    } else if (pizzaCheck === "missing toppings") {
+        header.textContent = "Missing toppings!";
+    } else {
+        header.textContent = "Close, but no pizza!";
+    }
 
     element.classList.add("show");
     setTimeout(() => {
