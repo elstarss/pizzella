@@ -49,5 +49,5 @@ export const feedback = (element: HTMLElement, pizzaCheck: string) => {
     element.classList.add("show");
     setTimeout(() => {
         element.classList.remove("show");
-    }, 1000);
+    }, 500);
 };
