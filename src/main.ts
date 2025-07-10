@@ -119,16 +119,16 @@ let timeLeft: number = 15;
 //
 
 // Need to add checks here for checking is variables are empty or not
-// if (
-//     !onionBtn ||
-//     !startGameButton ||
-//     !orderDisplay ||
-//     !bbqBtn ||
-//     !resetGameBtn
-// ) {
-//     throw new Error("Variable empty");
-// }
-//
+if (
+    !onionBtn ||
+    !startGameButton ||
+    !orderDisplay ||
+    !bbqBtn ||
+    !resetGameBtn
+) {
+    throw new Error("Variable empty");
+}
+
 const generateOrder = (numberOfToppings: number) => {
     const shuffledToppings = shuffle(toppingsList);
     const shuffledSauces = shuffle(sauceList);
@@ -144,7 +144,7 @@ const generateOrder = (numberOfToppings: number) => {
 function startGame() {
     setElementVisibility(landingContent, false);
     setElementVisibility(gameContent, true);
-    generateOrder(levelNumber, toppingsList, sauceList, customerOrder);
+    generateOrder(levelNumber);
     updateCustomerOrder(customerOrder, orderDisplay);
     startCountdown();
     updateWinDisplay(winDisplay, levelNumber, winCount);
