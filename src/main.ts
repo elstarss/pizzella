@@ -1,6 +1,6 @@
 import {
     updateWinDisplay,
-    setElementVisibility,
+    setElementDisplay,
     updateCustomerOrder,
     shuffle,
 } from "./gameUtils";
@@ -34,6 +34,9 @@ const resetGameBtnEnd = document.querySelector<HTMLButtonElement>(
 );
 const countdownDisplay = document.querySelector<HTMLParagraphElement>(
     ".countdown-timer-div"
+);
+const feedbackDisplay = document.querySelector<HTMLHeadingElement>(
+    ".feedback-pizza-row__display"
 );
 // buttons for ingredients
 const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
@@ -101,7 +104,7 @@ const sauceList: string[] = ["Tomato sauce", "Pesto sauce", "BBQ sauce"];
 let customerOrder: string[] = [];
 let clickedIngredientsArray: string[] = [];
 let countdown: any;
-let timeLeft: number = 15;
+let timeLeft: number = 30;
 // let pizzaStreak: number = 0;
 
 // Need to add checks here for checking is variables are empty or not
@@ -128,7 +131,7 @@ const generateOrder = (numberOfToppings: number) => {
 const binPizzaButton = () => {
     clickedIngredientsArray = [];
     pizzaLoadingImages.forEach((img) => {
-        setElementVisibility(img, false);
+        setElementDisplay(img, false);
     });
 };
 
@@ -137,42 +140,39 @@ const ingredientClickedSwitch = (event: Event) => {
     if (!clickedIngredientsArray.includes(target.innerText)) {
         switch (target) {
             case baseBtn:
-                setElementVisibility(baseImage as HTMLImageElement, true);
+                setElementDisplay(baseImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Base");
                 break;
             case tomatoBtn:
-                setElementVisibility(tomatoImage as HTMLImageElement, true);
+                setElementDisplay(tomatoImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Tomato sauce");
                 break;
             case pestoBtn:
-                setElementVisibility(pestoImage as HTMLImageElement, true);
+                setElementDisplay(pestoImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Pesto sauce");
                 break;
             case bbqBtn:
-                setElementVisibility(bbqImage as HTMLImageElement, true);
+                setElementDisplay(bbqImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("BBQ sauce");
                 break;
             case cheeseBtn:
-                setElementVisibility(cheeseImage as HTMLImageElement, true);
+                setElementDisplay(cheeseImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Cheese");
                 break;
             case mushroomBtn:
-                setElementVisibility(mushroomImage as HTMLImageElement, true);
+                setElementDisplay(mushroomImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Mushroom");
                 break;
             case pineappleImageBtn:
-                setElementVisibility(pineappleImage as HTMLImageElement, true);
+                setElementDisplay(pineappleImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Pineapple");
                 break;
             case tomatoSlicesBtn:
-                setElementVisibility(
-                    tomatoSlicesImage as HTMLImageElement,
-                    true
-                );
+                setElementDisplay(tomatoSlicesImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Tomato slices");
                 break;
             case onionBtn:
-                setElementVisibility(onionImage as HTMLImageElement, true);
+                setElementDisplay(onionImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Onion");
                 break;
             default:
@@ -199,11 +199,14 @@ const checkOrder = () => {
         totalCorrectPizzas++;
         updateWinDisplay(winDisplay, levelNumber, winCount);
         levelUp();
+        feedback(feedbackDisplay as HTMLHeadingElement, "correct");
     } else if (clickedIngredientsArray.length < customerOrder.length) {
         console.log("Not enough toppings");
+        feedback(feedbackDisplay as HTMLHeadingElement, "missing toppings");
         clickedIngredientsArray = [];
     } else {
         console.log("Wrong toppings!");
+        feedback(feedbackDisplay as HTMLHeadingElement, "wrong");
     }
     clickedIngredientsArray = [];
     generateOrder(levelNumber);
@@ -215,7 +218,7 @@ const checkOrder = () => {
 const levelUp = () => {
     if (levelNumber == 3 && winCount == 2) {
         console.log("Winner!!");
-        setElementVisibility(gameContent as HTMLDivElement, false);
+        setElementDisplay(gameContent as HTMLDivElement, false);
     } else if (winCount >= 2) {
         levelNumber++;
         winCount = 0;
@@ -226,16 +229,16 @@ const levelUp = () => {
 const startCountdown = () => {
     // prevents from duplication issues- resets from when countdown begins
     clearInterval(countdown);
-    timeLeft = 15;
+    timeLeft = 300;
     countdownDisplay!.textContent = timeLeft + " seconds left!";
     countdown = setInterval(() => {
         timeLeft--;
         countdownDisplay!.textContent = timeLeft + " seconds left!";
         if (timeLeft <= 0) {
             clearInterval(countdown);
-            setElementVisibility(gameContent, false);
-            setElementVisibility(endScreenContent, true);
-            setElementVisibility(startGameButton, true);
+            setElementDisplay(gameContent, false);
+            setElementDisplay(endScreenContent, true);
+            setElementDisplay(startGameButton, true);
             endScreenScore!.innerHTML =
                 "Time's up! You scored " + totalCorrectPizzas + " points";
         }
@@ -243,8 +246,8 @@ const startCountdown = () => {
 };
 
 const startGame = () => {
-    setElementVisibility(landingContent, false);
-    setElementVisibility(gameContent, true);
+    setElementDisplay(landingContent, false);
+    setElementDisplay(gameContent, true);
     generateOrder(levelNumber);
     updateCustomerOrder(customerOrder, orderDisplay);
     startCountdown();
@@ -252,14 +255,28 @@ const startGame = () => {
 };
 
 const resetGameFunction = () => {
-    setElementVisibility(gameContent, false);
-    setElementVisibility(landingContent, true);
-    setElementVisibility(endScreenContent, false);
+    setElementDisplay(gameContent, false);
+    setElementDisplay(landingContent, true);
+    setElementDisplay(endScreenContent, false);
     binPizzaButton();
     winCount = 0;
     levelNumber = 1;
     totalCorrectPizzas = 0;
 };
+
+const feedback = (element: HTMLElement, pizzaCheck: string) => {
+    if (pizzaCheck == "correct") {
+        element.innerHTML = "Perfect!";
+    } else if (pizzaCheck == "missing toppings") {
+        element.innerHTML = "Missing toppings!";
+    } else element.innerHTML = "Close, but no pizza!";
+
+    element.classList.add("show");
+    setTimeout(() => {
+        element.classList.remove("show");
+    }, 1000);
+};
+
 // Event listeners
 startGameButton.addEventListener("click", startGame);
 document

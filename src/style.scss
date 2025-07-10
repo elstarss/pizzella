@@ -9,14 +9,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
-    margin-left: 10px;
+    justify-content: center;
+    padding: 10px;
     width: 90%;
     border: purple solid;
     @include variables.desktop {
-        margin-top: 200px;
-        margin-left: 50px;
-        justify-content: center;
+        width: 80%;
+        margin-top: 4vw;
+        margin-left: 3vw;
+        padding: 60px;
+    }
+    @include variables.tablet {
+        width: 80%;
+        margin-top: 4vw;
+        padding: 60px;
     }
     &__img {
         width: 40vw;
@@ -59,7 +65,7 @@ body {
             font-size: 20px;
         }
         @include variables.tablet {
-            font-size: 15px;
+            font-size: 9px;
         }
     }
 }
@@ -95,7 +101,7 @@ body {
     padding: 10px;
     @include variables.desktop {
         width: 80%;
-        margin-top: 80px;
+        margin-top: 4vw;
         padding: 60px;
     }
 }
@@ -106,6 +112,23 @@ body {
         font-size: x-large;
     }
 }
+.feedback-pizza-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    &__display {
+        visibility: hidden;
+        margin-left: 6vw;
+        align-self: center;
+        transition: opacity 0.5s ease;
+        opacity: 0;
+    }
+}
+.feedback-pizza-row__display.show {
+    opacity: 1;
+    visibility: visible;
+}
+
 .pizza-loading-images {
     display: none;
     position: absolute;
@@ -151,6 +174,7 @@ body {
     margin-bottom: 10px;
     border: purple 2px dashed;
     align-self: center;
+    justify-self: center;
     @include variables.desktop {
         width: 200px;
         height: 200px;

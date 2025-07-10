@@ -7,12 +7,19 @@ export const updateWinDisplay = (
     element.innerHTML = `Level ${level}, Pizzas made in this level: ${winCount}`;
 };
 
-// element visibility
-export const setElementVisibility = (
+// element display
+export const setElementDisplay = (
     element: HTMLElement,
     visibility: boolean
 ) => {
     return (element.style.display = visibility ? "block" : "none");
+};
+// element visibility
+export const setElementVisibility = (
+    element: HTMLElement,
+    visible: boolean
+) => {
+    return (element.style.visibility = visible ? "visible" : "hidden");
 };
 
 // customer order display
