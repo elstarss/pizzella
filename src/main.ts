@@ -105,7 +105,7 @@ const sauceList: string[] = ["Tomato sauce", "Pesto sauce", "BBQ sauce"];
 let customerOrder: string[] = [];
 let clickedIngredientsArray: string[] = [];
 let countdown: any;
-let timeLeft: number = 30;
+let timeLeft: number = 20;
 // let pizzaStreak: number = 0;
 
 // Need to add checks here for checking is variables are empty or not
@@ -230,7 +230,7 @@ const levelUp = () => {
 const startCountdown = () => {
     // prevents from duplication issues- resets from when countdown begins
     clearInterval(countdown);
-    timeLeft = 300;
+    timeLeft = 20;
     countdownDisplay!.textContent = timeLeft + " seconds left!";
     countdown = setInterval(() => {
         timeLeft--;
@@ -241,7 +241,10 @@ const startCountdown = () => {
             setElementDisplay(endScreenContent, true);
             setElementDisplay(startGameButton, true);
             endScreenScore!.innerHTML =
-                "Time's up! You scored " + totalCorrectPizzas + " points";
+                "Time's up! </br>You scored: " +
+                totalCorrectPizzas +
+                " points </br> You made it to level: " +
+                levelNumber;
         }
     }, 1000);
 };

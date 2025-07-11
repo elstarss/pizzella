@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.scss" />
+        <link rel="stylesheet" href="./src/style.scss" />
+        <link rel="stylesheet" href="./src/landing-screen.scss" />
+        <link rel="stylesheet" href="./src/end-screen.scss" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -243,8 +245,10 @@
                 </div>
             </div>
             <div class="end-screen-content">
-                <h1 class="end-screen-score">Score</h1>
-                <button class="reset-game-btn-end">Start again!</button>
+                <div class="end-screen-styling">
+                    <h1 class="end-screen-score">Score</h1>
+                    <button class="reset-game-btn-end">Start again!</button>
+                </div>
             </div>
         </main>
         <script type="module" src="/src/main.ts"></script>

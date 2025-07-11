@@ -1,121 +1,10 @@
-@use "variables";
-body {
-    background-color: lavender;
-    font-family: "Playwrite AU NSW", cursive;
-    font-optical-sizing: auto;
-}
-.landing-screen-all {
-    align-content: center;
-    justify-items: center;
-}
-.landing-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    // padding: 10px;
-    border: purple solid;
-    width: 90%;
-    padding: 10px;
-    @include variables.desktop {
-        width: 70%;
-        margin-top: 4vw;
-        padding: 40px;
-    }
-    &__img {
-        width: 40vw;
-        @include variables.desktop {
-            width: 40vw;
-        }
-    }
-    &__header {
-        text-align: center;
-        font-size: large;
-    }
-    &__intro {
-        text-align: center;
-        font-size: x-small;
-    }
-}
-.start-game-btn {
-    background-color: purple;
-    color: white;
-    font-family: "Playwrite AU NSW", cursive;
-    border-radius: 10px;
-    &:hover {
-        transition: 1s ease;
-        transform: scale(1.1);
-    }
-}
-.overlay-container {
-    position: relative;
-    width: 50%;
-    &__image {
-        display: block;
-        // width: 100%;
-        height: auto;
-    }
-}
-.overlay-container:hover .overlay {
-    height: 100%;
-    &__text {
-        white-space: wrap;
-        color: white;
-        font-size: 9px;
-        position: absolute;
-        overflow: hidden;
-        top: 50%;
-        left: 50%;
-        width: 70%;
-        transform: translate(-50%, -50%);
-        @include variables.desktop {
-            font-size: 20px;
-        }
-        @include variables.tablet {
-            font-size: 9px;
-        }
-    }
-}
-.overlay-container:hover .overlay-container__image {
-    transform: scale(0.7);
-}
-.overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: purple;
-    overflow: hidden;
-    opacity: 0.95;
-    width: 90%;
-    height: 0;
-    transition: 1s ease;
-    &__text {
-        color: white;
-        font-size: 9px;
-    }
-}
-
+@use "variables.scss";
 .game-content {
     display: none;
     align-content: center;
     justify-items: center;
 }
 
-.pizza-content-styling {
-    border: purple solid;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    padding: 10px;
-    @include variables.desktop {
-        width: 70%;
-        margin-top: 4vw;
-        padding: 40px;
-    }
-}
 .customer-order-display {
     font-size: medium;
     margin: 4px;
@@ -129,8 +18,11 @@ body {
     grid-template-areas: "reset-game-btn" "customer-order-display__header";
     column-gap: 8vw;
 }
-.reset-game-btn {
+.reset-game-btn,
+.countdown-timer-div,
+.reset-game-btn-end {
     background-color: purple;
+    border: black solid 2px;
     color: white;
     width: 80px;
     height: 30px;
@@ -145,7 +37,7 @@ body {
         font-size: small;
     }
     @include variables.desktop {
-        margin-left: 3vw;
+        margin-left: 2vw;
         width: 120px;
         height: 70px;
         font-size: medium;
@@ -156,28 +48,13 @@ body {
     }
 }
 .countdown-timer-div {
-    background-color: purple;
-    color: white;
-    width: 80px;
-    height: 30px;
-    line-height: 30px;
     margin-top: 1vw;
     text-align: center;
-    border: black solid 2px;
-    font-family: "Playwrite AU NSW", cursive;
-    font-size: xx-small;
     border-radius: 10px;
-    @include variables.tablet {
-        margin-left: 2vw;
-        width: 120px;
-        height: 50px;
-        font-size: small;
-    }
     @include variables.desktop {
-        margin-left: 3vw;
-        width: 120px;
-        height: 70px;
-        font-size: medium;
+        margin-right: 2vw;
+        line-height: 70px;
+        font-size: small;
     }
 }
 .feedback-pizza-row {
@@ -205,12 +82,12 @@ body {
 .feedback__header {
     position: absolute;
     z-index: 1;
-    font-size: x-small;
+    font-size: medium;
     @include variables.tablet {
-        font-size: medium;
+        font-size: large;
     }
     @include variables.desktop {
-        font-size: x-large;
+        font-size: xx-large;
     }
     &--img {
         width: 160px;
@@ -358,10 +235,6 @@ body {
     justify-content: center;
 }
 
-.toppings {
-    display: flex;
-}
-
 .bin-pizza-btn {
     background-color: transparent;
     border: none;
@@ -380,7 +253,6 @@ body {
 .win-count {
     font-size: large;
 }
-
 .end-screen-content {
     display: none;
 }
