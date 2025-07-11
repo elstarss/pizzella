@@ -44,9 +44,12 @@
                 <div class="pizza-content-styling">
                     <div class="top-row">
                         <button class="reset-game-btn">Back to menu</button>
-                        <h2 class="customer-order-display__header">
+                        <h3
+                            class="customer-order-display customer-order-display__header"
+                        >
                             The customer would like:
-                        </h2>
+                        </h3>
+                        <div class="countdown-timer-div">20 seconds left!</div>
                     </div>
                     <h1
                         class="customer-order-display customer-order-display__order"
@@ -56,10 +59,10 @@
                     <div class="pizza-loading-area">
                         <div class="feedback-pizza-row">
                             <div class="feedback-pizza-row__display">
-                                <h1 class="feedback-header">Correct!</h1>
+                                <h1 class="feedback__header">Correct!</h1>
                                 <img
-                                    class="feedback-img"
-                                    src="./src/images/purple-cloud.png"
+                                    src="./src/images/purple-flame.png"
+                                    class="feedback__header--img"
                                     alt="purple-cloud"
                                 />
                             </div>
@@ -237,7 +240,6 @@
                         </button>
                     </div>
                     <h2 class="win-count" id="winDisplay">Win count is:</h2>
-                    <p class="countdown-timer-div">20 seconds left!</p>
                 </div>
             </div>
             <div class="end-screen-content">

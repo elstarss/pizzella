@@ -36,7 +36,7 @@ export const shuffle = (array: string[]): string[] => {
 };
 
 export const feedback = (element: HTMLElement, pizzaCheck: string) => {
-    const header = element.querySelector(".feedback-header");
+    const header = element.querySelector(".feedback__header");
     if (!header) return;
 
     if (pizzaCheck === "correct") {

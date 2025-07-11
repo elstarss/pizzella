@@ -4,25 +4,23 @@ body {
     font-family: "Playwrite AU NSW", cursive;
     font-optical-sizing: auto;
 }
-
+.landing-screen-all {
+    align-content: center;
+    justify-items: center;
+}
 .landing-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    width: 90%;
+    // padding: 10px;
     border: purple solid;
+    width: 90%;
+    padding: 10px;
     @include variables.desktop {
-        width: 80%;
+        width: 70%;
         margin-top: 4vw;
-        margin-left: 3vw;
-        padding: 60px;
-    }
-    @include variables.tablet {
-        width: 80%;
-        margin-top: 4vw;
-        padding: 60px;
+        padding: 40px;
     }
     &__img {
         width: 40vw;
@@ -39,7 +37,16 @@ body {
         font-size: x-small;
     }
 }
-
+.start-game-btn {
+    background-color: purple;
+    color: white;
+    font-family: "Playwrite AU NSW", cursive;
+    border-radius: 10px;
+    &:hover {
+        transition: 1s ease;
+        transform: scale(1.1);
+    }
+}
 .overlay-container {
     position: relative;
     width: 50%;
@@ -82,7 +89,11 @@ body {
     opacity: 0.95;
     width: 90%;
     height: 0;
-    transition: 0.5s ease;
+    transition: 1s ease;
+    &__text {
+        color: white;
+        font-size: 9px;
+    }
 }
 
 .game-content {
@@ -100,9 +111,9 @@ body {
     width: 90%;
     padding: 10px;
     @include variables.desktop {
-        width: 80%;
+        width: 70%;
         margin-top: 4vw;
-        padding: 60px;
+        padding: 40px;
     }
 }
 .customer-order-display {
@@ -111,15 +122,12 @@ body {
     @include variables.desktop {
         font-size: x-large;
     }
-    &__header {
-        font-size: x-large;
-    }
 }
 .top-row {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas: "reset-game-btn" "customer-order-display__header";
-    column-gap: 10vw;
+    column-gap: 8vw;
 }
 .reset-game-btn {
     background-color: purple;
@@ -147,6 +155,31 @@ body {
         transform: scale(1.1);
     }
 }
+.countdown-timer-div {
+    background-color: purple;
+    color: white;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 1vw;
+    text-align: center;
+    border: black solid 2px;
+    font-family: "Playwrite AU NSW", cursive;
+    font-size: xx-small;
+    border-radius: 10px;
+    @include variables.tablet {
+        margin-left: 2vw;
+        width: 120px;
+        height: 50px;
+        font-size: small;
+    }
+    @include variables.desktop {
+        margin-left: 3vw;
+        width: 120px;
+        height: 70px;
+        font-size: medium;
+    }
+}
 .feedback-pizza-row {
     display: none;
     transition: opacity 0.6s ease;
@@ -169,7 +202,7 @@ body {
         height: 200px;
     }
 }
-.feedback-header {
+.feedback__header {
     position: absolute;
     z-index: 1;
     font-size: x-small;
@@ -179,20 +212,19 @@ body {
     @include variables.desktop {
         font-size: x-large;
     }
-}
-
-.feedback-img {
-    width: 160px;
-    height: 160px;
-    position: absolute;
-    z-index: 0;
-    @include variables.tablet {
-        width: 200px;
-        height: 200px;
-    }
-    @include variables.desktop {
-        width: 300px;
-        height: 300px;
+    &--img {
+        width: 160px;
+        height: 160px;
+        position: absolute;
+        z-index: 0;
+        @include variables.tablet {
+            width: 180px;
+            height: 160px;
+        }
+        @include variables.desktop {
+            width: 280px;
+            height: 280px;
+        }
     }
 }
 
@@ -234,7 +266,6 @@ body {
         width: 200px;
     }
 }
-
 .pizza-loading-area {
     width: 120px;
     height: 120px;
@@ -247,7 +278,6 @@ body {
         height: 200px;
     }
 }
-
 .pizza-content__ingredients {
     display: flex;
     flex-direction: column;
@@ -255,7 +285,6 @@ body {
     align-items: center;
     flex-wrap: wrap;
 }
-
 .ingredient-buttons {
     // display: flex;
     font-size: x-small;
