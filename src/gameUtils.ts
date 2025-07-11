@@ -4,7 +4,8 @@ export const updateWinDisplay = (
     level: number,
     winCount: number
 ) => {
-    element.innerHTML = `Level ${level}, Pizzas made in this level: ${winCount}`;
+    element.innerHTML =
+        "Level: " + level + "<br />" + `Pizzas made in this level: ${winCount}`;
 };
 
 // element display

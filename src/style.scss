@@ -106,19 +106,46 @@ body {
     }
 }
 .customer-order-display {
-    font-size: small;
-    margin: 5px;
+    font-size: medium;
+    margin: 4px;
     @include variables.desktop {
+        font-size: x-large;
+    }
+    &__header {
         font-size: x-large;
     }
 }
 .top-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 10px;
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas: "reset-game-btn" "customer-order-display__header";
+    column-gap: 10vw;
 }
 .reset-game-btn {
-    right: 0;
+    background-color: purple;
+    color: white;
+    width: 80px;
+    height: 30px;
+    margin-top: 1vw;
+    font-family: "Playwrite AU NSW", cursive;
+    font-size: xx-small;
+    border-radius: 10px;
+    @include variables.tablet {
+        margin-left: 2vw;
+        width: 120px;
+        height: 50px;
+        font-size: small;
+    }
+    @include variables.desktop {
+        margin-left: 3vw;
+        width: 120px;
+        height: 70px;
+        font-size: medium;
+    }
+    &:hover {
+        transition: 2s, ease;
+        transform: scale(1.1);
+    }
 }
 .feedback-pizza-row {
     display: none;
