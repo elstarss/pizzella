@@ -7,9 +7,16 @@
 
 .customer-order-display {
     font-size: medium;
-    margin: 4px;
+    margin-top: 4px;
+    margin-bottom: 0px;
+    text-align: center;
+
     @include variables.desktop {
         font-size: x-large;
+    }
+    &__order {
+        margin-top: 0px;
+        margin-bottom: 5px;
     }
 }
 .top-row {
@@ -163,7 +170,6 @@
     flex-wrap: wrap;
 }
 .ingredient-buttons {
-    // display: flex;
     font-size: x-small;
     background-color: transparent;
     border: none;
@@ -252,7 +258,46 @@
 }
 .win-count {
     font-size: large;
+    margin-bottom: 0px;
 }
 .end-screen-content {
     display: none;
+}
+.winner-screen-content {
+    display: none;
+}
+.winner-screen-styling {
+    // display: flex;
+    &__header {
+        text-align: center;
+    }
+    &__image {
+        width: 200px;
+        height: 200px;
+        border-radius: 50px;
+        background-color: #3b2c2f;
+        border: 5px solid #a264e9;
+        box-shadow: 0 0 20px #a264e9;
+        animation: glow 3s infinite ease-in-out;
+        @include variables.tablet {
+            width: 300px;
+            height: 300px;
+        }
+        @include variables.desktop {
+            width: 400px;
+            height: 400px;
+        }
+    }
+}
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px -10px rgb(223, 98, 248);
+    }
+    to {
+        box-shadow: 0 0 10px 10px rgb(223, 98, 248);
+    }
+}
+.reset-game-btn-winner {
+    align-self: flex-start;
+    margin: 0;
 }

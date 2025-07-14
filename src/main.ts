@@ -22,6 +22,9 @@ const endScreenContent = document.querySelector<HTMLDivElement>(
 ) as HTMLDivElement;
 const endScreenScore =
     document.querySelector<HTMLHeadingElement>(".end-screen-score");
+const winnerScreenContent = document.querySelector<HTMLDivElement>(
+    ".winner-screen-content"
+);
 // other dom elements
 const orderDisplay = document.querySelector(
     ".customer-order-display__order"
@@ -217,10 +220,11 @@ const checkOrder = () => {
 };
 
 const levelUp = () => {
-    if (levelNumber == 3 && winCount == 2) {
+    if (levelNumber == 3 && winCount == 1) {
         console.log("Winner!!");
         setElementDisplay(gameContent as HTMLDivElement, false);
-    } else if (winCount >= 2) {
+        setElementDisplay(winnerScreenContent as HTMLDivElement, true);
+    } else if (winCount >= 1) {
         levelNumber++;
         winCount = 0;
         updateWinDisplay(winDisplay, levelNumber, winCount);
@@ -228,14 +232,13 @@ const levelUp = () => {
 };
 
 const startCountdown = () => {
-    // prevents from duplication issues- resets from when countdown begins
     clearInterval(countdown);
     timeLeft = 20;
     countdownDisplay!.textContent = timeLeft + " seconds left!";
     countdown = setInterval(() => {
         timeLeft--;
         countdownDisplay!.textContent = timeLeft + " seconds left!";
-        if (timeLeft <= 0) {
+        if (timeLeft <= 0 && gameContent.style.display == "block") {
             clearInterval(countdown);
             setElementDisplay(gameContent, false);
             setElementDisplay(endScreenContent, true);
