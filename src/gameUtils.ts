@@ -52,3 +52,7 @@ export const feedback = (element: HTMLElement, pizzaCheck: string) => {
         element.classList.remove("show");
     }, 500);
 };
+
+export const changeImgSrc = (image: HTMLImageElement, newSrc: string) => {
+    image.src = `${newSrc}`;
+};

@@ -4,6 +4,7 @@ import {
     updateCustomerOrder,
     shuffle,
     feedback,
+    changeImgSrc,
 } from "./gameUtils";
 import "./style.scss";
 import "./variables.scss";
@@ -64,9 +65,9 @@ const pineappleImageBtn = document.getElementById(
 const ovenBtn = document.getElementById("ovenButton");
 // importing pizza loading images
 const pizzaLoadingImages = document.querySelectorAll(".pizza-loading-images");
-const baseImage = document.querySelector<HTMLImageElement>(
+const baseImage = document.querySelector(
     ".pizza-loading-images__base"
-);
+) as HTMLImageElement;
 const tomatoImage = document.querySelector<HTMLImageElement>(
     ".pizza-loading-images__tomato-sauce"
 );
@@ -85,12 +86,13 @@ const mushroomImage = document.querySelector<HTMLImageElement>(
 const tomatoSlicesImage = document.querySelector<HTMLImageElement>(
     ".pizza-loading-images__sliced-tomato"
 );
-const onionImage = document.querySelector<HTMLImageElement>(
+const onionImage = document.querySelector(
     ".pizza-loading-images__onion"
-);
+) as HTMLImageElement;
 const pineappleImage = document.querySelector<HTMLImageElement>(
     ".pizza-loading-images__pineapple"
 );
+
 //
 //
 //Global variables
@@ -104,7 +106,19 @@ const toppingsList: string[] = [
     "Pineapple",
     "Onion",
 ];
+const dessertToppingsList: string[] = [
+    "Blueberries",
+    "Strawberries",
+    "Chocolate chips",
+    "Marshmallows",
+    "Sprinkles",
+];
 const sauceList: string[] = ["Tomato sauce", "Pesto sauce", "BBQ sauce"];
+const dessertSauceList: string[] = [
+    "Chocolate Sauce",
+    "Strawberry Sauce",
+    "Caramel Sauce",
+];
 let customerOrder: string[] = [];
 let clickedIngredientsArray: string[] = [];
 let countdown: any;
@@ -122,15 +136,25 @@ if (
     throw new Error("Variable empty");
 }
 // functions
+console.log(toppingsList);
 const generateOrder = (numberOfToppings: number) => {
-    const shuffledToppings = shuffle(toppingsList);
-    const shuffledSauces = shuffle(sauceList);
+    let toppings: string[] = [];
+    let sauce: string[] = [];
+    if (isDessertMode) {
+        toppings = dessertToppingsList.slice(0);
+        sauce = dessertSauceList.slice(0);
+    } else {
+        toppings = toppingsList.slice(0);
+        sauce = sauceList.slice(0);
+    }
+    const shuffledToppings = shuffle(toppings);
+    const shuffledSauces = shuffle(sauce);
     const slicedToppings = shuffledToppings.slice(0, numberOfToppings);
     const slicedSauces = shuffledSauces.slice(0, 1);
     slicedSauces.unshift("Base");
     slicedSauces.push(...slicedToppings);
     customerOrder = slicedSauces;
-    console.log("Customer order is: " + customerOrder);
+    console.log("Customer order is: " + slicedSauces);
 };
 const binPizzaButton = () => {
     clickedIngredientsArray = [];
@@ -138,10 +162,10 @@ const binPizzaButton = () => {
         setElementDisplay(img, false);
     });
 };
-
+let isDessertMode = true;
 const ingredientClickedSwitch = (event: Event) => {
     const target = event.currentTarget as HTMLButtonElement;
-    if (!clickedIngredientsArray.includes(target.innerText)) {
+    if (!clickedIngredientsArray.includes(target.innerText) && !isDessertMode) {
         switch (target) {
             case baseBtn:
                 setElementDisplay(baseImage as HTMLImageElement, true);
@@ -182,7 +206,84 @@ const ingredientClickedSwitch = (event: Event) => {
             default:
                 console.log("Switch error");
         }
+    } else if (
+        !clickedIngredientsArray.includes(target.innerText) &&
+        isDessertMode
+    ) {
+        switch (target) {
+            case baseBtn:
+                setElementDisplay(baseImage as HTMLImageElement, true);
+                clickedIngredientsArray.push("Base");
+                break;
+            case tomatoBtn:
+                setElementDisplay(tomatoImage as HTMLImageElement, true);
+                changeImgSrc(
+                    tomatoImage as HTMLImageElement,
+                    "./src/images/chocolate-sauce.png"
+                );
+                clickedIngredientsArray.push("Chocolate Sauce");
+                break;
+            case pestoBtn:
+                setElementDisplay(pestoImage as HTMLImageElement, true);
+                clickedIngredientsArray.push("Strawberry Sauce");
+                changeImgSrc(
+                    pestoImage as HTMLImageElement,
+                    "./src/images/strawberry-sauce.png"
+                );
+                break;
+            case bbqBtn:
+                setElementDisplay(bbqImage as HTMLImageElement, true);
+                clickedIngredientsArray.push("Caramel Sauce");
+                changeImgSrc(
+                    bbqImage as HTMLImageElement,
+                    "./src/images/caramel-sauce.png"
+                );
+                break;
+            case cheeseBtn:
+                setElementDisplay(cheeseImage as HTMLImageElement, true);
+                clickedIngredientsArray.push("Blueberries");
+                changeImgSrc(
+                    cheeseImage as HTMLImageElement,
+                    "./src/images/blueberry-topping.png"
+                );
+                break;
+            case mushroomBtn:
+                setElementDisplay(mushroomImage as HTMLImageElement, true);
+                changeImgSrc(
+                    mushroomImage as HTMLImageElement,
+                    "./src/images/chocolate-chip-topping.png"
+                );
+                clickedIngredientsArray.push("Chocolate chips");
+                break;
+            case pineappleImageBtn:
+                setElementDisplay(pineappleImage as HTMLImageElement, true);
+                changeImgSrc(
+                    pineappleImage as HTMLImageElement,
+                    "./src/images/marshmallow-topping.png"
+                );
+                clickedIngredientsArray.push("Marshmallows");
+                break;
+            case tomatoSlicesBtn:
+                setElementDisplay(tomatoSlicesImage as HTMLImageElement, true);
+                changeImgSrc(
+                    tomatoSlicesImage as HTMLImageElement,
+                    "./src/images/strawberry-topping.png"
+                );
+                clickedIngredientsArray.push("Strawberries");
+                break;
+            case onionBtn:
+                setElementDisplay(onionImage as HTMLImageElement, true);
+                changeImgSrc(
+                    onionImage as HTMLImageElement,
+                    "./src/images/sprinkles-topping.png"
+                );
+                clickedIngredientsArray.push("Sprinkles");
+                break;
+            default:
+                console.log("Switch error");
+        }
     }
+    console.log(clickedIngredientsArray);
 };
 
 const checkOrder = () => {
@@ -259,6 +360,9 @@ const startGame = () => {
     updateCustomerOrder(customerOrder, orderDisplay);
     startCountdown();
     updateWinDisplay(winDisplay, levelNumber, winCount);
+    if (isDessertMode) {
+        swapToDessertIcons();
+    }
 };
 
 const resetGameFunction = () => {
@@ -271,10 +375,28 @@ const resetGameFunction = () => {
     totalCorrectPizzas = 0;
 };
 
-const dessertMode = () => {
-    pineappleImage.src = "./src/images/blueberry-topping.png";
+const iconImages = document.querySelectorAll(".ingredient-buttons__icon");
+const iconsArray = [
+    "./src/images/icons/dough-icon.png",
+    "./src/images/icons/chocolate-sauce-icon.png",
+    "./src/images/icons/strawberry-sauce-icon.png",
+    "./src/images/icons/caramel-sauce-icon.png",
+    "./src/images/icons/blueberry-icon.png",
+    "./src/images/icons/chocolate-chip-icon.png",
+    "./src/images/icons/strawberry-icon.png",
+    "./src/images/icons/marshmallow-icon.png",
+
+    "./src/images/icons/sprinkles-icon.png",
+];
+console.log(iconImages);
+const swapToDessertIcons = () => {
+    iconImages.forEach((img, index) => {
+        if (iconsArray[index]) {
+            img.src = iconsArray[index];
+        }
+    });
 };
-dessertMode();
+
 // Event listeners
 startGameButton.addEventListener("click", startGame);
 document
