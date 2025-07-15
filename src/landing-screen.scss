@@ -1,6 +1,6 @@
 @use "variables.scss";
 body {
-    background-color: lavender;
+    background-color: rgb(200, 182, 255);
     font-family: "Playwrite AU NSW", cursive;
     font-optical-sizing: auto;
 }
@@ -20,11 +20,12 @@ body {
     align-items: center;
     justify-content: center;
     border: purple solid;
+    background-color: rgb(184, 192, 255);
     width: 90%;
     padding: 10px;
     @include variables.desktop {
         width: 70%;
-        // margin-top: 1vw;
+        margin-top: 2vw;
         padding: 25px;
     }
 }
@@ -37,6 +38,7 @@ body {
             font-size: x-large;
         }
         @include variables.desktop {
+            align-self: flex-end;
             font-size: xx-large;
         }
     }
@@ -79,7 +81,7 @@ body {
         justify-self: center;
     }
     @include variables.desktop {
-        width: 70%;
+        width: 50%;
         justify-self: center;
     }
 }

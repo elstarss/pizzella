@@ -398,15 +398,31 @@ const resetGameFunction = () => {
     isDessertMode = false;
 };
 
+const dessertModeToggle = () => {
+    console.log(isDessertMode);
+    if (isDessertMode == true) {
+        dessertModeBtn!.innerHTML = "Sweet tooth?";
+        document.body.style.backgroundColor = "rgb(200, 182, 255)";
+
+        isDessertMode = false;
+        return isDessertMode;
+    } else if (isDessertMode == false) {
+        dessertModeBtn!.innerHTML = "Back to classic";
+        document.body.style.backgroundColor = "rgba(255, 214, 255)";
+
+        isDessertMode = true;
+
+        return isDessertMode;
+    }
+    console.log(isDessertMode);
+    return isDessertMode;
+};
 // Event listeners
 startGameButton.addEventListener("click", startGame);
 document
     .querySelector<HTMLButtonElement>(".bin-pizza-btn")
     ?.addEventListener("click", binPizzaButton);
-dessertModeBtn?.addEventListener("click", () => {
-    isDessertMode = true;
-    startGame();
-});
+dessertModeBtn?.addEventListener("click", dessertModeToggle);
 ingredientBtns.forEach((btn) => {
     btn.addEventListener("click", ingredientClickedSwitch);
 });
