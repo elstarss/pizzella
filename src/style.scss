@@ -10,13 +10,19 @@
     margin-top: 4px;
     margin-bottom: 0px;
     text-align: center;
-
+    line-height: 30px;
+    @include variables.tablet {
+        line-height: 70px;
+    }
     @include variables.desktop {
         font-size: x-large;
+        line-height: 70px;
     }
     &__order {
         margin-top: 0px;
         margin-bottom: 5px;
+    }
+    &__header {
     }
 }
 .top-row {
@@ -58,6 +64,10 @@
     margin-top: 1vw;
     text-align: center;
     border-radius: 10px;
+    line-height: 30px;
+    @include variables.tablet {
+        line-height: 50px;
+    }
     @include variables.desktop {
         margin-right: 2vw;
         line-height: 70px;

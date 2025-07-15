@@ -233,7 +233,7 @@ const levelUp = () => {
 
 const startCountdown = () => {
     clearInterval(countdown);
-    timeLeft = 20;
+    timeLeft = 60;
     countdownDisplay!.textContent = timeLeft + " seconds left!";
     countdown = setInterval(() => {
         timeLeft--;
@@ -271,6 +271,10 @@ const resetGameFunction = () => {
     totalCorrectPizzas = 0;
 };
 
+const dessertMode = () => {
+    pineappleImage.src = "./src/images/blueberry-topping.png";
+};
+dessertMode();
 // Event listeners
 startGameButton.addEventListener("click", startGame);
 document
