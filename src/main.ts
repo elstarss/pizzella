@@ -43,6 +43,9 @@ const countdownDisplay = document.querySelector<HTMLParagraphElement>(
 const feedbackDisplay = document.querySelector<HTMLDivElement>(
     ".feedback-pizza-row"
 );
+const dessertModeBtn =
+    document.querySelector<HTMLButtonElement>(".dessert-mode-btn");
+const iconImages = document.querySelectorAll(".ingredient-buttons__icon");
 // buttons for ingredients
 const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
     ".ingredient-buttons"
@@ -119,10 +122,23 @@ const dessertSauceList: string[] = [
     "Strawberry Sauce",
     "Caramel Sauce",
 ];
+const iconsArray = [
+    "./src/images/icons/dough-icon.png",
+    "./src/images/icons/chocolate-sauce-icon.png",
+    "./src/images/icons/strawberry-sauce-icon.png",
+    "./src/images/icons/caramel-sauce-icon.png",
+    "./src/images/icons/blueberry-icon.png",
+    "./src/images/icons/chocolate-chip-icon.png",
+    "./src/images/icons/strawberry-icon.png",
+    "./src/images/icons/marshmallow-icon.png",
+
+    "./src/images/icons/sprinkles-icon.png",
+];
 let customerOrder: string[] = [];
 let clickedIngredientsArray: string[] = [];
 let countdown: any;
 let timeLeft: number = 20;
+let isDessertMode = false;
 // let pizzaStreak: number = 0;
 
 // Need to add checks here for checking is variables are empty or not
@@ -162,7 +178,7 @@ const binPizzaButton = () => {
         setElementDisplay(img, false);
     });
 };
-let isDessertMode = true;
+
 const ingredientClickedSwitch = (event: Event) => {
     const target = event.currentTarget as HTMLButtonElement;
     if (!clickedIngredientsArray.includes(target.innerText) && !isDessertMode) {
@@ -319,7 +335,13 @@ const checkOrder = () => {
     binPizzaButton();
     console.log(levelNumber, winCount);
 };
-
+const swapToDessertIcons = () => {
+    iconImages.forEach((img, index) => {
+        if (iconsArray[index]) {
+            img.src = iconsArray[index];
+        }
+    });
+};
 const levelUp = () => {
     if (levelNumber == 3 && winCount == 1) {
         console.log("Winner!!");
@@ -373,28 +395,7 @@ const resetGameFunction = () => {
     winCount = 0;
     levelNumber = 1;
     totalCorrectPizzas = 0;
-};
-
-const iconImages = document.querySelectorAll(".ingredient-buttons__icon");
-const iconsArray = [
-    "./src/images/icons/dough-icon.png",
-    "./src/images/icons/chocolate-sauce-icon.png",
-    "./src/images/icons/strawberry-sauce-icon.png",
-    "./src/images/icons/caramel-sauce-icon.png",
-    "./src/images/icons/blueberry-icon.png",
-    "./src/images/icons/chocolate-chip-icon.png",
-    "./src/images/icons/strawberry-icon.png",
-    "./src/images/icons/marshmallow-icon.png",
-
-    "./src/images/icons/sprinkles-icon.png",
-];
-console.log(iconImages);
-const swapToDessertIcons = () => {
-    iconImages.forEach((img, index) => {
-        if (iconsArray[index]) {
-            img.src = iconsArray[index];
-        }
-    });
+    isDessertMode = false;
 };
 
 // Event listeners
@@ -402,7 +403,10 @@ startGameButton.addEventListener("click", startGame);
 document
     .querySelector<HTMLButtonElement>(".bin-pizza-btn")
     ?.addEventListener("click", binPizzaButton);
-
+dessertModeBtn?.addEventListener("click", () => {
+    isDessertMode = true;
+    startGame();
+});
 ingredientBtns.forEach((btn) => {
     btn.addEventListener("click", ingredientClickedSwitch);
 });

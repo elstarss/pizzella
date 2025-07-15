@@ -32,13 +32,40 @@ body {
     &__header {
         text-align: center;
         font-size: large;
+        grid-area: header;
+        @include variables.tablet {
+            font-size: x-large;
+        }
+        @include variables.desktop {
+            font-size: xx-large;
+        }
     }
     &__intro {
         text-align: center;
         font-size: x-small;
+        grid-area: intro;
+        @include variables.tablet {
+            align-self: flex-start;
+        }
+        @include variables.desktop {
+            align-self: flex-start;
+        }
+    }
+    @include variables.tablet {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "menu header" "menu button" "menu intro";
+        justify-content: space-evenly;
+    }
+    @include variables.desktop {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "menu header" "menu button" "menu intro";
+        justify-content: space-evenly;
     }
 }
 .start-game-btn {
+    grid-area: button;
     background-color: purple;
     color: white;
     font-family: "Playwrite AU NSW", cursive;
@@ -47,10 +74,39 @@ body {
         transition: 1s ease;
         transform: scale(1.1);
     }
+    @include variables.tablet {
+        width: 70%;
+        justify-self: center;
+    }
+    @include variables.desktop {
+        width: 70%;
+        justify-self: center;
+    }
+}
+#dessertBtn {
+    grid-area: secretBtn;
+    align-self: flex-end;
+    width: 40px;
+    height: 20px;
+    font-size: 4px;
+    &:hover {
+        transition: 1s ease;
+        transform: scale(5);
+    }
+    @include variables.tablet {
+        width: 40px;
+    }
 }
 .overlay-container {
+    grid-area: menu;
     position: relative;
-    width: 55%;
+    width: 50%;
+    @include variables.tablet {
+        width: 100%;
+    }
+    @include variables.desktop {
+        width: 100%;
+    }
     &__image {
         display: block;
         width: 100%;
