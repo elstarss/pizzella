@@ -12,11 +12,11 @@
     text-align: center;
     line-height: 30px;
     @include variables.tablet {
-        line-height: 70px;
+        line-height: 50px;
     }
     @include variables.desktop {
         font-size: x-large;
-        line-height: 70px;
+        line-height: 60px;
     }
     &__order {
         margin-top: 0px;
@@ -178,7 +178,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
 }
 .ingredient-buttons {
     font-size: x-small;

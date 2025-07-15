@@ -23,20 +23,16 @@ const endScreenContent = document.querySelector<HTMLDivElement>(
 ) as HTMLDivElement;
 const endScreenScore =
     document.querySelector<HTMLHeadingElement>(".end-screen-score");
-const winnerScreenContent = document.querySelector<HTMLDivElement>(
+const winnerScreenContent = document.querySelector(
     ".winner-screen-content"
-);
+) as HTMLDivElement;
 // other dom elements
 const orderDisplay = document.querySelector(
     ".customer-order-display__order"
 ) as HTMLHeadingElement;
 const winDisplay = document.getElementById("winDisplay") as HTMLElement;
 const pizzaBinBtn = document.querySelector<HTMLButtonElement>(".bin-pizza-btn");
-const resetGameBtn =
-    document.querySelector<HTMLButtonElement>(".reset-game-btn");
-const resetGameBtnEnd = document.querySelector<HTMLButtonElement>(
-    ".reset-game-btn-end"
-);
+const resetBtns = document.querySelectorAll(".reset");
 const countdownDisplay = document.querySelector<HTMLParagraphElement>(
     ".countdown-timer-div"
 );
@@ -122,33 +118,36 @@ const dessertSauceList: string[] = [
     "Strawberry Sauce",
     "Caramel Sauce",
 ];
-const iconsArray = [
-    "./src/images/icons/dough-icon.png",
-    "./src/images/icons/chocolate-sauce-icon.png",
-    "./src/images/icons/strawberry-sauce-icon.png",
-    "./src/images/icons/caramel-sauce-icon.png",
-    "./src/images/icons/blueberry-icon.png",
-    "./src/images/icons/chocolate-chip-icon.png",
-    "./src/images/icons/strawberry-icon.png",
-    "./src/images/icons/marshmallow-icon.png",
-
-    "./src/images/icons/sprinkles-icon.png",
+const dessertIconsArray: string[] = [
+    "dough-icon.png",
+    "chocolate-sauce-icon.png",
+    "strawberry-sauce-icon.png",
+    "caramel-sauce-icon.png",
+    "blueberry-icon.png",
+    "chocolate-chip-icon.png",
+    "strawberry-icon.png",
+    "marshmallow-icon.png",
+    "sprinkles-icon.png",
+];
+const savouryIconsArray: string[] = [
+    "dough-icon.png",
+    "tomato-sauce-icon.png",
+    "pesto-sauce-icon.png",
+    "bbq-sauce-icon.png",
+    "cheese-icon.png",
+    "mushroom-icon.png",
+    "sliced-tomato-icon.png",
+    "pineapple-icon.png",
+    "onion-icon.png",
 ];
 let customerOrder: string[] = [];
 let clickedIngredientsArray: string[] = [];
 let countdown: any;
 let timeLeft: number = 20;
 let isDessertMode = false;
-// let pizzaStreak: number = 0;
 
 // Need to add checks here for checking is variables are empty or not
-if (
-    !onionBtn ||
-    !startGameButton ||
-    !orderDisplay ||
-    !bbqBtn ||
-    !resetGameBtn
-) {
+if (!onionBtn || !startGameButton || !orderDisplay || !bbqBtn) {
     throw new Error("Variable empty");
 }
 // functions
@@ -337,8 +336,14 @@ const checkOrder = () => {
 };
 const swapToDessertIcons = () => {
     iconImages.forEach((img, index) => {
-        if (iconsArray[index]) {
-            img.src = iconsArray[index];
+        if (isDessertMode == true) {
+            if (dessertIconsArray[index]) {
+                img.src = `./src/images/icons/${dessertIconsArray[index]}`;
+            }
+        } else {
+            if (savouryIconsArray[index]) {
+                img.src = `./src/images/icons/${savouryIconsArray[index]}`;
+            }
         }
     });
 };
@@ -382,20 +387,20 @@ const startGame = () => {
     updateCustomerOrder(customerOrder, orderDisplay);
     startCountdown();
     updateWinDisplay(winDisplay, levelNumber, winCount);
-    if (isDessertMode) {
-        swapToDessertIcons();
-    }
+    swapToDessertIcons();
 };
 
 const resetGameFunction = () => {
     setElementDisplay(gameContent, false);
     setElementDisplay(landingContent, true);
     setElementDisplay(endScreenContent, false);
+    setElementDisplay(winnerScreenContent, false);
     binPizzaButton();
     winCount = 0;
     levelNumber = 1;
     totalCorrectPizzas = 0;
     isDessertMode = false;
+    console.log("restarting");
 };
 
 const dessertModeToggle = () => {
@@ -403,15 +408,12 @@ const dessertModeToggle = () => {
     if (isDessertMode == true) {
         dessertModeBtn!.innerHTML = "Sweet tooth?";
         document.body.style.backgroundColor = "rgb(200, 182, 255)";
-
         isDessertMode = false;
         return isDessertMode;
     } else if (isDessertMode == false) {
         dessertModeBtn!.innerHTML = "Back to classic";
-        document.body.style.backgroundColor = "rgba(255, 214, 255)";
-
+        document.body.style.backgroundColor = "rgb(255, 214, 255)";
         isDessertMode = true;
-
         return isDessertMode;
     }
     console.log(isDessertMode);
@@ -431,5 +433,10 @@ ovenBtn!.addEventListener("click", () => {
 });
 pizzaBinBtn!.addEventListener("click", binPizzaButton);
 console.log(winCount);
-resetGameBtn.addEventListener("click", resetGameFunction);
-resetGameBtnEnd?.addEventListener("click", resetGameFunction);
+resetBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        resetGameFunction();
+        console.log("restart");
+        document.body.style.backgroundColor = "rgb(200, 182, 255)";
+    });
+});

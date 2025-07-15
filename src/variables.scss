@@ -1,7 +1,7 @@
 // media queries
 $s: 600px; // Mobile
-$m: 768px; //tablet
-$lg: 769px; // desktop
+$m: 790px; //tablet
+$lg: 791px; // desktop
 
 @mixin mobile {
     @media only screen and (max-width: $s) {
@@ -19,7 +19,3 @@ $lg: 769px; // desktop
         @content;
     }
 }
-
-// colours
-$background-landing: rgb(172, 128, 180);
-$background-game: rgb(161, 89, 174);

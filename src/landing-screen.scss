@@ -39,7 +39,7 @@ body {
         }
         @include variables.desktop {
             align-self: flex-end;
-            font-size: xx-large;
+            font-size: 50px;
         }
     }
     &__intro {
@@ -51,6 +51,7 @@ body {
         }
         @include variables.desktop {
             align-self: flex-start;
+            font-size: medium;
         }
     }
     @include variables.tablet {
@@ -74,15 +75,18 @@ body {
     border-radius: 10px;
     &:hover {
         transition: 1s ease;
-        transform: scale(1.1);
-    }
-    @include variables.tablet {
-        width: 70%;
-        justify-self: center;
-    }
-    @include variables.desktop {
-        width: 50%;
-        justify-self: center;
+        transform: scale(1.5);
+        @include variables.desktop {
+            transform: scale(1.8);
+        }
+        @include variables.tablet {
+            width: 70%;
+            justify-self: center;
+        }
+        @include variables.desktop {
+            width: 50%;
+            justify-self: center;
+        }
     }
 }
 #dessertBtn {
