@@ -2,6 +2,7 @@
 $s: 600px; // Mobile
 $m: 790px; //tablet
 $lg: 791px; // desktop
+$xl: 940px; // xl desktop
 
 @mixin mobile {
     @media only screen and (max-width: $s) {
@@ -16,6 +17,12 @@ $lg: 791px; // desktop
 
 @mixin desktop {
     @media only screen and (min-width: $lg) {
+        @content;
+    }
+}
+
+@mixin xl {
+    @media only screen and (min-width: $xl) {
         @content;
     }
 }

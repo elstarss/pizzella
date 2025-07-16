@@ -41,7 +41,9 @@ const feedbackDisplay = document.querySelector<HTMLDivElement>(
 );
 const dessertModeBtn =
     document.querySelector<HTMLButtonElement>(".dessert-mode-btn");
-const iconImages = document.querySelectorAll(".ingredient-buttons__icon");
+const iconImages = document.querySelectorAll(
+    ".ingredient-buttons__icon"
+) as NodeListOf<HTMLImageElement>;
 // buttons for ingredients
 const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
     ".ingredient-buttons"
@@ -63,7 +65,9 @@ const pineappleImageBtn = document.getElementById(
 ) as HTMLButtonElement;
 const ovenBtn = document.getElementById("ovenButton");
 // importing pizza loading images
-const pizzaLoadingImages = document.querySelectorAll(".pizza-loading-images");
+const pizzaLoadingImages = document.querySelectorAll(
+    ".pizza-loading-images"
+) as NodeListOf<HTMLImageElement>;
 const baseImage = document.querySelector(
     ".pizza-loading-images__base"
 ) as HTMLImageElement;
@@ -146,10 +150,11 @@ let countdown: any;
 let timeLeft: number = 20;
 let isDessertMode = false;
 
-// Need to add checks here for checking is variables are empty or not
-if (!onionBtn || !startGameButton || !orderDisplay || !bbqBtn) {
-    throw new Error("Variable empty");
-}
+document.addEventListener("DOMContentLoaded", () => {
+    if (!onionBtn || !startGameButton || !orderDisplay || !bbqBtn) {
+        throw new Error("Variable empty");
+    }
+});
 // functions
 console.log(toppingsList);
 const generateOrder = (numberOfToppings: number) => {
