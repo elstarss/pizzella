@@ -124,13 +124,13 @@ body {
 .overlay-container:hover .overlay {
     height: 100%;
     @include variables.mobile {
-        height: 160%;
+        height: 240%;
     }
 
     &__text {
         white-space: wrap;
         color: white;
-        font-size: 9px;
+        font-size: 8px;
         position: absolute;
         overflow: hidden;
         top: 50%;
