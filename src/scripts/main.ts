@@ -44,6 +44,13 @@ const dessertModeBtn =
 const iconImages = document.querySelectorAll(
     ".ingredient-buttons__icon"
 ) as NodeListOf<HTMLImageElement>;
+const playButton = document.querySelector(
+    ".audio-controls__play-btn"
+) as HTMLButtonElement;
+const audioImage = document.querySelector(
+    ".audio-controls__play-btn--img"
+) as HTMLImageElement;
+const audio = document.querySelector("#audio") as HTMLAudioElement;
 // buttons for ingredients
 const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
     ".ingredient-buttons"
@@ -207,7 +214,6 @@ const binPizzaButton = () => {
 const ingredientClickedSwitch = (event: Event) => {
     console.log(isDessertMode);
     const target = event.currentTarget as HTMLButtonElement;
-    console.log(clickedIngredientsArray);
     switch (target) {
         case baseBtn:
             setElementDisplay(baseImage as HTMLImageElement, true);
@@ -290,8 +296,6 @@ const ingredientClickedSwitch = (event: Event) => {
 
 const checkOrder = () => {
     let correctIngredients = 0;
-    console.log(clickedIngredientsArray);
-    console.log(customerOrder);
     const clickedIngredientsArrayCleaned = clickedIngredientsArray.filter(
         (topping, index) => {
             return clickedIngredientsArray.indexOf(topping) === index;
@@ -406,7 +410,6 @@ const startGame = () => {
     startCountdown();
     updateWinDisplay(winDisplay, levelNumber, winCount);
     swapToDessertImages();
-    console.log(isDessertMode);
 };
 
 const resetGameFunction = () => {
@@ -421,7 +424,6 @@ const resetGameFunction = () => {
     isDessertMode = true;
     dessertModeToggle();
 };
-
 // Event listeners
 startGameButton.addEventListener("click", startGame);
 document
@@ -435,9 +437,17 @@ ovenBtn!.addEventListener("click", () => {
     checkOrder();
 });
 pizzaBinBtn!.addEventListener("click", binPizzaButton);
-console.log(winCount);
 resetBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
         resetGameFunction();
     });
+});
+playButton.addEventListener("click", () => {
+    if (audio.paused) {
+        audio.play();
+        audioImage.src = "images/speaker-off-icon.png";
+    } else {
+        audio.pause();
+        audioImage.src = "images/speaker-icon.png";
+    }
 });

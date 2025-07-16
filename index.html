@@ -16,6 +16,16 @@
     </head>
     <body>
         <main>
+            <audio id="audio">
+                <source src="theme-music.mp3" type="audio/mpeg" />
+            </audio>
+            <button data-target="dream" class="audio-controls__play-btn">
+                <img
+                    class="audio-controls__play-btn--img"
+                    src="images/speaker-icon.png"
+                    alt="speaker icon"
+                />
+            </button>
             <div class="landing-screen-all">
                 <div class="landing-screen">
                     <h1 class="landing-screen__header">Welcome to Pizzella!</h1>
@@ -39,8 +49,14 @@
                                     pizza base and when you're finished with
                                     your masterpiece press bake.
                                 </p>
-                                There are 3 levels to beat, and you need to bake
-                                5 perfect pizzas to levelup each time. Enjoy!
+                                <p>
+                                    There are 3 levels to beat, and you need to
+                                    bake 5 perfect pizzas to level up each time.
+                                    Enjoy! <br />
+                                    Oh and don't forget to press play on the top
+                                    left corner for some music while you work
+                                    &#128171;
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -279,12 +295,6 @@
                         Legend! You baked those pizzas to perfection!
                     </h1>
                 </div>
-            </div>
-            <br />
-            <div class="audio-controls">
-                <audio controls loop>
-                    <source src="theme-music.mp3" type="audio/mpeg" />
-                </audio>
             </div>
         </main>
 

@@ -147,7 +147,7 @@ body {
             font-size: 14px;
         }
         @include variables.tablet {
-            font-size: 12px;
+            font-size: 10px;
         }
     }
 }
@@ -167,5 +167,16 @@ body {
     transition: 1s ease;
     &__text {
         color: purple;
+    }
+}
+
+.audio-controls__play-btn {
+    width: 5vw;
+    height: 5vw;
+    background-color: transparent;
+    border: none;
+    &--img {
+        width: 4vw;
+        height: 4vw;
     }
 }
