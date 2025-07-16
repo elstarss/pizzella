@@ -102,93 +102,92 @@ const pineappleImage = document.querySelector<HTMLImageElement>(
 let winCount: number = 0;
 let levelNumber: number = 1;
 let totalCorrectPizzas: number = 0;
-// could probably all be one object -> to do
-const toppingsList: string[] = [
-    "Cheese",
-    "Mushroom",
-    "Tomato slices",
-    "Pineapple",
-    "Onion",
-];
-const dessertToppingsList: string[] = [
-    "Blueberries",
-    "Chocolate chips",
-    "Marshmallows",
-    "Strawberries",
-    "Sprinkles",
-];
-const sauceList: string[] = ["Tomato sauce", "Pesto sauce", "BBQ sauce"];
-const dessertSauceList: string[] = [
-    "Chocolate Sauce",
-    "Strawberry Sauce",
-    "Caramel Sauce",
-];
-const dessertIconsArray: string[] = [
-    "images/icons/dough-icon.png",
-    "images/icons/sweet/chocolate-sauce-icon.png",
-    "images/icons/sweet/strawberry-sauce-icon.png",
-    "images/icons/sweet/caramel-sauce-icon.png",
-    "images/icons/sweet/blueberry-icon.png",
-    "images/icons/sweet/chocolate-chip-icon.png",
-    "images/icons/sweet/marshmallow-icon.png",
-    "images/icons/sweet/strawberry-icon.png",
-    "images/icons/sweet/sprinkles-icon.png",
-];
-const savouryIconsArray: string[] = [
-    "images/icons/dough-icon.png",
-    "images/icons/savoury/tomato-sauce-icon.png",
-    "images/icons/savoury/pesto-sauce-icon.png",
-    "images/icons/savoury/bbq-sauce-icon.png",
-    "images/icons/savoury/cheese-icon.png",
-    "images/icons/savoury/mushroom-icon.png",
-    "images/icons/savoury/pineapple-icon.png",
-    "images/icons/savoury/sliced-tomato-icon.png",
-    "images/icons/savoury/onion-icon.png",
-];
-const savouryToppingsSrcArray: string[] = [
-    "images/pizza-toppings/pizza-base-1.png",
-    "images/pizza-toppings/savoury/pizza-tomato-1.png",
-    "images/pizza-toppings/savoury/pizza-pesto-1.png",
-    "images/pizza-toppings/savoury/pizza-bbq.png",
-    "images/pizza-toppings/savoury/pizza-cheese-1.png",
-    "images/pizza-toppings/savoury/pizza-topping-mushroom-s2.png",
-    "images/pizza-toppings/savoury/pizza-topping-pineapple.png",
-    "images/pizza-toppings/savoury/tomato-pizza-topping-s2.png",
-    "images/pizza-toppings/savoury/onion-pizza-topping-s2.png",
-];
-const sweetToppingsSrcArray: string[] = [
-    "images/pizza-toppings/pizza-base-1.png",
-    "images/pizza-toppings/sweet/chocolate-sauce.png",
-    "images/pizza-toppings/sweet/strawberry-sauce.png",
-    "images/pizza-toppings/sweet/caramel-sauce.png",
-    "images/pizza-toppings/sweet/blueberry-topping.png",
-    "images/pizza-toppings/sweet/chocolate-chip-topping.png",
-    "images/pizza-toppings/sweet/marshmallow-topping.png",
-    "images/pizza-toppings/sweet/strawberry-topping.png",
-    "images/pizza-toppings/sweet/sprinkles-topping.png",
-];
 let customerOrder: string[] = [];
 let clickedIngredientsArray: string[] = [];
 let countdown: any;
 let timeLeft: number = 20;
-let isDessertMode = false;
-
+let isDessertMode: boolean = false;
+const pizzaObject = {
+    savoury: {
+        toppingsList: [
+            "Cheese",
+            "Mushroom",
+            "Tomato slices",
+            "Pineapple",
+            "Onion",
+        ],
+        sauceList: ["Tomato sauce", "Pesto sauce", "BBQ sauce"],
+        srcListIcons: [
+            "images/icons/dough-icon.png",
+            "images/icons/savoury/tomato-sauce-icon.png",
+            "images/icons/savoury/pesto-sauce-icon.png",
+            "images/icons/savoury/bbq-sauce-icon.png",
+            "images/icons/savoury/cheese-icon.png",
+            "images/icons/savoury/mushroom-icon.png",
+            "images/icons/savoury/pineapple-icon.png",
+            "images/icons/savoury/sliced-tomato-icon.png",
+            "images/icons/savoury/onion-icon.png",
+        ],
+        srcListToppings: [
+            "images/pizza-toppings/pizza-base-1.png",
+            "images/pizza-toppings/savoury/pizza-tomato-1.png",
+            "images/pizza-toppings/savoury/pizza-pesto-1.png",
+            "images/pizza-toppings/savoury/pizza-bbq.png",
+            "images/pizza-toppings/savoury/pizza-cheese-1.png",
+            "images/pizza-toppings/savoury/pizza-topping-mushroom-s2.png",
+            "images/pizza-toppings/savoury/pizza-topping-pineapple.png",
+            "images/pizza-toppings/savoury/tomato-pizza-topping-s2.png",
+            "images/pizza-toppings/savoury/onion-pizza-topping-s2.png",
+        ],
+    },
+    sweet: {
+        toppingsList: [
+            "Blueberries",
+            "Chocolate chips",
+            "Marshmallows",
+            "Strawberries",
+            "Sprinkles",
+        ],
+        sauceList: ["Chocolate Sauce", "Strawberry Sauce", "Caramel Sauce"],
+        srcListIcons: [
+            "images/icons/dough-icon.png",
+            "images/icons/sweet/chocolate-sauce-icon.png",
+            "images/icons/sweet/strawberry-sauce-icon.png",
+            "images/icons/sweet/caramel-sauce-icon.png",
+            "images/icons/sweet/blueberry-icon.png",
+            "images/icons/sweet/chocolate-chip-icon.png",
+            "images/icons/sweet/marshmallow-icon.png",
+            "images/icons/sweet/strawberry-icon.png",
+            "images/icons/sweet/sprinkles-icon.png",
+        ],
+        srcListToppings: [
+            "images/pizza-toppings/pizza-base-1.png",
+            "images/pizza-toppings/sweet/chocolate-sauce.png",
+            "images/pizza-toppings/sweet/strawberry-sauce.png",
+            "images/pizza-toppings/sweet/caramel-sauce.png",
+            "images/pizza-toppings/sweet/blueberry-topping.png",
+            "images/pizza-toppings/sweet/chocolate-chip-topping.png",
+            "images/pizza-toppings/sweet/marshmallow-topping.png",
+            "images/pizza-toppings/sweet/strawberry-topping.png",
+            "images/pizza-toppings/sweet/sprinkles-topping.png",
+        ],
+    },
+};
 document.addEventListener("DOMContentLoaded", () => {
     if (!onionBtn || !startGameButton || !orderDisplay || !bbqBtn) {
         throw new Error("Variable empty");
     }
 });
 // functions
-console.log(toppingsList);
 const generateOrder = (numberOfToppings: number) => {
     let toppings: string[] = [];
     let sauce: string[] = [];
     if (isDessertMode) {
-        toppings = dessertToppingsList.slice(0);
-        sauce = dessertSauceList.slice(0);
+        toppings = pizzaObject.sweet.toppingsList.slice(0);
+        sauce = pizzaObject.sweet.sauceList.slice(0);
     } else {
-        toppings = toppingsList.slice(0);
-        sauce = sauceList.slice(0);
+        toppings = pizzaObject.savoury.toppingsList.slice(0);
+        sauce = pizzaObject.savoury.sauceList.slice(0);
     }
     const shuffledToppings = shuffle(toppings);
     const shuffledSauces = shuffle(sauce);
@@ -205,12 +204,10 @@ const binPizzaButton = () => {
         setElementDisplay(img, false);
     });
 };
-
 const ingredientClickedSwitch = (event: Event) => {
     console.log(isDessertMode);
     const target = event.currentTarget as HTMLButtonElement;
     console.log(clickedIngredientsArray);
-    // if (!isDessertMode) {
     switch (target) {
         case baseBtn:
             setElementDisplay(baseImage as HTMLImageElement, true);
@@ -288,8 +285,6 @@ const ingredientClickedSwitch = (event: Event) => {
         default:
             console.log("Switch error");
     }
-
-    console.log(clickedIngredientsArray);
     return clickedIngredientsArray;
 };
 
@@ -331,24 +326,24 @@ const checkOrder = () => {
     binPizzaButton();
     console.log(levelNumber, winCount);
 };
-const swapToDessertIcons = () => {
+const swapToDessertImages = () => {
     iconImages.forEach((img, index) => {
         if (isDessertMode == true) {
-            if (dessertIconsArray[index]) {
-                img.src = `${dessertIconsArray[index]}`;
+            if (pizzaObject.sweet.srcListIcons[index]) {
+                img.src = `${pizzaObject.sweet.srcListIcons[index]}`;
             }
         } else {
-            if (savouryIconsArray[index]) {
-                img.src = `${savouryIconsArray[index]}`;
+            if (pizzaObject.savoury.srcListIcons[index]) {
+                img.src = `${pizzaObject.savoury.srcListIcons[index]}`;
             }
         }
         pizzaLoadingImages.forEach((img, index) => {
             if (isDessertMode == true) {
-                if (sweetToppingsSrcArray[index]) {
-                    img.src = `${sweetToppingsSrcArray[index]}`;
+                if (pizzaObject.sweet.srcListToppings[index]) {
+                    img.src = `${pizzaObject.sweet.srcListToppings[index]}`;
                 } else {
-                    if (savouryToppingsSrcArray[index]) {
-                        img.src = `${savouryToppingsSrcArray[index]}`;
+                    if (pizzaObject.savoury.srcListToppings[index]) {
+                        img.src = `${pizzaObject.savoury.srcListToppings[index]}`;
                     }
                 }
             }
@@ -410,7 +405,7 @@ const startGame = () => {
     updateCustomerOrder(customerOrder, orderDisplay);
     startCountdown();
     updateWinDisplay(winDisplay, levelNumber, winCount);
-    swapToDessertIcons();
+    swapToDessertImages();
     console.log(isDessertMode);
 };
 
