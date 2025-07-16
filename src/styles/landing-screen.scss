@@ -122,21 +122,15 @@ body {
     }
 }
 .overlay-container:hover .overlay {
-    height: 150%;
-    @include variables.tablet {
-        height: 100%;
-    }
-    @include variables.desktop {
-        height: 150%;
-    }
-    @include variables.xl {
-        height: 150%;
+    height: 100%;
+    @include variables.mobile {
+        height: 160%;
     }
 
     &__text {
         white-space: wrap;
         color: white;
-        font-size: 6px;
+        font-size: 9px;
         position: absolute;
         overflow: hidden;
         top: 50%;
