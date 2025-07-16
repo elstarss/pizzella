@@ -163,8 +163,8 @@ const sweetToppingsSrcArray: string[] = [
     "images/pizza-toppings/sweet/caramel-sauce.png",
     "images/pizza-toppings/sweet/blueberry-topping.png",
     "images/pizza-toppings/sweet/chocolate-chip-topping.png",
-    "images/pizza-toppings/sweet/strawberry-topping.png",
     "images/pizza-toppings/sweet/marshmallow-topping.png",
+    "images/pizza-toppings/sweet/strawberry-topping.png",
     "images/pizza-toppings/sweet/sprinkles-topping.png",
 ];
 let customerOrder: string[] = [];
@@ -287,54 +287,6 @@ const ingredientClickedSwitch = (event: Event) => {
 
         default:
             console.log("Switch error");
-        // }
-        // } else if (
-        //     !clickedIngredientsArray.includes(target.innerText) &&
-        //     isDessertMode
-        // ) {
-        //     switch (target) {
-        //         case baseBtn:
-        //             setElementDisplay(baseImage as HTMLImageElement, true);
-        //             clickedIngredientsArray.push("Base");
-        //             break;
-        //         case tomatoBtn:
-        //             setElementDisplay(tomatoImage as HTMLImageElement, true);
-        //             console.log("here");
-        //             clickedIngredientsArray.push("Chocolate Sauce");
-        //             break;
-        //         case pestoBtn:
-        //             setElementDisplay(pestoImage as HTMLImageElement, true);
-        //             clickedIngredientsArray.push("Strawberry Sauce");
-
-        //             break;
-        //         case bbqBtn:
-        //             setElementDisplay(bbqImage as HTMLImageElement, true);
-        //             clickedIngredientsArray.push("Caramel Sauce");
-        //             break;
-        //         case cheeseBtn:
-        //             setElementDisplay(cheeseImage as HTMLImageElement, true);
-        //             clickedIngredientsArray.push("Blueberries");
-        //             break;
-        //         case mushroomBtn:
-        //             setElementDisplay(mushroomImage as HTMLImageElement, true);
-        //             clickedIngredientsArray.push("Chocolate chips");
-        //             break;
-        //         case pineappleImageBtn:
-        //             setElementDisplay(pineappleImage as HTMLImageElement, true);
-        //             clickedIngredientsArray.push("Marshmallows");
-        //             break;
-        //         case tomatoSlicesBtn:
-        //             setElementDisplay(tomatoSlicesImage as HTMLImageElement, true);
-        //             clickedIngredientsArray.push("Strawberries");
-        //             break;
-        //         case onionBtn:
-        //             setElementDisplay(onionImage as HTMLImageElement, true);
-        //             clickedIngredientsArray.push("Sprinkles");
-
-        //             break;
-        //         default:
-        //             console.log("Switch error");
-        //     }
     }
 
     console.log(clickedIngredientsArray);
