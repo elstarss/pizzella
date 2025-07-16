@@ -6,8 +6,9 @@ import {
     feedback,
     changeImgSrc,
 } from "./gameUtils";
-import "./style.scss";
-import "./variables.scss";
+import "../styles/style.scss";
+import "../styles/variables.scss";
+
 // content divs
 const startGameButton = document.querySelector<HTMLButtonElement>(
     ".start-game-btn"
@@ -123,26 +124,26 @@ const dessertSauceList: string[] = [
     "Caramel Sauce",
 ];
 const dessertIconsArray: string[] = [
-    "dough-icon.png",
-    "chocolate-sauce-icon.png",
-    "strawberry-sauce-icon.png",
-    "caramel-sauce-icon.png",
-    "blueberry-icon.png",
-    "chocolate-chip-icon.png",
-    "strawberry-icon.png",
-    "marshmallow-icon.png",
-    "sprinkles-icon.png",
+    "images/icons/dough-icon.png",
+    "images/icons/sweet/chocolate-sauce-icon.png",
+    "images/icons/sweet/strawberry-sauce-icon.png",
+    "images/icons/sweet/caramel-sauce-icon.png",
+    "images/icons/sweet/blueberry-icon.png",
+    "images/icons/sweet/chocolate-chip-icon.png",
+    "images/icons/sweet/strawberry-icon.png",
+    "images/icons/sweet/marshmallow-icon.png",
+    "images/icons/sweet/sprinkles-icon.png",
 ];
 const savouryIconsArray: string[] = [
-    "dough-icon.png",
-    "tomato-sauce-icon.png",
-    "pesto-sauce-icon.png",
-    "bbq-sauce-icon.png",
-    "cheese-icon.png",
-    "mushroom-icon.png",
-    "sliced-tomato-icon.png",
-    "pineapple-icon.png",
-    "onion-icon.png",
+    "images/icons/dough-icon.png",
+    "images/icons/savoury/tomato-sauce-icon.png",
+    "images/icons/savoury/pesto-sauce-icon.png",
+    "images/icons/savoury/bbq-sauce-icon.png",
+    "images/icons/savoury/cheese-icon.png",
+    "images/icons/savoury/mushroom-icon.png",
+    "images/icons/savoury/sliced-tomato-icon.png",
+    "images/icons/savoury/pineapple-icon.png",
+    "images/icons/savoury/onion-icon.png",
 ];
 let customerOrder: string[] = [];
 let clickedIngredientsArray: string[] = [];
@@ -239,7 +240,7 @@ const ingredientClickedSwitch = (event: Event) => {
                 setElementDisplay(tomatoImage as HTMLImageElement, true);
                 changeImgSrc(
                     tomatoImage as HTMLImageElement,
-                    "./src/images/chocolate-sauce.png"
+                    `images/pizza-toppings/sweet/chocolate-sauce.png`
                 );
                 clickedIngredientsArray.push("Chocolate Sauce");
                 break;
@@ -248,7 +249,7 @@ const ingredientClickedSwitch = (event: Event) => {
                 clickedIngredientsArray.push("Strawberry Sauce");
                 changeImgSrc(
                     pestoImage as HTMLImageElement,
-                    "./src/images/strawberry-sauce.png"
+                    "images/pizza-toppings/sweet/strawberry-sauce.png"
                 );
                 break;
             case bbqBtn:
@@ -256,7 +257,7 @@ const ingredientClickedSwitch = (event: Event) => {
                 clickedIngredientsArray.push("Caramel Sauce");
                 changeImgSrc(
                     bbqImage as HTMLImageElement,
-                    "./src/images/caramel-sauce.png"
+                    "images/pizza-toppings/sweet/caramel-sauce.png"
                 );
                 break;
             case cheeseBtn:
@@ -264,14 +265,14 @@ const ingredientClickedSwitch = (event: Event) => {
                 clickedIngredientsArray.push("Blueberries");
                 changeImgSrc(
                     cheeseImage as HTMLImageElement,
-                    "./src/images/blueberry-topping.png"
+                    "images/pizza-toppings/sweet/blueberry-topping.png"
                 );
                 break;
             case mushroomBtn:
                 setElementDisplay(mushroomImage as HTMLImageElement, true);
                 changeImgSrc(
                     mushroomImage as HTMLImageElement,
-                    "./src/images/chocolate-chip-topping.png"
+                    "images/pizza-toppings/sweet/chocolate-chip-topping.png"
                 );
                 clickedIngredientsArray.push("Chocolate chips");
                 break;
@@ -279,7 +280,7 @@ const ingredientClickedSwitch = (event: Event) => {
                 setElementDisplay(pineappleImage as HTMLImageElement, true);
                 changeImgSrc(
                     pineappleImage as HTMLImageElement,
-                    "./src/images/marshmallow-topping.png"
+                    "images/pizza-toppings/sweet/marshmallow-topping.png"
                 );
                 clickedIngredientsArray.push("Marshmallows");
                 break;
@@ -287,7 +288,7 @@ const ingredientClickedSwitch = (event: Event) => {
                 setElementDisplay(tomatoSlicesImage as HTMLImageElement, true);
                 changeImgSrc(
                     tomatoSlicesImage as HTMLImageElement,
-                    "./src/images/strawberry-topping.png"
+                    "images/pizza-toppings/sweet/strawberry-topping.png"
                 );
                 clickedIngredientsArray.push("Strawberries");
                 break;
@@ -295,7 +296,7 @@ const ingredientClickedSwitch = (event: Event) => {
                 setElementDisplay(onionImage as HTMLImageElement, true);
                 changeImgSrc(
                     onionImage as HTMLImageElement,
-                    "./src/images/sprinkles-topping.png"
+                    "images/pizza-toppings/sweet/sprinkles-topping.png"
                 );
                 clickedIngredientsArray.push("Sprinkles");
                 break;
@@ -343,11 +344,11 @@ const swapToDessertIcons = () => {
     iconImages.forEach((img, index) => {
         if (isDessertMode == true) {
             if (dessertIconsArray[index]) {
-                img.src = `./src/images/icons/${dessertIconsArray[index]}`;
+                img.src = `${dessertIconsArray[index]}`;
             }
         } else {
             if (savouryIconsArray[index]) {
-                img.src = `./src/images/icons/${savouryIconsArray[index]}`;
+                img.src = `${savouryIconsArray[index]}`;
             }
         }
     });

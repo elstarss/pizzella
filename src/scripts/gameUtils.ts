@@ -1,4 +1,5 @@
 //Win display
+// import { getImage } from "./main.ts";
 export const updateWinDisplay = (
     element: HTMLElement,
     level: number,
