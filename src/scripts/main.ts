@@ -401,6 +401,7 @@ const dessertModeToggle = () => {
     }
     return isDessertMode;
 };
+
 const startGame = () => {
     setElementDisplay(landingContent, false);
     setElementDisplay(gameContent, true);

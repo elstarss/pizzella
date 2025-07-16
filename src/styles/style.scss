@@ -309,3 +309,12 @@
     align-self: flex-start;
     margin: 0;
 }
+
+audio {
+    width: 20vw;
+    height: 2vw;
+}
+.audio-controls {
+    display: flex;
+    justify-content: center;
+}
