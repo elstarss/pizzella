@@ -2,6 +2,9 @@
 ### Gameplay/intro:
 Pizella is a point and click game where the player assembles a pizza matching the customer order, selecting the right ingredients to score a point. There are three levels of progressive difficulty with more toppings to add each time, and the player must assemble five correct pizzas each level to progress. Each game has a limit of 60 seconds.
 
+### Build and configuration 
+This project was built using vite, steps to download and configure vite can be found at https://vite.dev/guide/. Images for this project were generated using Copilot, and the music is royalty free from pixabay.com.
+
 ## Key features
 - clickable ingredients buttons (displayed as images/ icons of what they represent)
 - customer order display- shows the required pizza to make
@@ -45,7 +48,7 @@ area for images to appear
 - [x] function to reset current pizza being built without affecting win score etc
 - [x] countdown timer function that starts on new game/ next level
 
-# Potential extra features
+## Potential extra features
 - [ ] Divide levels into seperate rounds, with the timer resetting for each progressive level
 - [ ] Improved audio features- sound effects when baking, or when an order is correct
 - [ ] Additional player feedback when pizza is baked e.g. variation in praise
