@@ -102,6 +102,7 @@ const pineappleImage = document.querySelector<HTMLImageElement>(
 let winCount: number = 0;
 let levelNumber: number = 1;
 let totalCorrectPizzas: number = 0;
+// could probably all be one object -> to do
 const toppingsList: string[] = [
     "Cheese",
     "Mushroom",
