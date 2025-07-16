@@ -130,8 +130,8 @@ const dessertIconsArray: string[] = [
     "images/icons/sweet/caramel-sauce-icon.png",
     "images/icons/sweet/blueberry-icon.png",
     "images/icons/sweet/chocolate-chip-icon.png",
-    "images/icons/sweet/strawberry-icon.png",
     "images/icons/sweet/marshmallow-icon.png",
+    "images/icons/sweet/strawberry-icon.png",
     "images/icons/sweet/sprinkles-icon.png",
 ];
 const savouryIconsArray: string[] = [
@@ -141,8 +141,8 @@ const savouryIconsArray: string[] = [
     "images/icons/savoury/bbq-sauce-icon.png",
     "images/icons/savoury/cheese-icon.png",
     "images/icons/savoury/mushroom-icon.png",
-    "images/icons/savoury/sliced-tomato-icon.png",
     "images/icons/savoury/pineapple-icon.png",
+    "images/icons/savoury/sliced-tomato-icon.png",
     "images/icons/savoury/onion-icon.png",
 ];
 const savouryToppingsSrcArray: string[] = [
@@ -152,9 +152,9 @@ const savouryToppingsSrcArray: string[] = [
     "images/pizza-toppings/savoury/pizza-bbq.png",
     "images/pizza-toppings/savoury/pizza-cheese-1.png",
     "images/pizza-toppings/savoury/pizza-topping-mushroom-s2.png",
+    "images/pizza-toppings/savoury/pizza-topping-pineapple.png",
     "images/pizza-toppings/savoury/tomato-pizza-topping-s2.png",
     "images/pizza-toppings/savoury/onion-pizza-topping-s2.png",
-    "images/pizza-toppings/savoury/pizza-topping-pineapple.png",
 ];
 const sweetToppingsSrcArray: string[] = [
     "images/pizza-toppings/pizza-base-1.png",
@@ -163,8 +163,8 @@ const sweetToppingsSrcArray: string[] = [
     "images/pizza-toppings/sweet/caramel-sauce.png",
     "images/pizza-toppings/sweet/blueberry-topping.png",
     "images/pizza-toppings/sweet/chocolate-chip-topping.png",
-    "images/pizza-toppings/sweet/marshmallow-topping.png",
     "images/pizza-toppings/sweet/strawberry-topping.png",
+    "images/pizza-toppings/sweet/marshmallow-topping.png",
     "images/pizza-toppings/sweet/sprinkles-topping.png",
 ];
 let customerOrder: string[] = [];
@@ -253,7 +253,6 @@ const ingredientClickedSwitch = (event: Event) => {
             case onionBtn:
                 setElementDisplay(onionImage as HTMLImageElement, true);
                 clickedIngredientsArray.push("Onion");
-                return ingredient;
                 break;
 
             default:
@@ -398,7 +397,21 @@ const startCountdown = () => {
         }
     }, 1000);
 };
-
+const dessertModeToggle = () => {
+    console.log(isDessertMode);
+    if (isDessertMode == true) {
+        dessertModeBtn!.innerHTML = "Sweet tooth?";
+        document.body.style.backgroundColor = "rgb(200, 182, 255)";
+        isDessertMode = false;
+        return isDessertMode;
+    } else if (isDessertMode == false) {
+        dessertModeBtn!.innerHTML = "Back to classic";
+        document.body.style.backgroundColor = "rgb(255, 214, 255)";
+        isDessertMode = true;
+        return isDessertMode;
+    }
+    return isDessertMode;
+};
 const startGame = () => {
     setElementDisplay(landingContent, false);
     setElementDisplay(gameContent, true);
@@ -423,21 +436,6 @@ const resetGameFunction = () => {
     dessertModeToggle();
 };
 
-const dessertModeToggle = () => {
-    console.log(isDessertMode);
-    if (isDessertMode == true) {
-        dessertModeBtn!.innerHTML = "Sweet tooth?";
-        document.body.style.backgroundColor = "rgb(200, 182, 255)";
-        isDessertMode = false;
-        return isDessertMode;
-    } else if (isDessertMode == false) {
-        dessertModeBtn!.innerHTML = "Back to classic";
-        document.body.style.backgroundColor = "rgb(255, 214, 255)";
-        isDessertMode = true;
-        return isDessertMode;
-    }
-    return isDessertMode;
-};
 // Event listeners
 startGameButton.addEventListener("click", startGame);
 document
