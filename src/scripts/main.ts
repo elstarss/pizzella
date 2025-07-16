@@ -4,7 +4,7 @@ import {
     updateCustomerOrder,
     shuffle,
     feedback,
-    changeImgSrc,
+    // changeImgSrc,
 } from "./gameUtils";
 import "../styles/style.scss";
 import "../styles/variables.scss";
