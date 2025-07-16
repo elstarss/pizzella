@@ -399,8 +399,8 @@ const resetGameFunction = () => {
     winCount = 0;
     levelNumber = 1;
     totalCorrectPizzas = 0;
-    isDessertMode = false;
-    console.log("restarting");
+    isDessertMode = true;
+    dessertModeToggle();
 };
 
 const dessertModeToggle = () => {
@@ -416,7 +416,6 @@ const dessertModeToggle = () => {
         isDessertMode = true;
         return isDessertMode;
     }
-    console.log(isDessertMode);
     return isDessertMode;
 };
 // Event listeners
@@ -436,7 +435,5 @@ console.log(winCount);
 resetBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
         resetGameFunction();
-        console.log("restart");
-        document.body.style.backgroundColor = "rgb(200, 182, 255)";
     });
 });
