@@ -311,8 +311,14 @@
 }
 
 audio {
-    width: 20vw;
-    height: 2vw;
+    width: 40vw;
+    height: 4vw;
+    @include variables.tablet {
+        width: 20vw;
+    }
+    @include variables.desktop {
+        width: 20vw;
+    }
 }
 .audio-controls {
     display: flex;
