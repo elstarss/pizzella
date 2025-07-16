@@ -186,6 +186,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 // functions
+const swapToDessertImages = () => {
+    iconImages.forEach((img, index) => {
+        if (isDessertMode == true) {
+            if (pizzaObject.sweet.srcListIcons[index]) {
+                img.src = `${pizzaObject.sweet.srcListIcons[index]}`;
+            }
+        } else {
+            console.log("got to savoury");
+            if (pizzaObject.savoury.srcListIcons[index]) {
+                img.src = `${pizzaObject.savoury.srcListIcons[index]}`;
+            }
+        }
+    });
+    pizzaLoadingImages.forEach((img, index) => {
+        if (isDessertMode) {
+            console.log("got to sweet");
+            if (pizzaObject.sweet.srcListToppings[index]) {
+                img.src = `${pizzaObject.sweet.srcListToppings[index]}`;
+            }
+        } else {
+            console.log("got to savoury toppings");
+            if (pizzaObject.savoury.srcListToppings[index]) {
+                img.src = `${pizzaObject.savoury.srcListToppings[index]}`;
+            }
+        }
+    });
+};
 const generateOrder = (numberOfToppings: number) => {
     let toppings: string[] = [];
     let sauce: string[] = [];
@@ -330,30 +357,6 @@ const checkOrder = () => {
     binPizzaButton();
     console.log(levelNumber, winCount);
 };
-const swapToDessertImages = () => {
-    iconImages.forEach((img, index) => {
-        if (isDessertMode == true) {
-            if (pizzaObject.sweet.srcListIcons[index]) {
-                img.src = `${pizzaObject.sweet.srcListIcons[index]}`;
-            }
-        } else {
-            if (pizzaObject.savoury.srcListIcons[index]) {
-                img.src = `${pizzaObject.savoury.srcListIcons[index]}`;
-            }
-        }
-        pizzaLoadingImages.forEach((img, index) => {
-            if (isDessertMode == true) {
-                if (pizzaObject.sweet.srcListToppings[index]) {
-                    img.src = `${pizzaObject.sweet.srcListToppings[index]}`;
-                } else {
-                    if (pizzaObject.savoury.srcListToppings[index]) {
-                        img.src = `${pizzaObject.savoury.srcListToppings[index]}`;
-                    }
-                }
-            }
-        });
-    });
-};
 const levelUp = () => {
     if (levelNumber == 3 && winCount == 5) {
         console.log("Winner!!");
@@ -403,13 +406,13 @@ const dessertModeToggle = () => {
 };
 
 const startGame = () => {
+    swapToDessertImages();
     setElementDisplay(landingContent, false);
     setElementDisplay(gameContent, true);
     generateOrder(levelNumber);
     updateCustomerOrder(customerOrder, orderDisplay);
     startCountdown();
     updateWinDisplay(winDisplay, levelNumber, winCount);
-    swapToDessertImages();
 };
 
 const resetGameFunction = () => {
