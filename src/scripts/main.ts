@@ -345,14 +345,19 @@ const checkOrder = () => {
     let correctIngredients = 0;
     console.log(clickedIngredientsArray);
     console.log(customerOrder);
-    for (let i = 0; i < clickedIngredientsArray.length; i++) {
-        if (customerOrder.includes(clickedIngredientsArray[i])) {
+    const clickedIngredientsArrayCleaned = clickedIngredientsArray.filter(
+        (topping, index) => {
+            return clickedIngredientsArray.indexOf(topping) === index;
+        }
+    );
+    for (let i = 0; i < clickedIngredientsArrayCleaned.length; i++) {
+        if (customerOrder.includes(clickedIngredientsArrayCleaned[i])) {
             correctIngredients++;
         }
     }
     if (
-        correctIngredients === clickedIngredientsArray.length &&
-        clickedIngredientsArray.length == customerOrder.length
+        correctIngredients === clickedIngredientsArrayCleaned.length &&
+        clickedIngredientsArrayCleaned.length == customerOrder.length
     ) {
         console.log("correct");
         winCount++;
@@ -360,7 +365,7 @@ const checkOrder = () => {
         updateWinDisplay(winDisplay, levelNumber, winCount);
         levelUp();
         feedback(feedbackDisplay as HTMLDivElement, "correct");
-    } else if (clickedIngredientsArray.length < customerOrder.length) {
+    } else if (clickedIngredientsArrayCleaned.length < customerOrder.length) {
         console.log("Not enough toppings");
         feedback(feedbackDisplay as HTMLDivElement, "missing toppings");
         clickedIngredientsArray = [];
