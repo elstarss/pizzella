@@ -112,9 +112,9 @@ const toppingsList: string[] = [
 ];
 const dessertToppingsList: string[] = [
     "Blueberries",
-    "Strawberries",
     "Chocolate chips",
     "Marshmallows",
+    "Strawberries",
     "Sprinkles",
 ];
 const sauceList: string[] = ["Tomato sauce", "Pesto sauce", "BBQ sauce"];
@@ -207,105 +207,138 @@ const binPizzaButton = () => {
 };
 
 const ingredientClickedSwitch = (event: Event) => {
-    let ingredient: string[] = [];
+    console.log(isDessertMode);
     const target = event.currentTarget as HTMLButtonElement;
     console.log(clickedIngredientsArray);
-    if (
-        !clickedIngredientsArray.some((topping) =>
-            ingredient.includes(topping)
-        ) &&
-        !isDessertMode
-    ) {
-        switch (target) {
-            case baseBtn:
-                ingredient.push("Base");
-                setElementDisplay(baseImage as HTMLImageElement, true);
+    // if (!isDessertMode) {
+    switch (target) {
+        case baseBtn:
+            setElementDisplay(baseImage as HTMLImageElement, true);
+            if (!isDessertMode) {
                 clickedIngredientsArray.push("Base");
-                break;
-            case tomatoBtn:
-                setElementDisplay(tomatoImage as HTMLImageElement, true);
+            } else if (isDessertMode == true) {
+                clickedIngredientsArray.push("Base");
+            }
+            break;
+        case tomatoBtn:
+            setElementDisplay(tomatoImage as HTMLImageElement, true);
+            if (!isDessertMode) {
                 clickedIngredientsArray.push("Tomato sauce");
-                break;
-            case pestoBtn:
-                setElementDisplay(pestoImage as HTMLImageElement, true);
-                clickedIngredientsArray.push("Pesto sauce");
-                break;
-            case bbqBtn:
-                setElementDisplay(bbqImage as HTMLImageElement, true);
-                clickedIngredientsArray.push("BBQ sauce");
-                break;
-            case cheeseBtn:
-                setElementDisplay(cheeseImage as HTMLImageElement, true);
-                clickedIngredientsArray.push("Cheese");
-                break;
-            case mushroomBtn:
-                setElementDisplay(mushroomImage as HTMLImageElement, true);
-                clickedIngredientsArray.push("Mushroom");
-                break;
-            case pineappleImageBtn:
-                setElementDisplay(pineappleImage as HTMLImageElement, true);
-                clickedIngredientsArray.push("Pineapple");
-                break;
-            case tomatoSlicesBtn:
-                setElementDisplay(tomatoSlicesImage as HTMLImageElement, true);
-                clickedIngredientsArray.push("Tomato slices");
-                break;
-            case onionBtn:
-                setElementDisplay(onionImage as HTMLImageElement, true);
-                clickedIngredientsArray.push("Onion");
-                break;
-
-            default:
-                console.log("Switch error");
-        }
-    } else if (
-        !clickedIngredientsArray.includes(target.innerText) &&
-        isDessertMode
-    ) {
-        switch (target) {
-            case baseBtn:
-                setElementDisplay(baseImage as HTMLImageElement, true);
-                clickedIngredientsArray.push("Base");
-                break;
-            case tomatoBtn:
-                setElementDisplay(tomatoImage as HTMLImageElement, true);
-                console.log("here");
+            } else if (isDessertMode) {
                 clickedIngredientsArray.push("Chocolate Sauce");
-                break;
-            case pestoBtn:
-                setElementDisplay(pestoImage as HTMLImageElement, true);
+            }
+            break;
+        case pestoBtn:
+            setElementDisplay(pestoImage as HTMLImageElement, true);
+            if (!isDessertMode) {
+                clickedIngredientsArray.push("Pesto sauce");
+            } else if (isDessertMode) {
                 clickedIngredientsArray.push("Strawberry Sauce");
-
-                break;
-            case bbqBtn:
-                setElementDisplay(bbqImage as HTMLImageElement, true);
+            }
+            break;
+        case bbqBtn:
+            setElementDisplay(bbqImage as HTMLImageElement, true);
+            if (!isDessertMode) {
+                clickedIngredientsArray.push("BBQ sauce");
+            } else if (isDessertMode) {
                 clickedIngredientsArray.push("Caramel Sauce");
-                break;
-            case cheeseBtn:
-                setElementDisplay(cheeseImage as HTMLImageElement, true);
+            }
+            break;
+        case cheeseBtn:
+            setElementDisplay(cheeseImage as HTMLImageElement, true);
+            if (!isDessertMode) {
+                clickedIngredientsArray.push("Cheese");
+            } else if (isDessertMode) {
                 clickedIngredientsArray.push("Blueberries");
-                break;
-            case mushroomBtn:
-                setElementDisplay(mushroomImage as HTMLImageElement, true);
+            }
+            break;
+        case mushroomBtn:
+            setElementDisplay(mushroomImage as HTMLImageElement, true);
+            if (!isDessertMode) {
+                clickedIngredientsArray.push("Mushroom");
+            } else if (isDessertMode) {
                 clickedIngredientsArray.push("Chocolate chips");
-                break;
-            case pineappleImageBtn:
-                setElementDisplay(pineappleImage as HTMLImageElement, true);
+            }
+            break;
+        case pineappleImageBtn:
+            setElementDisplay(pineappleImage as HTMLImageElement, true);
+            if (!isDessertMode) {
+                clickedIngredientsArray.push("Pineapple");
+            } else if (isDessertMode) {
                 clickedIngredientsArray.push("Marshmallows");
-                break;
-            case tomatoSlicesBtn:
-                setElementDisplay(tomatoSlicesImage as HTMLImageElement, true);
+            }
+            break;
+        case tomatoSlicesBtn:
+            setElementDisplay(tomatoSlicesImage as HTMLImageElement, true);
+            if (!isDessertMode) {
+                clickedIngredientsArray.push("Tomato slices");
+            } else if (isDessertMode) {
                 clickedIngredientsArray.push("Strawberries");
-                break;
-            case onionBtn:
-                setElementDisplay(onionImage as HTMLImageElement, true);
+            }
+            break;
+        case onionBtn:
+            setElementDisplay(onionImage as HTMLImageElement, true);
+            if (!isDessertMode) {
+                clickedIngredientsArray.push("Onion");
+            } else if (isDessertMode) {
                 clickedIngredientsArray.push("Sprinkles");
-                break;
-            default:
-                console.log("Switch error");
-        }
+            }
+            break;
+
+        default:
+            console.log("Switch error");
+        // }
+        // } else if (
+        //     !clickedIngredientsArray.includes(target.innerText) &&
+        //     isDessertMode
+        // ) {
+        //     switch (target) {
+        //         case baseBtn:
+        //             setElementDisplay(baseImage as HTMLImageElement, true);
+        //             clickedIngredientsArray.push("Base");
+        //             break;
+        //         case tomatoBtn:
+        //             setElementDisplay(tomatoImage as HTMLImageElement, true);
+        //             console.log("here");
+        //             clickedIngredientsArray.push("Chocolate Sauce");
+        //             break;
+        //         case pestoBtn:
+        //             setElementDisplay(pestoImage as HTMLImageElement, true);
+        //             clickedIngredientsArray.push("Strawberry Sauce");
+
+        //             break;
+        //         case bbqBtn:
+        //             setElementDisplay(bbqImage as HTMLImageElement, true);
+        //             clickedIngredientsArray.push("Caramel Sauce");
+        //             break;
+        //         case cheeseBtn:
+        //             setElementDisplay(cheeseImage as HTMLImageElement, true);
+        //             clickedIngredientsArray.push("Blueberries");
+        //             break;
+        //         case mushroomBtn:
+        //             setElementDisplay(mushroomImage as HTMLImageElement, true);
+        //             clickedIngredientsArray.push("Chocolate chips");
+        //             break;
+        //         case pineappleImageBtn:
+        //             setElementDisplay(pineappleImage as HTMLImageElement, true);
+        //             clickedIngredientsArray.push("Marshmallows");
+        //             break;
+        //         case tomatoSlicesBtn:
+        //             setElementDisplay(tomatoSlicesImage as HTMLImageElement, true);
+        //             clickedIngredientsArray.push("Strawberries");
+        //             break;
+        //         case onionBtn:
+        //             setElementDisplay(onionImage as HTMLImageElement, true);
+        //             clickedIngredientsArray.push("Sprinkles");
+
+        //             break;
+        //         default:
+        //             console.log("Switch error");
+        //     }
     }
+
     console.log(clickedIngredientsArray);
+    return clickedIngredientsArray;
 };
 
 const checkOrder = () => {
@@ -366,11 +399,11 @@ const swapToDessertIcons = () => {
     });
 };
 const levelUp = () => {
-    if (levelNumber == 3 && winCount == 1) {
+    if (levelNumber == 3 && winCount == 5) {
         console.log("Winner!!");
         setElementDisplay(gameContent as HTMLDivElement, false);
         setElementDisplay(winnerScreenContent as HTMLDivElement, true);
-    } else if (winCount >= 1) {
+    } else if (winCount >= 5) {
         levelNumber++;
         winCount = 0;
         updateWinDisplay(winDisplay, levelNumber, winCount);
