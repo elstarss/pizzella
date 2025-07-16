@@ -46,6 +46,6 @@ area for images to appear
 - [x] countdown timer function that starts on new game/ next level
 
 # Potential extra features
-- [] Divide levels into seperate rounds, with the timer resetting for each progressive level
-- [] Improved audio features- sound effects when baking, or when an order is correct
-- [] Additional player feedback when pizza is baked e.g. variation in praise
+- [ ] Divide levels into seperate rounds, with the timer resetting for each progressive level
+- [ ] Improved audio features- sound effects when baking, or when an order is correct
+- [ ] Additional player feedback when pizza is baked e.g. variation in praise
