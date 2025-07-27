@@ -7,103 +7,8 @@ import {
 } from "./gameUtils";
 import "../styles/style.scss";
 import "../styles/variables.scss";
-// import { DOM } from "./domElements";
+import { DOM } from "./domElements";
 import { pizzaObject } from "./pizzaObject";
-
-// content divs
-const startGameButton = document.querySelector<HTMLButtonElement>(
-    ".start-game-btn"
-) as HTMLButtonElement;
-const landingContent = document.querySelector(
-    ".landing-screen-all"
-) as HTMLDivElement;
-const gameContent = document.querySelector<HTMLDivElement>(
-    ".game-content"
-) as HTMLDivElement;
-const endScreenContent = document.querySelector<HTMLDivElement>(
-    ".end-screen-content"
-) as HTMLDivElement;
-const endScreenScore =
-    document.querySelector<HTMLHeadingElement>(".end-screen-score");
-const winnerScreenContent = document.querySelector(
-    ".winner-screen-content"
-) as HTMLDivElement;
-// other dom elements
-const orderDisplay = document.querySelector(
-    ".customer-order-display__order"
-) as HTMLHeadingElement;
-const winDisplay = document.getElementById("winDisplay") as HTMLElement;
-const pizzaBinBtn = document.querySelector<HTMLButtonElement>(".bin-pizza-btn");
-const resetBtns = document.querySelectorAll(".reset");
-const countdownDisplay = document.querySelector<HTMLParagraphElement>(
-    ".countdown-timer-div"
-);
-const feedbackDisplay = document.querySelector<HTMLDivElement>(
-    ".feedback-pizza-row"
-);
-const dessertModeBtn =
-    document.querySelector<HTMLButtonElement>(".dessert-mode-btn");
-const iconImages = document.querySelectorAll(
-    ".ingredient-buttons__icon"
-) as NodeListOf<HTMLImageElement>;
-const playButton = document.querySelector(
-    ".audio-controls__play-btn"
-) as HTMLButtonElement;
-const audioImage = document.querySelector(
-    ".audio-controls__play-btn--img"
-) as HTMLImageElement;
-const audio = document.querySelector("#audio") as HTMLAudioElement;
-// buttons for ingredients
-const ingredientBtns = document.querySelectorAll<HTMLButtonElement>(
-    ".ingredient-buttons"
-);
-const baseBtn = document.getElementById("baseButton") as HTMLButtonElement;
-const tomatoBtn = document.getElementById("tomatoButton") as HTMLButtonElement;
-const pestoBtn = document.getElementById("pestoBtn") as HTMLButtonElement;
-const bbqBtn = document.getElementById("bbqbtn");
-const cheeseBtn = document.getElementById("cheeseButton") as HTMLButtonElement;
-const mushroomBtn = document.getElementById(
-    "mushroomButton"
-) as HTMLButtonElement;
-const tomatoSlicesBtn = document.getElementById(
-    "tomatoSlicesButton"
-) as HTMLButtonElement;
-const onionBtn = document.getElementById("onionButton") as HTMLButtonElement;
-const pineappleImageBtn = document.getElementById(
-    "pineappleButton"
-) as HTMLButtonElement;
-const ovenBtn = document.getElementById("ovenButton");
-// importing pizza loading images
-const pizzaLoadingImages = document.querySelectorAll(
-    ".pizza-loading-images"
-) as NodeListOf<HTMLImageElement>;
-const baseImage = document.querySelector(
-    ".pizza-loading-images__base"
-) as HTMLImageElement;
-const tomatoImage = document.querySelector<HTMLImageElement>(
-    ".pizza-loading-images__tomato-sauce"
-);
-const pestoImage = document.querySelector<HTMLImageElement>(
-    ".pizza-loading-images__pesto"
-);
-const bbqImage = document.querySelector<HTMLImageElement>(
-    ".pizza-loading-images__bbq"
-);
-const cheeseImage = document.querySelector<HTMLImageElement>(
-    ".pizza-loading-images__cheese"
-);
-const mushroomImage = document.querySelector<HTMLImageElement>(
-    ".pizza-loading-images__mushroom"
-);
-const tomatoSlicesImage = document.querySelector<HTMLImageElement>(
-    ".pizza-loading-images__sliced-tomato"
-);
-const onionImage = document.querySelector(
-    ".pizza-loading-images__onion"
-) as HTMLImageElement;
-const pineappleImage = document.querySelector<HTMLImageElement>(
-    ".pizza-loading-images__pineapple"
-);
 
 //
 //
@@ -116,80 +21,20 @@ let clickedIngredientsArray: string[] = [];
 let countdown: any;
 let timeLeft: number = 20;
 let isDessertMode: boolean = false;
-// const pizzaObject = {
-//     savoury: {
-//         toppingsList: [
-//             "Cheese",
-//             "Mushroom",
-//             "Tomato slices",
-//             "Pineapple",
-//             "Onion",
-//         ],
-//         sauceList: ["Tomato sauce", "Pesto sauce", "BBQ sauce"],
-//         srcListIcons: [
-//             "images/icons/dough-icon.png",
-//             "images/icons/savoury/tomato-sauce-icon.png",
-//             "images/icons/savoury/pesto-sauce-icon.png",
-//             "images/icons/savoury/bbq-sauce-icon.png",
-//             "images/icons/savoury/cheese-icon.png",
-//             "images/icons/savoury/mushroom-icon.png",
-//             "images/icons/savoury/pineapple-icon.png",
-//             "images/icons/savoury/sliced-tomato-icon.png",
-//             "images/icons/savoury/onion-icon.png",
-//         ],
-//         srcListToppings: [
-//             "images/pizza-toppings/pizza-base-1.png",
-//             "images/pizza-toppings/savoury/pizza-tomato-1.png",
-//             "images/pizza-toppings/savoury/pizza-pesto-1.png",
-//             "images/pizza-toppings/savoury/pizza-bbq.png",
-//             "images/pizza-toppings/savoury/pizza-cheese-1.png",
-//             "images/pizza-toppings/savoury/pizza-topping-mushroom-s2.png",
-//             "images/pizza-toppings/savoury/pizza-topping-pineapple.png",
-//             "images/pizza-toppings/savoury/tomato-pizza-topping-s2.png",
-//             "images/pizza-toppings/savoury/onion-pizza-topping-s2.png",
-//         ],
-//     },
-//     sweet: {
-//         toppingsList: [
-//             "Blueberries",
-//             "Chocolate chips",
-//             "Marshmallows",
-//             "Strawberries",
-//             "Sprinkles",
-//         ],
-//         sauceList: ["Chocolate Sauce", "Strawberry Sauce", "Caramel Sauce"],
-//         srcListIcons: [
-//             "images/icons/dough-icon.png",
-//             "images/icons/sweet/chocolate-sauce-icon.png",
-//             "images/icons/sweet/strawberry-sauce-icon.png",
-//             "images/icons/sweet/caramel-sauce-icon.png",
-//             "images/icons/sweet/blueberry-icon.png",
-//             "images/icons/sweet/chocolate-chip-icon.png",
-//             "images/icons/sweet/marshmallow-icon.png",
-//             "images/icons/sweet/strawberry-icon.png",
-//             "images/icons/sweet/sprinkles-icon.png",
-//         ],
-//         srcListToppings: [
-//             "images/pizza-toppings/pizza-base-1.png",
-//             "images/pizza-toppings/sweet/chocolate-sauce.png",
-//             "images/pizza-toppings/sweet/strawberry-sauce.png",
-//             "images/pizza-toppings/sweet/caramel-sauce.png",
-//             "images/pizza-toppings/sweet/blueberry-topping.png",
-//             "images/pizza-toppings/sweet/chocolate-chip-topping.png",
-//             "images/pizza-toppings/sweet/marshmallow-topping.png",
-//             "images/pizza-toppings/sweet/strawberry-topping.png",
-//             "images/pizza-toppings/sweet/sprinkles-topping.png",
-//         ],
-//     },
-// };
+
 document.addEventListener("DOMContentLoaded", () => {
-    if (!onionBtn || !startGameButton || !orderDisplay || !bbqBtn) {
+    if (
+        !DOM.onionBtn ||
+        !DOM.startGameButton ||
+        !DOM.orderDisplay ||
+        !DOM.bbqBtn
+    ) {
         throw new Error("Variable empty");
     }
 });
 // functions
 const swapToDessertImages = () => {
-    iconImages.forEach((img, index) => {
+    DOM.iconImages.forEach((img, index) => {
         if (isDessertMode == true) {
             if (pizzaObject.sweet.srcListIcons[index]) {
                 img.src = `${pizzaObject.sweet.srcListIcons[index]}`;
@@ -201,7 +46,7 @@ const swapToDessertImages = () => {
             }
         }
     });
-    pizzaLoadingImages.forEach((img, index) => {
+    DOM.pizzaLoadingImages.forEach((img, index) => {
         if (isDessertMode) {
             console.log("got to sweet");
             if (pizzaObject.sweet.srcListToppings[index]) {
@@ -236,7 +81,7 @@ const generateOrder = (numberOfToppings: number) => {
 };
 const binPizzaButton = () => {
     clickedIngredientsArray = [];
-    pizzaLoadingImages.forEach((img) => {
+    DOM.pizzaLoadingImages.forEach((img) => {
         setElementDisplay(img, false);
     });
 };
@@ -244,72 +89,72 @@ const ingredientClickedSwitch = (event: Event) => {
     console.log(isDessertMode);
     const target = event.currentTarget as HTMLButtonElement;
     switch (target) {
-        case baseBtn:
-            setElementDisplay(baseImage as HTMLImageElement, true);
+        case DOM.baseBtn:
+            setElementDisplay(DOM.baseImage as HTMLImageElement, true);
             if (!isDessertMode) {
                 clickedIngredientsArray.push("Base");
             } else if (isDessertMode == true) {
                 clickedIngredientsArray.push("Base");
             }
             break;
-        case tomatoBtn:
-            setElementDisplay(tomatoImage as HTMLImageElement, true);
+        case DOM.tomatoBtn:
+            setElementDisplay(DOM.tomatoImage as HTMLImageElement, true);
             if (!isDessertMode) {
                 clickedIngredientsArray.push("Tomato sauce");
             } else if (isDessertMode) {
                 clickedIngredientsArray.push("Chocolate Sauce");
             }
             break;
-        case pestoBtn:
-            setElementDisplay(pestoImage as HTMLImageElement, true);
+        case DOM.pestoBtn:
+            setElementDisplay(DOM.pestoImage as HTMLImageElement, true);
             if (!isDessertMode) {
                 clickedIngredientsArray.push("Pesto sauce");
             } else if (isDessertMode) {
                 clickedIngredientsArray.push("Strawberry Sauce");
             }
             break;
-        case bbqBtn:
-            setElementDisplay(bbqImage as HTMLImageElement, true);
+        case DOM.bbqBtn:
+            setElementDisplay(DOM.bbqImage as HTMLImageElement, true);
             if (!isDessertMode) {
                 clickedIngredientsArray.push("BBQ sauce");
             } else if (isDessertMode) {
                 clickedIngredientsArray.push("Caramel Sauce");
             }
             break;
-        case cheeseBtn:
-            setElementDisplay(cheeseImage as HTMLImageElement, true);
+        case DOM.cheeseBtn:
+            setElementDisplay(DOM.cheeseImage as HTMLImageElement, true);
             if (!isDessertMode) {
                 clickedIngredientsArray.push("Cheese");
             } else if (isDessertMode) {
                 clickedIngredientsArray.push("Blueberries");
             }
             break;
-        case mushroomBtn:
-            setElementDisplay(mushroomImage as HTMLImageElement, true);
+        case DOM.mushroomBtn:
+            setElementDisplay(DOM.mushroomImage as HTMLImageElement, true);
             if (!isDessertMode) {
                 clickedIngredientsArray.push("Mushroom");
             } else if (isDessertMode) {
                 clickedIngredientsArray.push("Chocolate chips");
             }
             break;
-        case pineappleImageBtn:
-            setElementDisplay(pineappleImage as HTMLImageElement, true);
+        case DOM.pineappleImageBtn:
+            setElementDisplay(DOM.pineappleImage as HTMLImageElement, true);
             if (!isDessertMode) {
                 clickedIngredientsArray.push("Pineapple");
             } else if (isDessertMode) {
                 clickedIngredientsArray.push("Marshmallows");
             }
             break;
-        case tomatoSlicesBtn:
-            setElementDisplay(tomatoSlicesImage as HTMLImageElement, true);
+        case DOM.tomatoSlicesBtn:
+            setElementDisplay(DOM.tomatoSlicesImage as HTMLImageElement, true);
             if (!isDessertMode) {
                 clickedIngredientsArray.push("Tomato slices");
             } else if (isDessertMode) {
                 clickedIngredientsArray.push("Strawberries");
             }
             break;
-        case onionBtn:
-            setElementDisplay(onionImage as HTMLImageElement, true);
+        case DOM.onionBtn:
+            setElementDisplay(DOM.onionImage as HTMLImageElement, true);
             if (!isDessertMode) {
                 clickedIngredientsArray.push("Onion");
             } else if (isDessertMode) {
@@ -342,48 +187,48 @@ const checkOrder = () => {
         console.log("correct");
         winCount++;
         totalCorrectPizzas++;
-        updateWinDisplay(winDisplay, levelNumber, winCount);
+        updateWinDisplay(DOM.winDisplay, levelNumber, winCount);
         levelUp();
-        feedback(feedbackDisplay as HTMLDivElement, "correct");
+        feedback(DOM.feedbackDisplay as HTMLDivElement, "correct");
     } else if (clickedIngredientsArrayCleaned.length < customerOrder.length) {
         console.log("Not enough toppings");
-        feedback(feedbackDisplay as HTMLDivElement, "missing toppings");
+        feedback(DOM.feedbackDisplay as HTMLDivElement, "missing toppings");
         clickedIngredientsArray = [];
     } else {
         console.log("Wrong toppings!");
-        feedback(feedbackDisplay as HTMLDivElement, "wrong");
+        feedback(DOM.feedbackDisplay as HTMLDivElement, "wrong");
     }
     clickedIngredientsArray = [];
     generateOrder(levelNumber);
-    updateCustomerOrder(customerOrder, orderDisplay);
+    updateCustomerOrder(customerOrder, DOM.orderDisplay);
     binPizzaButton();
     console.log(levelNumber, winCount);
 };
 const levelUp = () => {
     if (levelNumber == 3 && winCount == 5) {
         console.log("Winner!!");
-        setElementDisplay(gameContent as HTMLDivElement, false);
-        setElementDisplay(winnerScreenContent as HTMLDivElement, true);
+        setElementDisplay(DOM.gameContent as HTMLDivElement, false);
+        setElementDisplay(DOM.winnerScreenContent as HTMLDivElement, true);
     } else if (winCount >= 5) {
         levelNumber++;
         winCount = 0;
-        updateWinDisplay(winDisplay, levelNumber, winCount);
+        updateWinDisplay(DOM.winDisplay, levelNumber, winCount);
     }
 };
 
 const startCountdown = () => {
     clearInterval(countdown);
     timeLeft = 60;
-    countdownDisplay!.textContent = timeLeft + " seconds left!";
+    DOM.countdownDisplay!.textContent = timeLeft + " seconds left!";
     countdown = setInterval(() => {
         timeLeft--;
-        countdownDisplay!.textContent = timeLeft + " seconds left!";
-        if (timeLeft <= 0 && gameContent.style.display == "block") {
+        DOM.countdownDisplay!.textContent = timeLeft + " seconds left!";
+        if (timeLeft <= 0 && DOM.gameContent.style.display == "block") {
             clearInterval(countdown);
-            setElementDisplay(gameContent, false);
-            setElementDisplay(endScreenContent, true);
-            setElementDisplay(startGameButton, true);
-            endScreenScore!.innerHTML =
+            setElementDisplay(DOM.gameContent, false);
+            setElementDisplay(DOM.endScreenContent, true);
+            setElementDisplay(DOM.startGameButton, true);
+            DOM.endScreenScore!.innerHTML =
                 "Time's up! </br>You scored: " +
                 totalCorrectPizzas +
                 " points </br> You made it to level: " +
@@ -394,12 +239,12 @@ const startCountdown = () => {
 const dessertModeToggle = () => {
     console.log(isDessertMode);
     if (isDessertMode == true) {
-        dessertModeBtn!.innerHTML = "Sweet tooth?";
+        DOM.dessertModeBtn!.innerHTML = "Sweet tooth?";
         document.body.style.backgroundColor = "rgb(200, 182, 255)";
         isDessertMode = false;
         return isDessertMode;
     } else if (isDessertMode == false) {
-        dessertModeBtn!.innerHTML = "Back to classic";
+        DOM.dessertModeBtn!.innerHTML = "Back to classic";
         document.body.style.backgroundColor = "rgb(255, 214, 255)";
         isDessertMode = true;
         return isDessertMode;
@@ -409,19 +254,19 @@ const dessertModeToggle = () => {
 
 const startGame = () => {
     swapToDessertImages();
-    setElementDisplay(landingContent, false);
-    setElementDisplay(gameContent, true);
+    setElementDisplay(DOM.landingContent, false);
+    setElementDisplay(DOM.gameContent, true);
     generateOrder(levelNumber);
-    updateCustomerOrder(customerOrder, orderDisplay);
+    updateCustomerOrder(customerOrder, DOM.orderDisplay);
     startCountdown();
-    updateWinDisplay(winDisplay, levelNumber, winCount);
+    updateWinDisplay(DOM.winDisplay, levelNumber, winCount);
 };
 
 const resetGameFunction = () => {
-    setElementDisplay(gameContent, false);
-    setElementDisplay(landingContent, true);
-    setElementDisplay(endScreenContent, false);
-    setElementDisplay(winnerScreenContent, false);
+    setElementDisplay(DOM.gameContent, false);
+    setElementDisplay(DOM.landingContent, true);
+    setElementDisplay(DOM.endScreenContent, false);
+    setElementDisplay(DOM.winnerScreenContent, false);
     binPizzaButton();
     winCount = 0;
     levelNumber = 1;
@@ -430,29 +275,29 @@ const resetGameFunction = () => {
     dessertModeToggle();
 };
 // Event listeners
-startGameButton.addEventListener("click", startGame);
+DOM.startGameButton.addEventListener("click", startGame);
 document
     .querySelector<HTMLButtonElement>(".bin-pizza-btn")
     ?.addEventListener("click", binPizzaButton);
-dessertModeBtn?.addEventListener("click", dessertModeToggle);
-ingredientBtns.forEach((btn) => {
+DOM.dessertModeBtn?.addEventListener("click", dessertModeToggle);
+DOM.ingredientBtns.forEach((btn) => {
     btn.addEventListener("click", ingredientClickedSwitch);
 });
-ovenBtn!.addEventListener("click", () => {
+DOM.ovenBtn!.addEventListener("click", () => {
     checkOrder();
 });
-pizzaBinBtn!.addEventListener("click", binPizzaButton);
-resetBtns.forEach((btn) => {
+DOM.pizzaBinBtn!.addEventListener("click", binPizzaButton);
+DOM.resetBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
         resetGameFunction();
     });
 });
-playButton.addEventListener("click", () => {
-    if (audio.paused) {
-        audio.play();
-        audioImage.src = "images/speaker-off-icon.png";
+DOM.playButton.addEventListener("click", () => {
+    if (DOM.audio.paused) {
+        DOM.audio.play();
+        DOM.audioImage.src = "images/speaker-off-icon.png";
     } else {
-        audio.pause();
-        audioImage.src = "images/speaker-icon.png";
+        DOM.audio.pause();
+        DOM.audioImage.src = "images/speaker-icon.png";
     }
 });
