@@ -29,7 +29,7 @@ export const DOM = {
     ),
     feedbackDisplay: document.querySelector<HTMLDivElement>(
         ".feedback-pizza-row"
-    ),
+    ) as HTMLDivElement,
     dessertModeBtn:
         document.querySelector<HTMLButtonElement>(".dessert-mode-btn"),
     iconImages: document.querySelectorAll(

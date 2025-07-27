@@ -9,8 +9,6 @@ import "../styles/style.scss";
 import "../styles/variables.scss";
 import { DOM } from "./domElements";
 import { pizzaObject } from "./pizzaObject";
-
-//
 //
 //Global variables
 let winCount: number = 0;
@@ -86,85 +84,94 @@ const binPizzaButton = () => {
     });
 };
 const ingredientClickedSwitch = (event: Event) => {
-    console.log(isDessertMode);
     const target = event.currentTarget as HTMLButtonElement;
-    switch (target) {
-        case DOM.baseBtn:
-            setElementDisplay(DOM.baseImage as HTMLImageElement, true);
-            if (!isDessertMode) {
-                clickedIngredientsArray.push("Base");
-            } else if (isDessertMode == true) {
-                clickedIngredientsArray.push("Base");
-            }
-            break;
-        case DOM.tomatoBtn:
-            setElementDisplay(DOM.tomatoImage as HTMLImageElement, true);
-            if (!isDessertMode) {
-                clickedIngredientsArray.push("Tomato sauce");
-            } else if (isDessertMode) {
-                clickedIngredientsArray.push("Chocolate Sauce");
-            }
-            break;
-        case DOM.pestoBtn:
-            setElementDisplay(DOM.pestoImage as HTMLImageElement, true);
-            if (!isDessertMode) {
-                clickedIngredientsArray.push("Pesto sauce");
-            } else if (isDessertMode) {
-                clickedIngredientsArray.push("Strawberry Sauce");
-            }
-            break;
-        case DOM.bbqBtn:
-            setElementDisplay(DOM.bbqImage as HTMLImageElement, true);
-            if (!isDessertMode) {
-                clickedIngredientsArray.push("BBQ sauce");
-            } else if (isDessertMode) {
-                clickedIngredientsArray.push("Caramel Sauce");
-            }
-            break;
-        case DOM.cheeseBtn:
-            setElementDisplay(DOM.cheeseImage as HTMLImageElement, true);
-            if (!isDessertMode) {
-                clickedIngredientsArray.push("Cheese");
-            } else if (isDessertMode) {
-                clickedIngredientsArray.push("Blueberries");
-            }
-            break;
-        case DOM.mushroomBtn:
-            setElementDisplay(DOM.mushroomImage as HTMLImageElement, true);
-            if (!isDessertMode) {
-                clickedIngredientsArray.push("Mushroom");
-            } else if (isDessertMode) {
-                clickedIngredientsArray.push("Chocolate chips");
-            }
-            break;
-        case DOM.pineappleImageBtn:
-            setElementDisplay(DOM.pineappleImage as HTMLImageElement, true);
-            if (!isDessertMode) {
-                clickedIngredientsArray.push("Pineapple");
-            } else if (isDessertMode) {
-                clickedIngredientsArray.push("Marshmallows");
-            }
-            break;
-        case DOM.tomatoSlicesBtn:
-            setElementDisplay(DOM.tomatoSlicesImage as HTMLImageElement, true);
-            if (!isDessertMode) {
-                clickedIngredientsArray.push("Tomato slices");
-            } else if (isDessertMode) {
-                clickedIngredientsArray.push("Strawberries");
-            }
-            break;
-        case DOM.onionBtn:
-            setElementDisplay(DOM.onionImage as HTMLImageElement, true);
-            if (!isDessertMode) {
-                clickedIngredientsArray.push("Onion");
-            } else if (isDessertMode) {
-                clickedIngredientsArray.push("Sprinkles");
-            }
-            break;
 
-        default:
-            console.log("Switch error");
+    const ingredientMap = new Map([
+        [
+            DOM.baseBtn,
+            {
+                image: DOM.baseImage as HTMLImageElement,
+                normal: "Base",
+                dessert: "Base",
+            },
+        ],
+        [
+            DOM.tomatoBtn,
+            {
+                image: DOM.tomatoImage as HTMLImageElement,
+                normal: "Tomato sauce",
+                dessert: "Chocolate Sauce",
+            },
+        ],
+        [
+            DOM.pestoBtn,
+            {
+                image: DOM.pestoImage as HTMLImageElement,
+                normal: "Pesto sauce",
+                dessert: "Strawberry Sauce",
+            },
+        ],
+        [
+            DOM.bbqBtn,
+            {
+                image: DOM.bbqImage as HTMLImageElement,
+                normal: "BBQ sauce",
+                dessert: "Caramel Sauce",
+            },
+        ],
+        [
+            DOM.cheeseBtn,
+            {
+                image: DOM.cheeseImage as HTMLImageElement,
+                normal: "Cheese",
+                dessert: "Blueberries",
+            },
+        ],
+        [
+            DOM.mushroomBtn,
+            {
+                image: DOM.mushroomImage as HTMLImageElement,
+                normal: "Mushroom",
+                dessert: "Chocolate chips",
+            },
+        ],
+        [
+            DOM.pineappleImageBtn,
+            {
+                image: DOM.pineappleImage as HTMLImageElement,
+                normal: "Pineapple",
+                dessert: "Marshmallows",
+            },
+        ],
+        [
+            DOM.tomatoSlicesBtn,
+            {
+                image: DOM.tomatoSlicesImage as HTMLImageElement,
+                normal: "Tomato slices",
+                dessert: "Strawberries",
+            },
+        ],
+        [
+            DOM.onionBtn,
+            {
+                image: DOM.onionImage as HTMLImageElement,
+                normal: "Onion",
+                dessert: "Sprinkles",
+            },
+        ],
+    ]);
+
+    const ingredient = ingredientMap.get(target);
+
+    if (ingredient) {
+        setElementDisplay(ingredient.image, true);
+        clickedIngredientsArray.push(
+            isDessertMode ? ingredient.dessert : ingredient.normal
+        );
+    } else {
+        console.log("Ingredient switch error occured");
     }
+
     return clickedIngredientsArray;
 };
 
@@ -189,14 +196,14 @@ const checkOrder = () => {
         totalCorrectPizzas++;
         updateWinDisplay(DOM.winDisplay, levelNumber, winCount);
         levelUp();
-        feedback(DOM.feedbackDisplay as HTMLDivElement, "correct");
+        feedback(DOM.feedbackDisplay, "correct");
     } else if (clickedIngredientsArrayCleaned.length < customerOrder.length) {
         console.log("Not enough toppings");
-        feedback(DOM.feedbackDisplay as HTMLDivElement, "missing toppings");
+        feedback(DOM.feedbackDisplay, "missing toppings");
         clickedIngredientsArray = [];
     } else {
         console.log("Wrong toppings!");
-        feedback(DOM.feedbackDisplay as HTMLDivElement, "wrong");
+        feedback(DOM.feedbackDisplay, "wrong");
     }
     clickedIngredientsArray = [];
     generateOrder(levelNumber);
@@ -207,8 +214,8 @@ const checkOrder = () => {
 const levelUp = () => {
     if (levelNumber == 3 && winCount == 5) {
         console.log("Winner!!");
-        setElementDisplay(DOM.gameContent as HTMLDivElement, false);
-        setElementDisplay(DOM.winnerScreenContent as HTMLDivElement, true);
+        setElementDisplay(DOM.gameContent, false);
+        setElementDisplay(DOM.winnerScreenContent, true);
     } else if (winCount >= 5) {
         levelNumber++;
         winCount = 0;
