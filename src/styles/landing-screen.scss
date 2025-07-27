@@ -75,22 +75,23 @@ body {
     color: white;
     font-family: "Playwrite AU NSW", cursive;
     border-radius: 10px;
+    justify-self: center;
+    @include variables.tablet {
+        width: 70%;
+    }
+    @include variables.desktop {
+        width: 50%;
+    }
     &:hover {
         transition: 1s ease;
-        transform: scale(1.5);
+        transform: scale(1.6);
+        justify-self: center;
         @include variables.desktop {
-            transform: scale(1.8);
-        }
-        @include variables.tablet {
-            width: 70%;
-            justify-self: center;
-        }
-        @include variables.desktop {
-            width: 50%;
-            justify-self: center;
+            transform: scale(1.9);
         }
     }
 }
+
 #dessertBtn {
     grid-area: secretBtn;
     align-self: flex-end;
